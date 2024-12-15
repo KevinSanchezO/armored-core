@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brtuqw4b7t5wj"]
+
+[ext_resource type="Script" path="res://scenes/components/air_movement/air_movement.gd" id="1_46bnr"]
+
+[node name="AirMovement" type="Node"]
+script = ExtResource("1_46bnr")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://fngl836w0ov7"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/entities/entity/entity.gd" id="1_buys0"]
+[ext_resource type="PackedScene" uid="uid://brtuqw4b7t5wj" path="res://scenes/components/air_movement/air_movement.tscn" id="2_oik1w"]
+[ext_resource type="PackedScene" uid="uid://bfglmuks53kby" path="res://scenes/components/ground_movement/ground_movement.tscn" id="3_6qc51"]
+
+[node name="Entity" type="CharacterBody3D"]
+script = ExtResource("1_buys0")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+
+[node name="Model" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="AirMovement" parent="." instance=ExtResource("2_oik1w")]
+
+[node name="GroundMovement" parent="." instance=ExtResource("3_6qc51")]
