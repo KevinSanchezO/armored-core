@@ -17,3 +17,4 @@ size = Vector3(20, 0.002, 20)
 
 [node name="Player" parent="." instance=ExtResource("1_gwp2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00745881, 0, 2.20599)
+tilt = 2.5

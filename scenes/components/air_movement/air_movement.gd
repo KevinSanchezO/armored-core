@@ -1,11 +1,15 @@
 extends Node
 class_name AirMovement
 
-@export var jump_velocity := 6.0
+signal upward_force_applied()
 
-func handle_air_physics(entity:Entity) -> void:
+@export var jump_velocity := 8.0
+@export var air_speed := 8.0
+
+func apply_gravity(entity:Entity) -> void:
 	entity.velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") \
 	* get_process_delta_time()
 
-func handle_jump(entity:Entity) -> void:
+func apply_upward_force(entity:Entity) -> void:
+	upward_force_applied.emit()
 	entity.velocity.y = jump_velocity

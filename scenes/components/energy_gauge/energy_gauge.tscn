@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1luyg6l6eaxb"]
+
+[ext_resource type="Script" path="res://scenes/components/energy_gauge/energy_gauge.gd" id="1_2b1e3"]
+
+[node name="EnergyGauge" type="Node"]
+script = ExtResource("1_2b1e3")
+
+[node name="ConsumptionTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="ConsumptionTimer" to="." method="_on_timer_timeout"]

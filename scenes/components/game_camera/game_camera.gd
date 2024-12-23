@@ -1,12 +1,15 @@
 extends Camera3D
 class_name GameCamera
 
+@export var headbob_move_amount := 0.06
+@export var headbob_frequency := 2.1
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var headbob_time := 0.0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func headbob_effect():
+	headbob_time += get_process_delta_time() * self.velocity.length()
+	self.transform.origin = Vector3(
+		cos(headbob_time * headbob_frequency * 0.5) * headbob_move_amount,
+		sin(headbob_time * headbob_frequency) * headbob_move_amount,
+		0
+	)
