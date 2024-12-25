@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cffj3or6ica6r"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/stage_boiler_plate/stage_boiler_plate.gd" id="1_f8etu"]
+[ext_resource type="PackedScene" uid="uid://b77cvkvbt6lo7" path="res://scenes/game_objects/entities/player/player.tscn" id="1_gwp2m"]
+
+[node name="StageBoilerPlate" type="Node3D"]
+script = ExtResource("1_f8etu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 0.002, 20)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1289, -7.59928, 0)
+use_collision = true
+size = Vector3(20, 0.002, 20)
+
+[node name="Player" parent="." instance=ExtResource("1_gwp2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00745881, 0, 2.20599)
+tilt = 2.5

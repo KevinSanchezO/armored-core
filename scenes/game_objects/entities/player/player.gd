@@ -58,7 +58,7 @@ func _handle_boost() -> void:
 
 func _handle_dash(input_dir:Vector3) -> void:
 	if Input.is_action_just_pressed("dash") and dash_handler.cooldown.is_stopped()\
-	and energy_gauge.energy_gauge > 0:
+	and energy_gauge.energy_gauge > 0 and !energy_gauge.is_in_cooldown:
 		energy_gauge.modify_gauge_directly(dash_handler.dash_consumption)
 		dash_handler.trigger_dash(input_dir)
 

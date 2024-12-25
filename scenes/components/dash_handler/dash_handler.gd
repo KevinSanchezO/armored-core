@@ -3,9 +3,9 @@ class_name DashHandler
 
 @export var cooldown_value := 0.0
 @export var entity : Entity
-@export var speed := 100.0
-@export var duration := 0.4
-@export var dash_consumption = 8.0
+@export var speed := 80.0
+@export var duration := 0.1
+@export var dash_consumption = 40.0
 
 var dash: Dash
 

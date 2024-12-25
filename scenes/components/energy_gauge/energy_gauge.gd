@@ -2,6 +2,8 @@ extends Node
 class_name EnergyGauge
 
 signal energy_gauge_changed()
+signal cooldown_started()
+signal cooldown_ended()
 
 const MAX_ENERGY_GAUGE := 100.0
 
@@ -16,7 +18,9 @@ var is_in_cooldown := false
 
 func _process(_delta) -> void:
 	if energy_gauge <= 0:
+		energy_gauge = 0
 		is_in_cooldown = true
+		cooldown_started.emit()
 	
 	if energy_gauge == MAX_ENERGY_GAUGE and is_in_cooldown:
 		is_in_cooldown = false
@@ -35,6 +39,7 @@ func _on_timer_timeout():
 			energy_gauge += recovery
 		else:
 			energy_gauge = MAX_ENERGY_GAUGE
+			cooldown_ended.emit()
 	else:
 		energy_gauge -= consumption
 	energy_gauge_changed.emit()
