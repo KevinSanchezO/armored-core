@@ -2,7 +2,7 @@ extends Node
 class_name Velocity3D
 
 @export var max_speed := 8.0
-@export var acceleration := 4.0
+@export var acceleration := 50.0
 
 var velocity := Vector3.ZERO
 

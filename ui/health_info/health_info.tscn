@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2siudy0fuobx"]
+
+[ext_resource type="Script" path="res://ui/health_info/health_info.gd" id="1_vhqsf"]
+[ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="2_mqff3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bl1i6"]
+font = ExtResource("2_mqff3")
+font_size = 38
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtvml"]
+font = ExtResource("2_mqff3")
+font_size = 48
+
+[node name="HealthInfo" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vhqsf")
+
+[node name="EntityHealth" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "100.0"
+label_settings = SubResource("LabelSettings_bl1i6")
+vertical_alignment = 2
+
+[node name="ArmorPoints" type="Label" parent="."]
+layout_mode = 2
+text = "A.P 9999.0"
+label_settings = SubResource("LabelSettings_qtvml")
+horizontal_alignment = 1
+vertical_alignment = 1

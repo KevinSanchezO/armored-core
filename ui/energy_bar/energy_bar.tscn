@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cne4ort68ma7a"]
+
+[ext_resource type="Script" path="res://ui/energy_bar/energy_bar.gd" id="1_7oo20"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8cie"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwmxx"]
+bg_color = Color(0.215686, 0.443137, 0.905882, 1)
+
+[node name="EnergyBar" type="ProgressBar"]
+custom_minimum_size = Vector2(12, 300)
+size_flags_vertical = 15
+theme_override_styles/background = SubResource("StyleBoxEmpty_e8cie")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rwmxx")
+value = 100.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("1_7oo20")

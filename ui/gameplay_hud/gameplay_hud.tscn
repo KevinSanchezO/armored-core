@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgka5ho1l73h"]
+
+[ext_resource type="Script" path="res://ui/gameplay_hud/gameplay_hud.gd" id="1_33mce"]
+[ext_resource type="PackedScene" uid="uid://b2siudy0fuobx" path="res://ui/health_info/health_info.tscn" id="2_iwpvg"]
+[ext_resource type="PackedScene" uid="uid://cne4ort68ma7a" path="res://ui/energy_bar/energy_bar.tscn" id="2_t5pab"]
+
+[node name="GameplayHUD" type="CanvasLayer" node_paths=PackedStringArray("energy_bar", "health_info")]
+script = ExtResource("1_33mce")
+energy_bar = NodePath("MarginContainer/Control/HBoxContainer/EnergyBar")
+health_info = NodePath("MarginContainer/Control/HBoxContainer/HealthInfo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -450.0
+offset_right = 246.0
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="EnergyBar" parent="MarginContainer/Control/HBoxContainer" instance=ExtResource("2_t5pab")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HealthInfo" parent="MarginContainer/Control/HBoxContainer" instance=ExtResource("2_iwpvg")]
+layout_mode = 2
+size_flags_vertical = 8

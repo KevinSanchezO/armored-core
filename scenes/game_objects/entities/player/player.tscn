@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c3bkd544ybrrb" path="res://scenes/components/dash_handler/dash_handler.tscn" id="3_g53iv"]
 [ext_resource type="PackedScene" uid="uid://c1luyg6l6eaxb" path="res://scenes/components/energy_gauge/energy_gauge.tscn" id="4_067co"]
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="6_3jcd1"]
-[ext_resource type="Script" path="res://ui/test_hud.gd" id="7_bts1j"]
+[ext_resource type="PackedScene" uid="uid://bgka5ho1l73h" path="res://ui/gameplay_hud/gameplay_hud.tscn" id="7_cokj1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
 
@@ -18,6 +18,9 @@ tilt = 2.5
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_efd3n")
+
+[node name="HealthEntity" parent="." index="4"]
+max_health = 2000.0
 
 [node name="Head" type="Node3D" parent="." index="6"]
 unique_name_in_owner = true
@@ -33,33 +36,5 @@ entity = NodePath("..")
 
 [node name="HealthPilot" parent="." index="9" instance=ExtResource("6_3jcd1")]
 
-[node name="TestHUD" type="CanvasLayer" parent="." index="10" node_paths=PackedStringArray("entity")]
-script = ExtResource("7_bts1j")
+[node name="HUD" parent="." index="10" node_paths=PackedStringArray("entity") instance=ExtResource("7_cokj1")]
 entity = NodePath("..")
-
-[node name="MarginContainer" type="MarginContainer" parent="TestHUD" index="0"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Control" type="Control" parent="TestHUD/MarginContainer" index="0"]
-layout_mode = 2
-mouse_filter = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TestHUD/MarginContainer/Control" index="0"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="LabelPosition" type="Label" parent="TestHUD/MarginContainer/Control/VBoxContainer" index="0"]
-layout_mode = 2
-
-[node name="LabelBoost" type="Label" parent="TestHUD/MarginContainer/Control/VBoxContainer" index="1"]
-layout_mode = 2

@@ -1,11 +1,11 @@
 extends Node
 class_name DashHandler
 
-@export var cooldown_value := 0.0
+@export var cooldown_value := 0.5
 @export var entity : Entity
-@export var speed := 80.0
-@export var duration := 0.1
-@export var dash_consumption = 40.0
+@export var speed := 150.0
+@export var duration := 0.08
+@export var dash_consumption = 30.0
 
 var dash: Dash
 

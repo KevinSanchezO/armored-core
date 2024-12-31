@@ -7,8 +7,8 @@ signal cooldown_ended()
 
 const MAX_ENERGY_GAUGE := 100.0
 
-@export var consumption := 8.0
-@export var recovery := 1.5
+@export var consumption := 12.0
+@export var recovery := 1.0
 
 @onready var energy_gauge := MAX_ENERGY_GAUGE
 
