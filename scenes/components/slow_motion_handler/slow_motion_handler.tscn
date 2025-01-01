@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4qnqhtru75"]
+
+[ext_resource type="Script" path="res://scenes/components/slow_motion_handler/slow_motion_handler.gd" id="1_4wf18"]
+
+[node name="SlowMotionHandler" type="Node"]
+script = ExtResource("1_4wf18")
+
+[node name="ConsumptionTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true

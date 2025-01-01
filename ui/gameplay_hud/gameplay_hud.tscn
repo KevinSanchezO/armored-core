@@ -5,10 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cne4ort68ma7a" path="res://ui/energy_bar/energy_bar.tscn" id="2_t5pab"]
 [ext_resource type="PackedScene" uid="uid://h2yii5f7p52x" path="res://ui/slow_motion_bar/slow_motion_bar.tscn" id="3_eik1h"]
 
-[node name="GameplayHUD" type="CanvasLayer" node_paths=PackedStringArray("energy_bar", "health_info")]
+[node name="GameplayHUD" type="CanvasLayer"]
 script = ExtResource("1_33mce")
-energy_bar = NodePath("MarginContainer/Control/HBoxContainer/EnergyBar")
-health_info = NodePath("MarginContainer/Control/HBoxContainer/VBoxContainer/HealthInfo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

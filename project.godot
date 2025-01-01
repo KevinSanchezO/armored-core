@@ -14,6 +14,13 @@ config/name="armored-core"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SlowMotion="*res://scenes/autoloads/slow_motion/slow_motion.tscn"
+FrameFreeze="*res://scenes/autoloads/frame_freeze/frame_freeze.tscn"
+WeaponLoad="*res://scenes/autoloads/weapon_load/weapon_load.tscn"
+UpgradeLoad="*res://scenes/autoloads/upgrade_load/UpgradeLoad.tscn"
+
 [display]
 
 window/size/resizable=false
@@ -54,6 +61,11 @@ dash={
 reload={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+]
+}
+slow_motion={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
