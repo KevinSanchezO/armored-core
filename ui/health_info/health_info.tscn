@@ -5,11 +5,13 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_bl1i6"]
 font = ExtResource("2_mqff3")
-font_size = 38
+font_size = 32
+font_color = Color(0.619608, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qtvml"]
 font = ExtResource("2_mqff3")
-font_size = 48
+font_size = 40
+font_color = Color(0.619608, 1, 1, 1)
 
 [node name="HealthInfo" type="VBoxContainer"]
 offset_right = 40.0

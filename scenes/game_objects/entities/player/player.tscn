@@ -14,10 +14,15 @@
 script = ExtResource("2_t4lea")
 mouse_sensitivity = 0.008
 tilt = 2.5
+boost_consumption = 50.0
+boost_cooldown_value = 0.2
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_efd3n")
+
+[node name="BoostCooldown" type="Timer" parent="AirMovement" index="0"]
+one_shot = true
 
 [node name="HealthEntity" parent="." index="4"]
 max_health = 2000.0

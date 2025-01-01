@@ -6,7 +6,7 @@ signal upward_force_applied()
 const GRAVITY := 9.8
 const FALL_GRAVITY := 19.6
 
-@export var jump_velocity := 8.0
+@export var jump_velocity := 12.0
 @export var air_speed := 8.0
 
 func apply_gravity(entity:Entity) -> void:

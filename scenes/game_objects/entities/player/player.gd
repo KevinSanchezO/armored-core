@@ -7,11 +7,17 @@ class_name Player
 @export_group("Base Tilt")
 @export var tilt := 2.5
 
+@export_group("Boosting")
+@export var boost_consumption := 50.0
+@export var boost_cooldown_value := 0.2
+
 @onready var game_camera := $Head/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
+@onready var boost_cooldown := $AirMovement/BoostCooldown as Timer
 
 func ready() -> void:
+	boost_cooldown.wait_time = boost_cooldown_value
 	for child in %Model.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
@@ -49,11 +55,17 @@ func _physics_process(_delta) -> void:
 
 
 func _handle_boost() -> void:
-	if Input.is_action_pressed("boost") and !energy_gauge.is_in_cooldown:
+	if Input.is_action_just_pressed("boost") and !energy_gauge.is_in_cooldown\
+	and boost_cooldown.is_stopped():
 		air_movement.apply_upward_force(self)
-		energy_gauge.is_consuming = true
-	if Input.is_action_just_released("boost") or energy_gauge.is_in_cooldown:
-		energy_gauge.is_consuming = false
+		energy_gauge.modify_gauge_directly(boost_consumption)
+		boost_cooldown.start()
+	
+	#if Input.is_action_pressed("boost") and !energy_gauge.is_in_cooldown:
+		#air_movement.apply_upward_force(self)
+		#energy_gauge.is_consuming = true
+	#if Input.is_action_just_released("boost") or energy_gauge.is_in_cooldown:
+		#energy_gauge.is_consuming = false
 
 
 func _handle_dash(input_dir:Vector3) -> void:

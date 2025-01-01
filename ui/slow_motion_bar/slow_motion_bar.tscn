@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://h2yii5f7p52x"]
+
+[ext_resource type="Script" path="res://ui/slow_motion_bar/slow_motion_bar.gd" id="1_1cjmb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0w4h5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s31ov"]
+bg_color = Color(0.619608, 1, 1, 1)
+
+[node name="SlowMotionBar" type="ProgressBar"]
+custom_minimum_size = Vector2(12, 200)
+offset_right = 12.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_0w4h5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s31ov")
+value = 100.0
+fill_mode = 3
+show_percentage = false
+script = ExtResource("1_1cjmb")

@@ -4,6 +4,9 @@ class_name GameplayHUD
 var SAFE_BOOST_COOLOR := Color.html("#3782e7")
 var DANGER_BOOST_COLOR := Color.html("#e24937")
 
+var SAFE_COLOR := Color.html("##e24937")
+var DANGER_COLOR := Color.html("#e24937")
+
 @export var entity : Player
 @export var energy_bar : EnergyBar
 @export var health_info : HealthInfo
