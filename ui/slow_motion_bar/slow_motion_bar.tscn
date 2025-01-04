@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0w4h5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s31ov"]
-bg_color = Color(0.619608, 1, 1, 1)
+bg_color = Color(1, 1, 1, 1)
 
 [node name="SlowMotionBar" type="ProgressBar"]
 custom_minimum_size = Vector2(12, 200)

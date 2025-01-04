@@ -6,18 +6,36 @@ class_name Player
 
 @export_group("Base Tilt")
 @export var tilt := 2.5
+@export var time_tilt := 0.05
 
 @export_group("Boosting")
 @export var boost_consumption := 50.0
 @export var boost_cooldown_value := 0.2
+
+@onready var current_time_tilt := time_tilt
 
 @onready var game_camera := $Head/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
 @onready var boost_cooldown := $AirMovement/BoostCooldown as Timer
 
-func ready() -> void:
+var air_momentum_dir := Vector2.ZERO
+
+func _ready() -> void:
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_speed)
+	
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_dash)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_dash)
+	
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_tilt)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_tilt)
+	
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
+	
 	boost_cooldown.wait_time = boost_cooldown_value
+	
 	for child in %Model.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
@@ -44,13 +62,23 @@ func _physics_process(_delta) -> void:
 		return
 	
 	var input_dir := Input.get_vector("left", "right", "down", "up").normalized()
+	
+	if input_dir != Vector2.ZERO:
+		air_momentum_dir = input_dir
+	
 	wish_dir = self.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
 	
-	velocity_3d.accelerate(wish_dir)
+	if is_on_floor():
+		air_momentum_dir = Vector2.ZERO
+		velocity_3d.accelerate(wish_dir)
+	else:
+		if input_dir == Vector2.ZERO:
+			wish_dir = self.global_transform.basis * Vector3(air_momentum_dir.x, 0.0, -air_momentum_dir.y)
+		velocity_3d.accelerate(wish_dir, air_movement.current_air_speed)
 	velocity_3d.move(self)
 	
 	_handle_boost()
-	_handle_dash(wish_dir)
+	_handle_dash(wish_dir, input_dir)
 	_head_tilt(input_dir)
 
 
@@ -60,32 +88,96 @@ func _handle_boost() -> void:
 		air_movement.apply_upward_force(self)
 		energy_gauge.modify_gauge_directly(boost_consumption)
 		boost_cooldown.start()
-	
-	#if Input.is_action_pressed("boost") and !energy_gauge.is_in_cooldown:
-		#air_movement.apply_upward_force(self)
-		#energy_gauge.is_consuming = true
-	#if Input.is_action_just_released("boost") or energy_gauge.is_in_cooldown:
-		#energy_gauge.is_consuming = false
 
 
-func _handle_dash(input_dir:Vector3) -> void:
+func _handle_dash(wish_dir:Vector3, input_dir:Vector2) -> void:
 	if Input.is_action_just_pressed("dash") and dash_handler.cooldown.is_stopped()\
 	and energy_gauge.energy_gauge > 0 and !energy_gauge.is_in_cooldown:
 		energy_gauge.modify_gauge_directly(dash_handler.dash_consumption)
-		dash_handler.trigger_dash(input_dir)
+		dash_handler.trigger_dash(wish_dir, input_dir)
 
 
 func _head_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(-tilt), 0.05)
+		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(-tilt), current_time_tilt)
 	elif input_dir.x < 0:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(tilt), 0.05)
+		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(tilt), current_time_tilt)
 	else:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(0), 0.05)
+		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(0), current_time_tilt)
 	
 	if input_dir.y > 0:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(-tilt), 0.05)
+		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(-tilt), current_time_tilt)
 	elif input_dir.y < 0:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(tilt), 0.05)
+		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(tilt), current_time_tilt)
 	else:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(0), 0.05)
+		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(0), current_time_tilt)
+
+
+func _enter_slow_motion_air() -> void:
+	TweenManager.create_new_tween(air_movement, "current_jump_velocity",\
+	air_movement.jump_velocity * 1.5, 0.5, air_movement.current_jump_velocity)
+	
+	TweenManager.create_new_tween(air_movement, "current_air_speed",\
+	air_movement.air_speed * 2, 0.5, air_movement.current_air_speed)
+	
+	TweenManager.create_new_tween(air_movement, "current_gravity",\
+	air_movement.GRAVITY * 2, 0.5, air_movement.current_gravity)
+	
+	TweenManager.create_new_tween(air_movement, "current_fall_gravity",\
+	air_movement.FALL_GRAVITY * 2, 0.5, air_movement.current_fall_gravity)
+
+
+func _exit_slow_motion_air() -> void:
+	TweenManager.create_new_tween(air_movement, "current_jump_velocity",\
+	air_movement.jump_velocity, 0.5, air_movement.current_jump_velocity)
+	
+	TweenManager.create_new_tween(air_movement, "current_air_speed",\
+	air_movement.air_speed, 0.5, air_movement.current_air_speed)
+	
+	TweenManager.create_new_tween(air_movement, "current_gravity",\
+	air_movement.GRAVITY, 0.5, air_movement.current_gravity)
+	
+	TweenManager.create_new_tween(air_movement, "current_fall_gravity",\
+	air_movement.FALL_GRAVITY, 0.5, air_movement.current_fall_gravity)
+
+
+func _enter_slow_motion_tilt() -> void:
+	TweenManager.create_new_tween(self, "current_time_tilt", self.time_tilt / 2,\
+	0.5, self.current_time_tilt)
+
+
+func _exit_slow_motion_tilt() -> void:
+	TweenManager.create_new_tween(self, "current_time_tilt", self.time_tilt,\
+	0.5, self.current_time_tilt)
+
+
+func _enter_slow_motion_speed() -> void:
+	TweenManager.create_new_tween(velocity_3d, "current_speed", \
+	velocity_3d.max_speed * 2, 0.5, velocity_3d.current_speed)
+
+
+func _exit_slow_motion_speed() -> void:
+	TweenManager.create_new_tween(velocity_3d, "current_speed", \
+	velocity_3d.max_speed, 0.5, velocity_3d.current_speed)
+
+
+func _enter_slow_motion_dash() -> void:
+	TweenManager.create_new_tween(dash_handler, "current_speed", \
+	dash_handler.speed * 2, 0.5, dash_handler.current_speed)
+	
+	TweenManager.create_new_tween(dash_handler, "current_duration", \
+	dash_handler.duration / 2, 0.5, dash_handler.current_duration)
+	
+	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
+	dash_handler.cooldown_value / 2, 0.5, dash_handler.cooldown.wait_time)
+
+
+func _exit_slow_motion_dash() -> void:
+	TweenManager.create_new_tween(dash_handler, "current_speed", \
+	dash_handler.speed, 0.5, dash_handler.current_speed)
+	
+	TweenManager.create_new_tween(dash_handler, "current_duration", \
+	dash_handler.duration, 0.5, dash_handler.current_duration)
+	
+	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
+	dash_handler.cooldown_value, 0.5, dash_handler.cooldown.wait_time)

@@ -11,9 +11,13 @@ const MAX_ENERGY_GAUGE := 100.0
 @export var recovery := 1.0
 
 @onready var energy_gauge := MAX_ENERGY_GAUGE
+@onready var comsumption_timer := $ConsumptionTimer as Timer
 
 var is_consuming := false
 var is_in_cooldown := false
+
+func _ready() -> void:
+	comsumption_timer.timeout.connect(_on_consumption_timer_timeout)
 
 
 func _process(_delta) -> void:
@@ -33,7 +37,7 @@ func modify_gauge_directly(value=consumption) -> void:
 	energy_gauge_changed.emit()
 
 
-func _on_timer_timeout():
+func _on_consumption_timer_timeout():
 	if !is_consuming:
 		if energy_gauge < MAX_ENERGY_GAUGE:
 			energy_gauge += recovery

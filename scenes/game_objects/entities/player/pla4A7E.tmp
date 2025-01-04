@@ -15,8 +15,7 @@
 script = ExtResource("2_t4lea")
 mouse_sensitivity = 0.008
 tilt = null
-time_tilt = null
-boost_consumption = 10.0
+boost_consumption = null
 boost_cooldown_value = null
 
 [node name="Collision" parent="." index="0"]
