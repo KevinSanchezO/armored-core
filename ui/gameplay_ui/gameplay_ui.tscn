@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3tv3jc3cj5x7"]
+
+[ext_resource type="Script" path="res://ui/gameplay_ui/gameplay_ui.gd" id="1_d30ao"]
+[ext_resource type="PackedScene" uid="uid://b2siudy0fuobx" path="res://ui/health_info/health_info.tscn" id="2_h18qn"]
+[ext_resource type="PackedScene" uid="uid://bo1t3imqlwbs0" path="res://ui/energy_n_slowmotion/energy_n_slowmotion.tscn" id="3_m6hhs"]
+
+[node name="GameplayUI" type="CanvasLayer"]
+script = ExtResource("1_d30ao")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="HealthInfo" parent="MarginContainer/Control/HBoxContainer" instance=ExtResource("2_h18qn")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="EnergyNSlowmotion" parent="MarginContainer/Control/HBoxContainer" instance=ExtResource("3_m6hhs")]
+layout_mode = 2
+size_flags_vertical = 8

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtcwukkva52n2"]
+
+[ext_resource type="PackedScene" uid="uid://b4mc2dmdujksl" path="res://ui/progress_bars/progress_bar_template/progress_bar_template.tscn" id="1_mmko2"]
+[ext_resource type="Script" path="res://ui/progress_bars/progress_bar_mirror/progress_bar_mirror.gd" id="1_uqk1o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5aqh0"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg58y"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ProgressBarMirror" type="HBoxContainer"]
+offset_right = 239.0
+offset_bottom = 8.0
+theme_override_constants/separation = -1
+script = ExtResource("1_uqk1o")
+
+[node name="ProgressBarTemplate" parent="." instance=ExtResource("1_mmko2")]
+custom_minimum_size = Vector2(120, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_5aqh0")
+fill_mode = 1
+use_previous_state = false
+
+[node name="ProgressBarTemplate2" parent="." instance=ExtResource("1_mmko2")]
+custom_minimum_size = Vector2(120, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_eg58y")
+use_previous_state = false

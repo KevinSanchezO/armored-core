@@ -1,32 +1,92 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2siudy0fuobx"]
+[gd_scene load_steps=10 format=3 uid="uid://b2siudy0fuobx"]
 
-[ext_resource type="Script" path="res://ui/health_info/health_info.gd" id="1_vhqsf"]
+[ext_resource type="Script" path="res://ui/health_info/health_info.gd" id="1_eoo8x"]
 [ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="2_mqff3"]
+[ext_resource type="PackedScene" uid="uid://b4mc2dmdujksl" path="res://ui/progress_bars/progress_bar_template/progress_bar_template.tscn" id="3_547yb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d586y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyox"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtvml"]
+font = ExtResource("2_mqff3")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fo6k"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bl1i6"]
 font = ExtResource("2_mqff3")
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_qtvml"]
-font = ExtResource("2_mqff3")
-font_size = 40
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75f4q"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
 
-[node name="HealthInfo" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_vhqsf")
+[node name="HealthInfo" type="HBoxContainer"]
+offset_right = 272.0
+offset_bottom = 28.0
+theme_override_constants/separation = 20
+script = ExtResource("1_eoo8x")
 
-[node name="EntityHealth" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(2, 10)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-text = "100.0"
-label_settings = SubResource("LabelSettings_bl1i6")
-vertical_alignment = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_d586y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_spyox")
+value = 100.0
+fill_mode = 2
+show_percentage = false
 
-[node name="ArmorPoints" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ArmorPoints" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "A.P 9999.0"
 label_settings = SubResource("LabelSettings_qtvml")
-horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ProgressBarTemplate" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_547yb")]
+custom_minimum_size = Vector2(150, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_5fo6k")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer2"]
+layout_mode = 2
+
+[node name="EntityHealth" type="Label" parent="HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100.0 P.H"
+label_settings = SubResource("LabelSettings_bl1i6")
+vertical_alignment = 2
+
+[node name="ProgressBarTemplate" parent="HBoxContainer2/VBoxContainer2" instance=ExtResource("3_547yb")]
+custom_minimum_size = Vector2(150, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_75f4q")
+fill_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(2, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_d586y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_spyox")
+value = 100.0
+fill_mode = 2
+show_percentage = false

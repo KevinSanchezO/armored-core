@@ -5,6 +5,7 @@ signal low_health_reached()
 signal slow_motion_count_reached()
 signal cooldown_started()
 signal cooldown_ended()
+signal count_updated()
 
 const NORMAL_TIME_SCALE := 1.0
 const MAX_SLOW_MOTION_GAUGE := 100.0
@@ -16,7 +17,7 @@ const MAX_SLOW_MOTION_GAUGE := 100.0
 
 var slow_motion_count := 0
 var slow_motion_gauge : int
-var consumption := 1.0
+var consumption := 2.0
 var recovery := 1.0
 
 @onready var consumption_timer := $ConsumptionTimer as Timer
@@ -50,6 +51,7 @@ func _exit_slow_motion() -> void:
 
 func _enter_slow_motion():
 	slow_motion_count += 1
+	count_updated.emit()
 	
 	if slow_motion_count == max_slow_motion_count:
 		slow_motion_count_reached.emit()

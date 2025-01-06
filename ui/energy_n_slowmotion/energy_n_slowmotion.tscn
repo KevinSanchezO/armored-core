@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo1t3imqlwbs0"]
+
+[ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="1_8n3qv"]
+[ext_resource type="PackedScene" uid="uid://dtcwukkva52n2" path="res://ui/progress_bars/progress_bar_mirror/progress_bar_mirror.tscn" id="1_jmtpe"]
+[ext_resource type="Script" path="res://ui/energy_n_slowmotion/energy_n_slowmotion.gd" id="1_pw28s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wk7nx"]
+font = ExtResource("1_8n3qv")
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ca1u6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jspob"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="EnergyNSlowmotion" type="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+offset_right = 300.0
+offset_bottom = 64.0
+theme_override_constants/separation = 10
+script = ExtResource("1_pw28s")
+
+[node name="SlowmotionCount" type="Label" parent="."]
+layout_mode = 2
+text = "0/2
+"
+label_settings = SubResource("LabelSettings_wk7nx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(2, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_ca1u6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jspob")
+value = 80.0
+fill_mode = 2
+show_percentage = false
+
+[node name="Slowmotion" parent="HBoxContainer" instance=ExtResource("1_jmtpe")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(2, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_ca1u6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jspob")
+value = 80.0
+fill_mode = 2
+show_percentage = false
+
+[node name="Energy" parent="." instance=ExtResource("1_jmtpe")]
+layout_mode = 2
+size_flags_vertical = 8

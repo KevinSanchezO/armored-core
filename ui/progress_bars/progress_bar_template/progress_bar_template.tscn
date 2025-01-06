@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4mc2dmdujksl"]
+
+[ext_resource type="Script" path="res://ui/progress_bars/progress_bar_template/progress_bar_template.gd" id="1_2g5fj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6pymr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmrmt"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3q30i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wvj8"]
+bg_color = Color(0.717415, 2.90469e-05, 0.0833422, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3dva"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owyqn"]
+bg_color = Color(0.2, 0.2, 0.2, 0.654902)
+
+[node name="ProgressBarTemplate" type="ProgressBar"]
+z_index = 2
+z_as_relative = false
+custom_minimum_size = Vector2(120, 5)
+offset_right = 120.0
+offset_bottom = 5.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_6pymr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xmrmt")
+value = 60.0
+show_percentage = false
+script = ExtResource("1_2g5fj")
+
+[node name="PreviousState" type="ProgressBar" parent="."]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_3q30i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0wvj8")
+value = 80.0
+show_percentage = false
+
+[node name="Background" type="ProgressBar" parent="."]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_q3dva")
+theme_override_styles/fill = SubResource("StyleBoxFlat_owyqn")
+value = 100.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

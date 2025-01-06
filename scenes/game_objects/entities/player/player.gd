@@ -34,6 +34,9 @@ func _ready() -> void:
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
 	
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_energy)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_energy)
+	
 	boost_cooldown.wait_time = boost_cooldown_value
 	
 	for child in %Model.find_children("*", "VisualInstance3D"):
@@ -111,6 +114,16 @@ func _head_tilt(input_dir:Vector2) -> void:
 		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(tilt), current_time_tilt)
 	else:
 		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(0), current_time_tilt)
+
+
+func _enter_slow_motion_energy() -> void:
+	TweenManager.create_new_tween(energy_gauge.comsumption_timer, "wait_time",\
+	energy_gauge.consumption_timer_value / 2, 0.5, energy_gauge.comsumption_timer.wait_time)
+
+
+func _exit_slow_motion_energy() -> void:
+	TweenManager.create_new_tween(energy_gauge.comsumption_timer, "wait_time",\
+	energy_gauge.consumption_timer_value, 0.5, energy_gauge.comsumption_timer.wait_time)
 
 
 func _enter_slow_motion_air() -> void:

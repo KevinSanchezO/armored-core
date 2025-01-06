@@ -1,9 +1,23 @@
-extends VBoxContainer
+extends HBoxContainer
 class_name HealthInfo
 
-@onready var armor_points_label := $ArmorPoints as Label
-@onready var entity_health_label := $EntityHealth as Label
+@onready var armor_points_label := $HBoxContainer/VBoxContainer/ArmorPoints as Label
+@onready var armor_points_bar := $HBoxContainer/VBoxContainer/ProgressBarTemplate as ProgressBarTemplate
+
+@onready var entity_health_label := $HBoxContainer2/VBoxContainer2/EntityHealth as Label
+@onready var entity_health_bar:= $HBoxContainer2/VBoxContainer2/ProgressBarTemplate as ProgressBarTemplate
+
+func set_ready(new_armor_points, new_entity_health) -> void:
+	armor_points_label.text = "AP " + str(new_armor_points) + ".0"
+	entity_health_label.text = str(new_entity_health) + ".0" + " PH"
+	
+	armor_points_bar.init_value(new_armor_points)
+	entity_health_bar.init_value(new_entity_health)
+
 
 func set_new_health_info(new_armor_points, new_entity_health) -> void:
 	armor_points_label.text = "AP " + str(new_armor_points) + ".0"
-	entity_health_label.text = str(new_entity_health) + ".0"
+	entity_health_label.text = str(new_entity_health) + ".0" + " PH"
+	
+	armor_points_bar.value_progress_bar = new_armor_points
+	entity_health_bar.value_progress_bar = new_entity_health

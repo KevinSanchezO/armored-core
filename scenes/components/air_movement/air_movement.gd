@@ -6,8 +6,8 @@ signal upward_force_applied()
 const GRAVITY := 9.8
 const FALL_GRAVITY := 19.6
 
-@export var jump_velocity := 10.0
-@export var air_speed := 6.0
+@export var jump_velocity := 6.0
+@export var air_speed := 8.0
 
 @onready var current_jump_velocity = jump_velocity
 @onready var current_air_speed = air_speed

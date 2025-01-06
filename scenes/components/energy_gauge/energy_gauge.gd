@@ -9,6 +9,7 @@ const MAX_ENERGY_GAUGE := 100.0
 
 @export var consumption := 12.0
 @export var recovery := 1.0
+@export var consumption_timer_value := 0.05
 
 @onready var energy_gauge := MAX_ENERGY_GAUGE
 @onready var comsumption_timer := $ConsumptionTimer as Timer
@@ -17,6 +18,7 @@ var is_consuming := false
 var is_in_cooldown := false
 
 func _ready() -> void:
+	comsumption_timer.wait_time = consumption_timer_value
 	comsumption_timer.timeout.connect(_on_consumption_timer_timeout)
 
 
