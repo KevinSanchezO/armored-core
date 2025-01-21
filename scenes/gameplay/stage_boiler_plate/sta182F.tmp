@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cffj3or6ica6r"]
+[gd_scene load_steps=13 format=3 uid="uid://cffj3or6ica6r"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/stage_boiler_plate/stage_boiler_plate.gd" id="1_f8etu"]
 [ext_resource type="PackedScene" uid="uid://b77cvkvbt6lo7" path="res://scenes/game_objects/entities/player/player.tscn" id="1_gwp2m"]
 [ext_resource type="Texture2D" uid="uid://bve2k0uowhu2j" path="res://enemy_gravity.png" id="3_6sls0"]
 [ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="4_jlt4a"]
-[ext_resource type="PackedScene" uid="uid://c3tv3jc3cj5x7" path="res://ui/gameplay_ui/gameplay_ui.tscn" id="5_o5s6i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rocnl"]
 atlas = ExtResource("3_6sls0")
@@ -76,6 +75,7 @@ use_collision = true
 size = Vector3(20, 0.002, 20)
 
 [node name="Player" parent="." instance=ExtResource("1_gwp2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00745881, 0, 2.20599)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5, 1.3, 0)
@@ -109,5 +109,3 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "650
 "
 font = ExtResource("4_jlt4a")
-
-[node name="GameplayUI" parent="." instance=ExtResource("5_o5s6i")]

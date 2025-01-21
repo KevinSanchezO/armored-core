@@ -21,6 +21,7 @@ TweenManager="*res://scenes/autoloads/tween_manager/TweenManager.tscn"
 
 [display]
 
+window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 

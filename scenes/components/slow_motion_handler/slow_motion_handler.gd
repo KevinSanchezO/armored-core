@@ -21,6 +21,8 @@ var consumption := 2.0
 var recovery := 1.0
 
 @onready var consumption_timer := $ConsumptionTimer as Timer
+@onready var enter_audio := $Enter as Audio3D
+@onready var exit_audio := $Exit as Audio3D
 
 func _ready() -> void:
 	slow_motion_gauge = MAX_SLOW_MOTION_GAUGE
@@ -45,6 +47,8 @@ func _process(_delta) -> void:
 
 
 func _exit_slow_motion() -> void:
+	exit_audio.play_audio()
+	
 	SlowMotion.slow_motion_active = false
 	SlowMotion.modify_time_scale(NORMAL_TIME_SCALE, 0.5, false)
 
@@ -52,6 +56,8 @@ func _exit_slow_motion() -> void:
 func _enter_slow_motion():
 	slow_motion_count += 1
 	count_updated.emit()
+	
+	enter_audio.play_audio()
 	
 	if slow_motion_count == max_slow_motion_count:
 		slow_motion_count_reached.emit()

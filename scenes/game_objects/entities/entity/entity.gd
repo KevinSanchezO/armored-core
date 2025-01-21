@@ -1,7 +1,6 @@
 extends CharacterBody3D
 class_name Entity 
 
-@onready var air_movement := $AirMovement as AirMovement
 @onready var velocity_3d := $Velocity3d as Velocity3D
 @onready var health_entity := $HealthEntity as Health
 @onready var hitbox := $Hitbox as Hitbox

@@ -1,20 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://fngl836w0ov7"]
+[gd_scene load_steps=5 format=3 uid="uid://fngl836w0ov7"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/entities/entity/entity.gd" id="1_buys0"]
-[ext_resource type="PackedScene" uid="uid://brtuqw4b7t5wj" path="res://scenes/components/air_movement/air_movement.tscn" id="2_oik1w"]
 [ext_resource type="PackedScene" uid="uid://dwo8tjovvd31c" path="res://scenes/components/velocity_3d/velocity_3d.tscn" id="3_yg2io"]
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="4_s6sxf"]
 [ext_resource type="PackedScene" uid="uid://dfnmj8py8el4u" path="res://scenes/components/hitbox/hitbox.tscn" id="5_h2n0t"]
 
 [node name="Entity" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_buys0")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
-
-[node name="AirMovement" parent="." instance=ExtResource("2_oik1w")]
 
 [node name="Velocity3d" parent="." instance=ExtResource("3_yg2io")]
 

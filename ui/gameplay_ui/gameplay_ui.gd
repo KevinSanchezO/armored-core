@@ -4,17 +4,28 @@ class_name GameplayUI
 var SAFE_ENERGY_COLOR := Color.html("#ffffff")
 var DANGER_ENERGY_COLOR := Color.html("#e24937")
 
-@export var entity : Player
+var entity : Player
 
-@onready var energy_gauge := $"../EnergyGauge" as EnergyGauge
-@onready var armor_points := $"../HealthEntity" as Health
-@onready var health_pilot := $"../HealthPilot" as Health
-@onready var slow_motion_handler := $"../SlowMotionHandler" as SlowMotionHandler
+var energy_gauge : EnergyGauge
+var armor_points : Health
+var health_pilot : Health
+var slow_motion_handler : SlowMotionHandler
 
 @onready var health_info := $MarginContainer/Control/HBoxContainer/HealthInfo as HealthInfo
 @onready var energy_n_slowmotion := $MarginContainer/Control/HBoxContainer/EnergyNSlowmotion as EnergyNSlowmotion
 
 func _ready() -> void:
+	gameplay_ui_config.call_deferred()
+
+
+func gameplay_ui_config() -> void:
+	entity = get_tree().get_first_node_in_group("player")
+	
+	energy_gauge = entity.energy_gauge
+	armor_points = entity.health_entity
+	health_pilot = entity.health_pilot
+	slow_motion_handler = entity.slow_motion_handler
+	
 	health_info.set_ready(armor_points.max_health, health_pilot.max_health)
 	health_pilot.health_changed.connect(_update_health_info)
 	armor_points.health_changed.connect(_update_health_info)

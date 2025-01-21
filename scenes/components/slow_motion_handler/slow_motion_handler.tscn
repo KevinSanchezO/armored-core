@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4qnqhtru75"]
+[gd_scene load_steps=5 format=3 uid="uid://d4qnqhtru75"]
 
 [ext_resource type="Script" path="res://scenes/components/slow_motion_handler/slow_motion_handler.gd" id="1_4wf18"]
+[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="2_t3si5"]
+[ext_resource type="AudioStream" uid="uid://dthsbnpngqk2r" path="res://scenes/components/slow_motion_handler/enter_slowmotion.wav" id="3_7hbbp"]
+[ext_resource type="AudioStream" uid="uid://bpvyireg0j3ta" path="res://scenes/components/slow_motion_handler/exit_slowmotion.wav" id="4_nyh2i"]
 
 [node name="SlowMotionHandler" type="Node"]
 script = ExtResource("1_4wf18")
@@ -8,3 +11,13 @@ script = ExtResource("1_4wf18")
 [node name="ConsumptionTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Enter" parent="." instance=ExtResource("2_t3si5")]
+stream = ExtResource("3_7hbbp")
+bus = &"SFX"
+randomize_pitch = false
+
+[node name="Exit" parent="." instance=ExtResource("2_t3si5")]
+stream = ExtResource("4_nyh2i")
+bus = &"SFX"
+randomize_pitch = false

@@ -17,7 +17,9 @@ class_name Player
 @onready var game_camera := $Head/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
-@onready var boost_cooldown := $AirMovement/BoostCooldown as Timer
+@onready var boost_cooldown := $Velocity3d/BoostCooldown as Timer
+@onready var health_pilot := $HealthPilot as Health
+@onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 
 var air_momentum_dir := Vector2.ZERO
 
@@ -59,7 +61,7 @@ func _unhandled_input(event) -> void:
 
 
 func _physics_process(_delta) -> void:
-	air_movement.apply_gravity(self)
+	velocity_3d.apply_gravity(self)
 	
 	if loss_of_control_effects != []:
 		return
@@ -77,7 +79,7 @@ func _physics_process(_delta) -> void:
 	else:
 		if input_dir == Vector2.ZERO:
 			wish_dir = self.global_transform.basis * Vector3(air_momentum_dir.x, 0.0, -air_momentum_dir.y)
-		velocity_3d.accelerate(wish_dir, air_movement.current_air_speed)
+		velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed)
 	velocity_3d.move(self)
 	
 	_handle_boost()
@@ -88,7 +90,7 @@ func _physics_process(_delta) -> void:
 func _handle_boost() -> void:
 	if Input.is_action_just_pressed("boost") and !energy_gauge.is_in_cooldown\
 	and boost_cooldown.is_stopped():
-		air_movement.apply_upward_force(self)
+		velocity_3d.apply_upward_force(self)
 		energy_gauge.modify_gauge_directly(boost_consumption)
 		boost_cooldown.start()
 
@@ -127,31 +129,31 @@ func _exit_slow_motion_energy() -> void:
 
 
 func _enter_slow_motion_air() -> void:
-	TweenManager.create_new_tween(air_movement, "current_jump_velocity",\
-	air_movement.jump_velocity * 1.5, 0.5, air_movement.current_jump_velocity)
+	TweenManager.create_new_tween(velocity_3d, "current_jump_velocity",\
+	velocity_3d.jump_velocity * 1.5, 0.5, velocity_3d.current_jump_velocity)
 	
-	TweenManager.create_new_tween(air_movement, "current_air_speed",\
-	air_movement.air_speed * 2, 0.5, air_movement.current_air_speed)
+	TweenManager.create_new_tween(velocity_3d, "current_air_speed",\
+	velocity_3d.air_speed * 2, 0.5, velocity_3d.current_air_speed)
 	
-	TweenManager.create_new_tween(air_movement, "current_gravity",\
-	air_movement.GRAVITY * 2, 0.5, air_movement.current_gravity)
+	TweenManager.create_new_tween(velocity_3d, "current_gravity",\
+	velocity_3d.GRAVITY * 2, 0.5, velocity_3d.current_gravity)
 	
-	TweenManager.create_new_tween(air_movement, "current_fall_gravity",\
-	air_movement.FALL_GRAVITY * 2, 0.5, air_movement.current_fall_gravity)
+	TweenManager.create_new_tween(velocity_3d, "current_fall_gravity",\
+	velocity_3d.FALL_GRAVITY * 2, 0.5, velocity_3d.current_fall_gravity)
 
 
 func _exit_slow_motion_air() -> void:
-	TweenManager.create_new_tween(air_movement, "current_jump_velocity",\
-	air_movement.jump_velocity, 0.5, air_movement.current_jump_velocity)
+	TweenManager.create_new_tween(velocity_3d, "current_jump_velocity",\
+	velocity_3d.jump_velocity, 0.5, velocity_3d.current_jump_velocity)
 	
-	TweenManager.create_new_tween(air_movement, "current_air_speed",\
-	air_movement.air_speed, 0.5, air_movement.current_air_speed)
+	TweenManager.create_new_tween(velocity_3d, "current_air_speed",\
+	velocity_3d.air_speed, 0.5, velocity_3d.current_air_speed)
 	
-	TweenManager.create_new_tween(air_movement, "current_gravity",\
-	air_movement.GRAVITY, 0.5, air_movement.current_gravity)
+	TweenManager.create_new_tween(velocity_3d, "current_gravity",\
+	velocity_3d.GRAVITY, 0.5, velocity_3d.current_gravity)
 	
-	TweenManager.create_new_tween(air_movement, "current_fall_gravity",\
-	air_movement.FALL_GRAVITY, 0.5, air_movement.current_fall_gravity)
+	TweenManager.create_new_tween(velocity_3d, "current_fall_gravity",\
+	velocity_3d.FALL_GRAVITY, 0.5, velocity_3d.current_fall_gravity)
 
 
 func _enter_slow_motion_tilt() -> void:
