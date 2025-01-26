@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=10 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
 [ext_resource type="PackedScene" uid="uid://d3ae7uvlokd0x" path="res://scenes/components/game_camera/game_camera.tscn" id="2_wsddm"]
 [ext_resource type="PackedScene" uid="uid://c3bkd544ybrrb" path="res://scenes/components/dash_handler/dash_handler.tscn" id="3_g53iv"]
 [ext_resource type="PackedScene" uid="uid://c1luyg6l6eaxb" path="res://scenes/components/energy_gauge/energy_gauge.tscn" id="4_067co"]
+[ext_resource type="PackedScene" uid="uid://ddehcxkogcypk" path="res://scenes/game_objects/weapons/rifle/rifle.tscn" id="4_l323l"]
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="6_3jcd1"]
 [ext_resource type="PackedScene" uid="uid://d4qnqhtru75" path="res://scenes/components/slow_motion_handler/slow_motion_handler.tscn" id="7_uy4ey"]
 
@@ -17,6 +18,7 @@ tilt = 2.5
 time_tilt = 0.05
 boost_consumption = 50.0
 boost_cooldown_value = 0.2
+weapon_rotation = 0.01
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CapsuleShape3D_efd3n")
@@ -32,6 +34,11 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="GameCamera" parent="Head" index="0" instance=ExtResource("2_wsddm")]
+
+[node name="WeaponHolder" type="Node3D" parent="Head/GameCamera" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, -0.165008, -0.4)
+
+[node name="Rifle" parent="Head/GameCamera/WeaponHolder" index="0" instance=ExtResource("4_l323l")]
 
 [node name="HealthPilot" parent="." index="6" instance=ExtResource("6_3jcd1")]
 

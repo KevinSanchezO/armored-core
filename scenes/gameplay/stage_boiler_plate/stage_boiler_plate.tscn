@@ -1,10 +1,28 @@
-[gd_scene load_steps=14 format=3 uid="uid://cffj3or6ica6r"]
+[gd_scene load_steps=19 format=3 uid="uid://cffj3or6ica6r"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/stage_boiler_plate/stage_boiler_plate.gd" id="1_f8etu"]
 [ext_resource type="PackedScene" uid="uid://b77cvkvbt6lo7" path="res://scenes/game_objects/entities/player/player.tscn" id="1_gwp2m"]
 [ext_resource type="Texture2D" uid="uid://bve2k0uowhu2j" path="res://enemy_gravity.png" id="3_6sls0"]
 [ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="4_jlt4a"]
 [ext_resource type="PackedScene" uid="uid://c3tv3jc3cj5x7" path="res://ui/gameplay_ui/gameplay_ui.tscn" id="5_o5s6i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_skcsp"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_t7evu"]
+sky_material = SubResource("ProceduralSkyMaterial_skcsp")
+
+[sub_resource type="Environment" id="Environment_b6ich"]
+background_mode = 2
+sky = SubResource("Sky_t7evu")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tssbb"]
+albedo_color = Color(0.129558, 0.129558, 0.129558, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e40os"]
+albedo_color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rocnl"]
 atlas = ExtResource("3_6sls0")
@@ -66,26 +84,41 @@ animations = [{
 [node name="StageBoilerPlate" type="Node3D"]
 script = ExtResource("1_f8etu")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-use_collision = true
-size = Vector3(20, 0.002, 20)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.5, -2.18557e-08, 0, -4.37114e-08, 1, -0.5, 0.866025, 3.78552e-08, -8, 8.708, 0)
+shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.1289, -7.59928, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b6ich")
+
+[node name="Geometry" type="CSGBox3D" parent="."]
 use_collision = true
-size = Vector3(20, 0.002, 20)
+size = Vector3(20, 0.002, 40)
+material = SubResource("StandardMaterial3D_tssbb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -3, 0)
+use_collision = true
+size = Vector3(20, 0.002, 40)
+material = SubResource("StandardMaterial3D_e40os")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -1.5, 0)
+size = Vector3(0.001, 3, 40)
 
 [node name="Player" parent="." instance=ExtResource("1_gwp2m")]
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5, 1.3, 0)
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Enemies"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5, 1.3, 10.3944)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_e5gcc")
 autoplay = "default"
 frame_progress = 0.9229
 speed_scale = 3.0
 
-[node name="Label3D" type="Label3D" parent="AnimatedSprite3D"]
+[node name="Label3D" type="Label3D" parent="Enemies/AnimatedSprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216764, 0)
 visible = false
 billboard = 1
@@ -93,7 +126,7 @@ outline_modulate = Color(0, 0, 0, 0)
 text = "1590"
 font = ExtResource("4_jlt4a")
 
-[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="."]
+[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="Enemies"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.89545, 1.3, -5.20059)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_e5gcc")
@@ -101,7 +134,40 @@ autoplay = "default"
 frame_progress = 0.9229
 speed_scale = 3.0
 
-[node name="Label3D" type="Label3D" parent="AnimatedSprite3D2"]
+[node name="Label3D" type="Label3D" parent="Enemies/AnimatedSprite3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216764, 0)
+visible = false
+billboard = 1
+outline_modulate = Color(0, 0, 0, 0)
+text = "650
+"
+font = ExtResource("4_jlt4a")
+
+[node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="Enemies"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -15.9507, -1.6, 13.7518)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_e5gcc")
+autoplay = "default"
+frame_progress = 0.9229
+speed_scale = 3.0
+
+[node name="Label3D" type="Label3D" parent="Enemies/AnimatedSprite3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216764, 0)
+visible = false
+billboard = 1
+outline_modulate = Color(0, 0, 0, 0)
+text = "1590"
+font = ExtResource("4_jlt4a")
+
+[node name="AnimatedSprite3D4" type="AnimatedSprite3D" parent="Enemies"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -24.8461, -1.6, -1.84325)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_e5gcc")
+autoplay = "default"
+frame_progress = 0.9229
+speed_scale = 3.0
+
+[node name="Label3D" type="Label3D" parent="Enemies/AnimatedSprite3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.216764, 0)
 visible = false
 billboard = 1

@@ -12,6 +12,9 @@ class_name Player
 @export var boost_consumption := 50.0
 @export var boost_cooldown_value := 0.2
 
+@export_group("Weapon holder")
+@export var weapon_rotation := 0.01
+
 @onready var current_time_tilt := time_tilt
 
 @onready var game_camera := $Head/GameCamera as GameCamera
@@ -20,8 +23,11 @@ class_name Player
 @onready var boost_cooldown := $Velocity3d/BoostCooldown as Timer
 @onready var health_pilot := $HealthPilot as Health
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
+@onready var head := %Head as Node3D
+@onready var weapon_holder := $Head/GameCamera/WeaponHolder as Node3D
 
 var air_momentum_dir := Vector2.ZERO
+var mouse_input:Vector2
 
 func _ready() -> void:
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
@@ -56,8 +62,10 @@ func _unhandled_input(event) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x * mouse_sensitivity)
+			#head.rotate_y(-event.relative.x * mouse_sensitivity)
 			game_camera.rotate_x(-event.relative.y * mouse_sensitivity)
 			game_camera.rotation.x = clamp(game_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90));
+			mouse_input = event.relative
 
 
 func _physics_process(_delta) -> void:
@@ -85,6 +93,8 @@ func _physics_process(_delta) -> void:
 	_handle_boost()
 	_handle_dash(wish_dir, input_dir)
 	_head_tilt(input_dir)
+	_weapon_sway()
+	_weapon_tilt(input_dir)
 
 
 func _handle_boost() -> void:
@@ -116,6 +126,22 @@ func _head_tilt(input_dir:Vector2) -> void:
 		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(tilt), current_time_tilt)
 	else:
 		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(0), current_time_tilt)
+
+
+func _weapon_sway() -> void:
+	var delta_time := get_process_delta_time() as float
+	mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta_time)
+	weapon_holder.rotation.x = lerp(weapon_holder.rotation.x, mouse_input.y * weapon_rotation, 10 * delta_time)
+	weapon_holder.rotation.y = lerp(weapon_holder.rotation.y, mouse_input.x * weapon_rotation, 10 * delta_time)
+
+
+func _weapon_tilt(input_dir:Vector2) -> void:
+	if input_dir.x > 0:
+		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(-5), 0.05)
+	elif input_dir.x < 0:
+		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(5), 0.05)
+	else:
+		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(0), 0.05)
 
 
 func _enter_slow_motion_energy() -> void:

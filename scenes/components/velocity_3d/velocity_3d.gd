@@ -8,7 +8,7 @@ const FALL_GRAVITY := 19.6
 
 @export var max_speed := 8.0
 @export var acceleration := 50.0
-@export var jump_velocity := 6.0
+@export var jump_velocity := 9.0
 @export var air_speed := 6.0
 
 var velocity := Vector3.ZERO
