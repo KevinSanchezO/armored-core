@@ -4,9 +4,5 @@
 
 [node name="Hurtcast" type="Marker3D"]
 script = ExtResource("1_icgn6")
-damage = null
-number_of_rays = null
-cast_range = null
-ray_cast_mask = null
 
 [node name="DirectionalNode" type="Node3D" parent="."]

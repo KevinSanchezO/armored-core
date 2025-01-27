@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/components/dash_handler/dash_handler.gd" id="1_p2x5q"]
 
-[node name="DashHandler" type="Node"]
+[node name="DashHandler" type="Node3D"]
 script = ExtResource("1_p2x5q")
 
 [node name="Cooldown" type="Timer" parent="."]

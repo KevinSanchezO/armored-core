@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/components/energy_gauge/energy_gauge.gd" id="1_2b1e3"]
 
-[node name="EnergyGauge" type="Node"]
+[node name="EnergyGauge" type="Node3D"]
 script = ExtResource("1_2b1e3")
 
 [node name="ConsumptionTimer" type="Timer" parent="."]
