@@ -24,6 +24,7 @@ class_name Player
 @onready var health_pilot := $HealthPilot as Health
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var head := %Head as Node3D
+@onready var speed_lines := $Head/GameCamera/SpeedLines as MeshInstance3D
 @onready var weapon_holder := $Head/GameCamera/WeaponHolder as Node3D
 
 var air_momentum_dir := Vector2.ZERO
