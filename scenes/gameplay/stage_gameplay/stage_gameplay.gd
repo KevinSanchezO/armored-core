@@ -1,4 +1,5 @@
-extends Node3D
+extends SubViewportContainer
+class_name StageGameplay
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

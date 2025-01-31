@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://cffj3or6ica6r"]
+
+[ext_resource type="Material" uid="uid://k1fiklm1q2ih" path="res://resources/materials/psx_postprocessing.tres" id="1_axsfp"]
+[ext_resource type="Script" path="res://scenes/gameplay/stage_gameplay/stage_gameplay.gd" id="1_f8etu"]
+[ext_resource type="PackedScene" uid="uid://b77cvkvbt6lo7" path="res://scenes/game_objects/entities/player/player.tscn" id="1_gwp2m"]
+[ext_resource type="PackedScene" uid="uid://cebcflu5kcvfv" path="res://layers/enemy_layer/enemy_layer.tscn" id="5_5coik"]
+[ext_resource type="PackedScene" uid="uid://c3tv3jc3cj5x7" path="res://ui/gameplay_ui/gameplay_ui.tscn" id="5_o5s6i"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="6_2w0ge"]
+[ext_resource type="Resource" uid="uid://coq3lnervxuau" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="7_b02qj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_skcsp"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_t7evu"]
+sky_material = SubResource("ProceduralSkyMaterial_skcsp")
+
+[sub_resource type="Environment" id="Environment_b6ich"]
+background_mode = 2
+sky = SubResource("Sky_t7evu")
+tonemap_mode = 2
+
+[node name="StageGameplay" type="SubViewportContainer"]
+material = ExtResource("1_axsfp")
+offset_right = 2.0
+offset_bottom = 2.0
+script = ExtResource("1_f8etu")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(-0.866025, -0.5, -2.18557e-08, 0, -4.37114e-08, 1, -0.5, 0.866025, 3.78552e-08, -8, 8.708, 0)
+light_energy = 0.5
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_b6ich")
+
+[node name="Player" parent="SubViewport" instance=ExtResource("1_gwp2m")]
+
+[node name="GameplayUI" parent="SubViewport" instance=ExtResource("5_o5s6i")]
+
+[node name="EnemyLayer" parent="SubViewport" instance=ExtResource("5_5coik")]
+
+[node name="FuncGodotMap" type="Node3D" parent="SubViewport"]
+script = ExtResource("6_2w0ge")
+map_settings = ExtResource("7_b02qj")
