@@ -10,6 +10,8 @@ uniform float mask_size: hint_range(0.0, 1.0) = 0.1;
 uniform float mask_edge: hint_range(0.0, 1.0) = 0.5;
 uniform float animation_speed: hint_range(1.0, 20.0) = 0.5;
 
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+
 float inv_lerp(float from, float to, float value) {
     return (value - from) / (to - from);
 }
@@ -32,16 +34,18 @@ vec2 rotate_uv(vec2 uv, vec2 pivot, float rotation) {
 }
 
 void fragment() {
-    vec2 rotated_uv = rotate_uv(UV, vec2(0.5), floor(fract(TIME) * animation_speed));
+    vec2 rotated_uv = rotate_uv(SCREEN_UV, vec2(0.5), floor(fract(TIME) * animation_speed));
     vec2 polar_uv = polar_coordinates(rotated_uv, vec2(0.5), 0.01, line_count);
+    
+    vec3 scene_color = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
     vec3 lines = texture(noise, polar_uv).rgb;
     
-    float mask_value = length(UV - vec2(0.5));
+    float mask_value = length(SCREEN_UV - vec2(0.5));
     float mask = inv_lerp(mask_size, mask_edge, mask_value);
     float result = 1.0 - (mask * line_density);
     
     result = smoothstep(result, result + line_falloff, lines.r);
     
-    ALBEDO = line_color.rgb;
+    ALBEDO = mix(scene_color, line_color.rgb, result);
     ALPHA = min(line_color.a, result);
 }

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b663jdm0waoxn"]
-
-[ext_resource type="Script" path="res://scenes/autoloads/upgrade_load/upgrade_load.gd" id="1_npylo"]
-
-[node name="UpgradeLoad" type="Node"]
-script = ExtResource("1_npylo")

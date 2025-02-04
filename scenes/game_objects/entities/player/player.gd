@@ -25,7 +25,7 @@ class_name Player
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var head := %Head as Node3D
 @onready var speed_lines := $Head/GameCamera/SpeedLines as MeshInstance3D
-@onready var weapon_holder := $Head/GameCamera/WeaponHolder as Node3D
+@onready var weapon_manager := $Head/GameCamera/WeaponManager as WeaponManager
 
 var air_momentum_dir := Vector2.ZERO
 var mouse_input:Vector2
@@ -56,6 +56,9 @@ func _ready() -> void:
 func _unhandled_input(event) -> void:
 	if loss_of_control_effects != []:
 		return
+	
+	if Input.is_action_pressed("switch_weapon"):
+		weapon_manager.switch_weapon()
 	
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -132,17 +135,17 @@ func _head_tilt(input_dir:Vector2) -> void:
 func _weapon_sway() -> void:
 	var delta_time := get_process_delta_time() as float
 	mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta_time)
-	weapon_holder.rotation.x = lerp(weapon_holder.rotation.x, mouse_input.y * weapon_rotation, 10 * delta_time)
-	weapon_holder.rotation.y = lerp(weapon_holder.rotation.y, mouse_input.x * weapon_rotation, 10 * delta_time)
+	weapon_manager.rotation.x = lerp(weapon_manager.rotation.x, mouse_input.y * weapon_rotation, 10 * delta_time)
+	weapon_manager.rotation.y = lerp(weapon_manager.rotation.y, mouse_input.x * weapon_rotation, 10 * delta_time)
 
 
 func _weapon_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(-5), 0.05)
+		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(-5), 0.05)
 	elif input_dir.x < 0:
-		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(5), 0.05)
+		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(5), 0.05)
 	else:
-		weapon_holder.rotation.z = lerp_angle(weapon_holder.rotation.z, deg_to_rad(0), 0.05)
+		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(0), 0.05)
 
 
 func _enter_slow_motion_energy() -> void:
@@ -212,6 +215,9 @@ func _enter_slow_motion_dash() -> void:
 	
 	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
 	dash_handler.cooldown_value / 2, 0.5, dash_handler.cooldown.wait_time)
+	
+	TweenManager.create_new_tween(dash_handler, "current_speed_lines_duration", \
+	dash_handler.speed_lines_duration / 2, 0.5, dash_handler.current_speed_lines_duration)
 
 
 func _exit_slow_motion_dash() -> void:
@@ -223,3 +229,6 @@ func _exit_slow_motion_dash() -> void:
 	
 	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
 	dash_handler.cooldown_value, 0.5, dash_handler.cooldown.wait_time)
+	
+	TweenManager.create_new_tween(dash_handler, "current_speed_lines_duration", \
+	dash_handler.speed_lines_duration, 0.5, dash_handler.current_speed_lines_duration)
