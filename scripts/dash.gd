@@ -8,7 +8,7 @@ var entity:Entity
 var direction:Vector3
 var duration:float
 var speed: float
-var progress := 0
+var progress := 0.0
 
 static func create(dash_data: Dictionary) -> Dash:
 	var new_dash := Dash.new()

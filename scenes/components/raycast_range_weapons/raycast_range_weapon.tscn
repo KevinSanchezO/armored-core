@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddtksqgtds031"]
+
+[ext_resource type="Script" path="res://scenes/components/raycast_range_weapons/raycast_range_weapon.gd" id="1_foqk8"]
+
+[node name="RaycastRangeWeapon" type="RayCast3D"]
+target_position = Vector3(0, 0, 0)
+collision_mask = 7
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("1_foqk8")

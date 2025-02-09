@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bddfblneuvbyi"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/camera/camera.gd" id="1_rlf6s"]
+
+[node name="Camera" type="Node"]
+script = ExtResource("1_rlf6s")

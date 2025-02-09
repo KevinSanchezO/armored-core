@@ -1,4 +1,7 @@
-extends Marker3D
+[gd_scene load_steps=2 format=3 uid="uid://bge7k8r07kb2d"]
+
+[sub_resource type="GDScript" id="GDScript_rb68h"]
+script/source = "extends Marker3D
 class_name Hurtcast
 
 
@@ -24,6 +27,9 @@ func fire_rays() -> Array[Dictionary]:
 			continue
 		
 		hits.append(hit_data)
+		
+		if not hit_data[\"collider\"] is Hurtbox:
+			continue
 	
 	return hits
 
@@ -50,3 +56,11 @@ func get_random_spread_vector() -> Vector3:
 			randf_range(-spread, spread), 
 			randf_range(-spread, spread)
 	)
+"
+
+[node name="Hurtcast" type="Marker3D"]
+script = SubResource("GDScript_rb68h")
+
+[node name="DirectionalNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+metadata/_edit_group_ = true

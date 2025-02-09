@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cggqfu1mxlamm"]
+
+[ext_resource type="PackedScene" uid="uid://chsacjn7iqxlc" path="res://scenes/components/hurtbox/hurtbox.tscn" id="1_2iubi"]
+[ext_resource type="Script" path="res://scenes/game_objects/projectiles/projectile/projectile.gd" id="1_hlebu"]
+[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="2_nikka"]
+[ext_resource type="PackedScene" uid="uid://dwo8tjovvd31c" path="res://scenes/components/velocity_3d/velocity_3d.tscn" id="3_mnqev"]
+[ext_resource type="PackedScene" uid="uid://epsyvnu02kcy" path="res://scenes/components/face_direction/face_direction.tscn" id="4_d6fwv"]
+
+[node name="Projectile" type="CharacterBody3D"]
+script = ExtResource("1_hlebu")
+
+[node name="ImpactPoint" type="Node3D" parent="."]
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Hurtbox" parent="." instance=ExtResource("1_2iubi")]
+
+[node name="Velocity3d" parent="." instance=ExtResource("3_mnqev")]
+
+[node name="FaceDirection" parent="." instance=ExtResource("4_d6fwv")]
+turn_speed = -1.0
+
+[node name="Audio3D" parent="." instance=ExtResource("2_nikka")]
+
+[node name="QueueFreeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

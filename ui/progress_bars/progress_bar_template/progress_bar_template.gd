@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func init_value(new_value:float) -> void:
-	value_progress_bar = new_value
+	value_progress_bar = int(new_value)
 	
 	max_value = int(new_value)
 	value = int(new_value)

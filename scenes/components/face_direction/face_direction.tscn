@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://epsyvnu02kcy"]
+
+[ext_resource type="Script" path="res://scenes/components/face_direction/face_direction.gd" id="1_u04g5"]
+
+[node name="FaceDirection" type="Node3D"]
+script = ExtResource("1_u04g5")

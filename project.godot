@@ -19,16 +19,22 @@ config/icon="res://icon.svg"
 SlowMotion="*res://scenes/autoloads/slow_motion/SlowMotion.tscn"
 TweenManager="*res://scenes/autoloads/tween_manager/TweenManager.tscn"
 WeaponLoad="*res://scenes/autoloads/weapon_load/weapon_load.tscn"
+Camera="*res://scenes/autoloads/camera/camera.tscn"
 
 [display]
 
-window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+
+[global_group]
+
+projectile_layer=""
+enemy_layer=""
+player=""
 
 [input]
 
@@ -79,6 +85,25 @@ switch_weapon={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(91, 9),"global_position":Vector2(100, 55),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+shoot_weapon={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(167, 10),"global_position":Vector2(176, 56),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+shoot_shoulder={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(177, 13),"global_position":Vector2(186, 59),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+
+[layer_names]
+
+3d_physics/layer_1="Surface"
+3d_physics/layer_2="Object"
+3d_physics/layer_3="Enemy"
+3d_physics/layer_4="Player"
+3d_physics/layer_5="Enemy Projectile"
+3d_physics/layer_6="Player Projectile"
 
 [rendering]
 

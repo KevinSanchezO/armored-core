@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://byryatimrsrhf"]
+
+[ext_resource type="PackedScene" uid="uid://dsbenaf2j7t8t" path="res://scenes/game_objects/weapons/weapon/weapon.tscn" id="1_8s7uc"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapon/range_weapon.gd" id="2_lif4x"]
+
+[node name="RangeWeapon" instance=ExtResource("1_8s7uc")]
+script = ExtResource("2_lif4x")
+projectiles_per_shoot = 0
+spread = 0.01
+max_ammo = 0
+max_chamber = 0
+projectile = null
+
+[node name="ProjectileSpawner" type="Node3D" parent="." index="5"]
+
+[node name="ShellSpawner" type="Node3D" parent="." index="6"]

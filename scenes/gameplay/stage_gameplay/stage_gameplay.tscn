@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cffj3or6ica6r"]
+[gd_scene load_steps=12 format=3 uid="uid://cffj3or6ica6r"]
 
 [ext_resource type="Material" uid="uid://k1fiklm1q2ih" path="res://resources/materials/psx_postprocessing.tres" id="1_axsfp"]
 [ext_resource type="Script" path="res://scenes/gameplay/stage_gameplay/stage_gameplay.gd" id="1_f8etu"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cebcflu5kcvfv" path="res://layers/enemy_layer/enemy_layer.tscn" id="5_5coik"]
 [ext_resource type="PackedScene" uid="uid://c3tv3jc3cj5x7" path="res://ui/gameplay_ui/gameplay_ui.tscn" id="5_o5s6i"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="6_2w0ge"]
+[ext_resource type="PackedScene" uid="uid://wtqdofpgo8ia" path="res://layers/projectile_layer/projectile_layer.tscn" id="6_tdhgk"]
 [ext_resource type="Resource" uid="uid://coq3lnervxuau" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="7_b02qj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_skcsp"]
@@ -47,6 +48,8 @@ environment = SubResource("Environment_b6ich")
 [node name="GameplayUI" parent="SubViewport" instance=ExtResource("5_o5s6i")]
 
 [node name="EnemyLayer" parent="SubViewport" instance=ExtResource("5_5coik")]
+
+[node name="ProjectileLayer" parent="SubViewport" instance=ExtResource("6_tdhgk")]
 
 [node name="FuncGodotMap" type="Node3D" parent="SubViewport"]
 script = ExtResource("6_2w0ge")

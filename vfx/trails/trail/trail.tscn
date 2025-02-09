@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkqs1blh8sn0j"]
+
+[ext_resource type="Script" path="res://vfx/trails/trail/trail.gd" id="1_1w0go"]
+
+[node name="Trail" type="Node3D"]
+script = ExtResource("1_1w0go")

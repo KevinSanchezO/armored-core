@@ -18,8 +18,8 @@ func init_progress_bar_mirror(new_value:float) -> void:
 
 
 func update_value_bar_mirror(new_value:float) -> void:
-	progress_bar_left.value_progress_bar = new_value
-	progress_bar_right.value_progress_bar = new_value
+	progress_bar_left.value_progress_bar = int(new_value)
+	progress_bar_right.value_progress_bar = int(new_value)
 
 
 func update_color_bar_mirror(color:Color) -> void:

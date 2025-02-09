@@ -57,7 +57,7 @@ func _unhandled_input(event) -> void:
 	if loss_of_control_effects != []:
 		return
 	
-	if Input.is_action_pressed("switch_weapon"):
+	if Input.is_action_just_pressed("switch_weapon"):
 		weapon_manager.switch_weapon()
 	
 	if event is InputEventMouseButton:
@@ -65,8 +65,7 @@ func _unhandled_input(event) -> void:
 	
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			rotate_y(-event.relative.x * mouse_sensitivity)
-			#head.rotate_y(-event.relative.x * mouse_sensitivity)
+			head.rotate_y(-event.relative.x * mouse_sensitivity)
 			game_camera.rotate_x(-event.relative.y * mouse_sensitivity)
 			game_camera.rotation.x = clamp(game_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90));
 			mouse_input = event.relative
@@ -83,7 +82,7 @@ func _physics_process(_delta) -> void:
 	if input_dir != Vector2.ZERO:
 		air_momentum_dir = input_dir
 	
-	wish_dir = self.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
+	wish_dir = head.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
 	
 	if is_on_floor():
 		air_momentum_dir = Vector2.ZERO
@@ -109,11 +108,11 @@ func _handle_boost() -> void:
 		boost_cooldown.start()
 
 
-func _handle_dash(wish_dir:Vector3, input_dir:Vector2) -> void:
+func _handle_dash(wish_dir_dash:Vector3, input_dir:Vector2) -> void:
 	if Input.is_action_just_pressed("dash") and dash_handler.cooldown.is_stopped()\
 	and energy_gauge.energy_gauge > 0 and !energy_gauge.is_in_cooldown:
 		energy_gauge.modify_gauge_directly(dash_handler.dash_consumption)
-		dash_handler.trigger_dash(wish_dir, input_dir)
+		dash_handler.trigger_dash(wish_dir_dash, input_dir)
 
 
 func _head_tilt(input_dir:Vector2) -> void:

@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://layers/enemy_layer/enemy_layer.gd" id="1_e1ha2"]
 
-[node name="EnemyLayer" type="Node3D"]
+[node name="EnemyLayer" type="Node3D" groups=["enemy_layer"]]
 script = ExtResource("1_e1ha2")

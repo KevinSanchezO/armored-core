@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3ae7uvlokd0x"]
+[gd_scene load_steps=3 format=3 uid="uid://d3ae7uvlokd0x"]
 
 [ext_resource type="Script" path="res://scenes/components/game_camera/game_camera.gd" id="1_17v0a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d3nig"]
+fractal_octaves = 4
 
 [node name="GameCamera" type="Camera3D"]
 cull_mask = 1048573
 script = ExtResource("1_17v0a")
+noise = SubResource("FastNoiseLite_d3nig")

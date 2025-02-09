@@ -1,8 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bge7k8r07kb2d"]
 
-[ext_resource type="Script" path="res://scenes/components/hurtcast/Hurtcast.gd" id="1_icgn6"]
+[ext_resource type="Script" path="res://scenes/components/hurtcast/Hurtcast.gd" id="1_01jir"]
 
 [node name="Hurtcast" type="Marker3D"]
-script = ExtResource("1_icgn6")
+script = ExtResource("1_01jir")
+ray_cast_mask = 7
 
 [node name="DirectionalNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+metadata/_edit_group_ = true

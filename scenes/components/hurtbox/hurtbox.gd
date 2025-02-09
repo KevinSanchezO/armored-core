@@ -22,7 +22,8 @@ func _on_area_entered(area) -> void:
 		damage_dealt.emit()
 
 func _on_body_entered(body) -> void:
-	return
+	if body.get_collision_layer() == 1:
+		wall_impacted.emit()
 
 func enable() -> void:
 	for i in get_child_count():

@@ -33,7 +33,9 @@ func apply_upward_force(entity:Entity) -> void:
 	upward_force_applied.emit()
 	entity.velocity.y = current_jump_velocity
 
-func move(body:Entity) -> void:
+func move(body:CharacterBody3D, ignore_y := true) -> void:
+	if not ignore_y:
+		body.velocity.y = velocity.y
 	body.velocity.x = velocity.x
 	body.velocity.z = velocity.z
 	body.move_and_slide()

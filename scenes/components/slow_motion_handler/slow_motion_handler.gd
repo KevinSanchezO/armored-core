@@ -16,7 +16,7 @@ const MAX_SLOW_MOTION_GAUGE := 100.0
 @export var max_slow_motion_count := 2
 
 var slow_motion_count := 0
-var slow_motion_gauge : int
+var slow_motion_gauge : float
 var consumption := 2.0
 var recovery := 1.0
 

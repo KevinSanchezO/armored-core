@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=4 uid="uid://c7jlhlr13uo42"]
+[gd_scene load_steps=31 format=4 uid="uid://c7jlhlr13uo42"]
 
 [ext_resource type="PackedScene" uid="uid://cffj3or6ica6r" path="res://scenes/gameplay/stage_gameplay/stage_gameplay.tscn" id="1_mwhq3"]
 [ext_resource type="Material" uid="uid://dpq0nig44lswm" path="res://trenchbroom/textures/test/test_texture_dark.tres" id="2_ik5p6"]
 [ext_resource type="Material" uid="uid://yuwmnc243kh6" path="res://trenchbroom/textures/test/test_texture_purple.tres" id="3_cp26h"]
 [ext_resource type="Material" uid="uid://bmqv57mme4fy0" path="res://trenchbroom/textures/test/test_texture_orange.tres" id="4_hrmo1"]
+[ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="5_o4yk7"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jcynt"]
 _surfaces = [{
@@ -122,7 +123,7 @@ points = PackedVector3Array(13, 10, -15, 13, 3, -15, 16, 3, -15, 16, 10, -15, 13
 [node name="Player" parent="SubViewport" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="FuncGodotMap" parent="SubViewport" index="5"]
+[node name="FuncGodotMap" parent="SubViewport" index="6"]
 local_map_file = "res://trenchbroom/maps/first_test_trenchbroom.map"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="SubViewport/FuncGodotMap" index="0"]
@@ -202,3 +203,6 @@ shape = SubResource("ConvexPolygonShape3D_nb8d6")
 
 [node name="entity_0_brush_22_collision_shape" type="CollisionShape3D" parent="SubViewport/FuncGodotMap/entity_0_worldspawn" index="24"]
 shape = SubResource("ConvexPolygonShape3D_8n8av")
+
+[node name="BulletPlayer" parent="." index="1" instance=ExtResource("5_o4yk7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.1879, 0.469901, -9.76986)

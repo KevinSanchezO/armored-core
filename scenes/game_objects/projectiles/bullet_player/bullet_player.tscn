@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8kl6207syrhk"]
+
+[ext_resource type="PackedScene" uid="uid://cggqfu1mxlamm" path="res://scenes/game_objects/projectiles/projectile/projectile.tscn" id="1_atww6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_45rkm"]
+size = Vector3(0.05, 0.05, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8n70"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.729412, 0.0784314, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xd4ds"]
+size = Vector3(0.1, 0.1, 0.5)
+
+[node name="BulletPlayer" instance=ExtResource("1_atww6")]
+collision_layer = 32
+collision_mask = 0
+rotate_impact = true
+speed_value_min = 180.0
+speed_value_max = 150.0
+
+[node name="ImpactPoint" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.268574)
+
+[node name="Model" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
+mesh = SubResource("BoxMesh_45rkm")
+surface_material_override/0 = SubResource("StandardMaterial3D_c8n70")
+
+[node name="Hurtbox" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.103737)
+damage = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("BoxShape3D_xd4ds")
+
+[node name="FaceDirection" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
+
+[node name="Audio3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.103587)
+shape = SubResource("BoxShape3D_xd4ds")
