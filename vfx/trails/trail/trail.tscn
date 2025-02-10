@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkqs1blh8sn0j"]
+[gd_scene load_steps=4 format=3 uid="uid://dkqs1blh8sn0j"]
 
 [ext_resource type="Script" path="res://vfx/trails/trail/trail.gd" id="1_1w0go"]
+[ext_resource type="PackedScene" uid="uid://epsyvnu02kcy" path="res://scenes/components/face_direction/face_direction.tscn" id="2_hglth"]
+[ext_resource type="PackedScene" uid="uid://dwo8tjovvd31c" path="res://scenes/components/velocity_3d/velocity_3d.tscn" id="3_eshpx"]
 
-[node name="Trail" type="Node3D"]
+[node name="Trail" type="CharacterBody3D"]
 script = ExtResource("1_1w0go")
+
+[node name="FaceDirection" parent="." instance=ExtResource("2_hglth")]
+turn_speed = -1.0
+
+[node name="Velocity3d" parent="." instance=ExtResource("3_eshpx")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]

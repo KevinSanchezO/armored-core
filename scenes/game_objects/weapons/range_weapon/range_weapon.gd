@@ -70,5 +70,7 @@ func generate_projectile():
 		
 		projectile_instance.look_at(projectile_instance.global_position + random_direction, Vector3.UP)
 	
+		projectile_instance.generate_trail(random_direction)
+	
 	firing = false
 	weapon_fired.emit()

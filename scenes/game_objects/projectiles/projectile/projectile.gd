@@ -47,3 +47,22 @@ func _update_impacts(impact:PackedScene, value := 1) -> void:
 func _generate_impact(impact:PackedScene) -> void:
 	if impact == null:
 		return
+
+
+func generate_trail(random_direction:Vector3) -> void:
+	if trail == null:
+		return
+	
+	var entity_layer := get_tree().get_first_node_in_group("projectile_layer") as Node3D
+	if entity_layer == null:
+		push_error("No entity layer found.")
+	
+	var trail_instance = trail.instantiate() as Trail
+	entity_layer.add_child(trail_instance)
+	
+	trail_instance.global_position = impact_point.global_position
+	trail_instance.look_at(trail_instance.global_position + random_direction, Vector3.UP)
+	trail_instance.objective = self
+	
+	trail_instance.velocity_3d.max_speed = velocity_3d.max_speed
+	trail_instance.velocity_3d.current_speed = velocity_3d.max_speed

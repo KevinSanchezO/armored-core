@@ -27,7 +27,7 @@ class_name Player
 @onready var speed_lines := $Head/GameCamera/SpeedLines as MeshInstance3D
 @onready var weapon_manager := $Head/GameCamera/WeaponManager as WeaponManager
 
-var air_momentum_dir := Vector2.ZERO
+var air_momentum_dir := Vector3.ZERO
 var mouse_input:Vector2
 
 func _ready() -> void:
@@ -67,7 +67,7 @@ func _unhandled_input(event) -> void:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * mouse_sensitivity)
 			game_camera.rotate_x(-event.relative.y * mouse_sensitivity)
-			game_camera.rotation.x = clamp(game_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90));
+			game_camera.rotation.x = clamp(game_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			mouse_input = event.relative
 
 
@@ -77,20 +77,22 @@ func _physics_process(_delta) -> void:
 	if loss_of_control_effects != []:
 		return
 	
-	var input_dir := Input.get_vector("left", "right", "down", "up").normalized()
+	var input_dir := Vector2.ZERO
+	input_dir = Input.get_vector("left", "right", "down", "up").normalized()
 	
 	if input_dir != Vector2.ZERO:
-		air_momentum_dir = input_dir
-	
-	wish_dir = head.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
+		air_momentum_dir = head.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
 	
 	if is_on_floor():
-		air_momentum_dir = Vector2.ZERO
-		velocity_3d.accelerate(wish_dir)
+		air_momentum_dir = Vector3.ZERO
+		wish_dir = head.global_transform.basis * Vector3(input_dir.x, 0.0, -input_dir.y)
 	else:
 		if input_dir == Vector2.ZERO:
-			wish_dir = self.global_transform.basis * Vector3(air_momentum_dir.x, 0.0, -air_momentum_dir.y)
-		velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed)
+			wish_dir = air_momentum_dir
+		else:
+			wish_dir = air_momentum_dir
+	
+	velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed if not is_on_floor() else velocity_3d.current_speed)
 	velocity_3d.move(self)
 	
 	_handle_boost()
