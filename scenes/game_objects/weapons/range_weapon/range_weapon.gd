@@ -5,7 +5,7 @@ signal weapon_fired()
 signal weapon_reloaded()
 
 @export var projectiles_per_shoot : int
-@export_range(0.0, 0.1, 0.001) var spread : float
+@export_range(0.0, 0.3, 0.001) var spread : float
 @export var max_ammo : int
 @export var max_chamber : int
 @export var projectile : PackedScene
