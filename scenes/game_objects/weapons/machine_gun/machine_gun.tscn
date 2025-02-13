@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cylia4d4b0uxe"]
+[gd_scene load_steps=6 format=3 uid="uid://cylia4d4b0uxe"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapon/range_weapon.tscn" id="1_ork2d"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/machine_gun/machine_gun.gd" id="2_0qfx7"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_3ul0p"]
 [ext_resource type="Texture2D" uid="uid://dbo7u5ddqxwue" path="res://scenes/game_objects/weapons/machine_gun/machine_gun.png" id="3_dx07r"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/machine_gun/nail.wav" id="5_trdol"]
 
 [node name="MachineGun" instance=ExtResource("1_ork2d")]
 script = ExtResource("2_0qfx7")
@@ -17,6 +18,10 @@ trauma = 0.25
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("3_dx07r")
+
+[node name="FireAudio" parent="Audio" index="0"]
+stream = ExtResource("5_trdol")
+volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028, -0.5)

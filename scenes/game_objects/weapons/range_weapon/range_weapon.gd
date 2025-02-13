@@ -24,6 +24,7 @@ func _ready() -> void:
 	current_chamber = max_chamber
 	
 	self.weapon_fired.connect(fire_rate.start)
+	self.weapon_fired.connect(fire_audio.play_audio)
 
 
 func start_reload() -> void:
@@ -56,6 +57,10 @@ func generate_projectile():
 	
 	if projectile == null:
 		push_error("No projectile found.")
+	
+	if current_chamber == 0:
+		empty_audio.play_audio()
+		return
 	
 	firing = true
 	for p in projectiles_per_shoot:
