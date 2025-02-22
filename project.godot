@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SlowMotion="*res://scenes/autoloads/slow_motion/SlowMotion.tscn"
-TweenManager="*res://scenes/autoloads/tween_manager/TweenManager.tscn"
+SlowMotion="*res://scenes/autoloads/slow_motion/slow_motion.tscn"
+TweenManager="*res://scenes/autoloads/tween_manager/tween_manager.tscn"
 WeaponLoad="*res://scenes/autoloads/weapon_load/weapon_load.tscn"
 Camera="*res://scenes/autoloads/camera/camera.tscn"
 

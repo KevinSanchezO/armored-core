@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bge7k8r07kb2d"]
 
-[ext_resource type="Script" path="res://scenes/components/hurtcast/Hurtcast.gd" id="1_01jir"]
+[ext_resource type="Script" path="res://scenes/components/hurtcast/hurtcast.gd" id="1_01jir"]
 
 [node name="Hurtcast" type="Marker3D"]
 script = ExtResource("1_01jir")
