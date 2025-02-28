@@ -23,8 +23,8 @@ func _ready() -> void:
 	velocity_3d.current_speed = velocity_3d.max_speed
 	queue_free_timer.wait_time = queue_free_timer_value
 	
-	hurtbox.wall_impacted.connect(_update_impacts.bind(debris))
-	hurtbox.damage_dealt.connect(_update_impacts.bind(impact_scene, max_impacts))
+	hurtbox.limit_impacted.connect(_update_impacts.bind(debris, max_impacts))
+	hurtbox.damage_dealt.connect(_update_impacts.bind(impact_scene))
 	queue_free_timer.timeout.connect(queue_free)
 
 func _physics_process(_delta) -> void:
@@ -38,7 +38,7 @@ func _get_direction() -> Vector3:
 func _update_impacts(impact:PackedScene, value := 1) -> void:
 	impacts += value
 
-	if impact_scene != null:
+	if impact != null:
 		_generate_impact(impact)
 	
 	if impacts == max_impacts:
@@ -47,6 +47,21 @@ func _update_impacts(impact:PackedScene, value := 1) -> void:
 func _generate_impact(impact:PackedScene) -> void:
 	if impact == null:
 		return
+	
+	var entity_layer := get_tree().get_first_node_in_group("projectile_layer") as Node3D
+	if entity_layer == null:
+		push_error("No entity layer found.")
+	
+	var impact_instance = impact.instantiate() as Impact
+	entity_layer.add_child(impact_instance)
+	
+	impact_instance.global_position = impact_point.global_position
+	impact_instance.rotation = self.rotation
+	#var bullet_origin := self.global_transform.origin
+	#impact_instance.look_at(bullet_origin, Vector3.UP);
+	
+	#var desired_direction = -self.global_transform.basis.z
+	#impact_instance.rotate_impact(desired_direction)
 
 
 func generate_trail(random_direction:Vector3) -> void:

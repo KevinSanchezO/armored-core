@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://3y6a0220jp8o"]
+
+[ext_resource type="Script" path="res://vfx/impacts/impact/impact.gd" id="1_5si17"]
+
+[node name="Impact" type="GPUParticles3D"]
+emitting = false
+one_shot = true
+script = ExtResource("1_5si17")

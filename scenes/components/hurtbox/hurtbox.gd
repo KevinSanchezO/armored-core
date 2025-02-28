@@ -4,7 +4,7 @@ class_name Hurtbox
 @export var damage := 0.0
 
 signal damage_dealt
-signal wall_impacted
+signal limit_impacted
 
 func _ready() -> void:
 	self.area_entered.connect(_on_area_entered)
@@ -23,7 +23,7 @@ func _on_area_entered(area) -> void:
 
 func _on_body_entered(body) -> void:
 	if body.get_collision_layer() == 1:
-		wall_impacted.emit()
+		limit_impacted.emit()
 
 func enable() -> void:
 	for i in get_child_count():
