@@ -69,6 +69,9 @@ rotate_impact = true
 speed_value_min = 180.0
 speed_value_max = 150.0
 
+[node name="ImpactPoint" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
+
 [node name="Model" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
 
