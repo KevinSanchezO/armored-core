@@ -1,8 +1,8 @@
 extends Node3D
 class_name JumpHandler
 
-@export var jump_consumption := 50.0
-@export var jump_cooldown_value := 0.4
+@export var jump_consumption := 5.0
+@export var jump_cooldown_value := 0.8
 
 @onready var jump_cooldown := $JumpCooldown as Timer
 

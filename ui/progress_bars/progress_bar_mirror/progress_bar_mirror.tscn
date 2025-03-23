@@ -18,14 +18,12 @@ theme_override_constants/separation = -1
 script = ExtResource("1_uqk1o")
 
 [node name="ProgressBarTemplate" parent="." instance=ExtResource("1_mmko2")]
-custom_minimum_size = Vector2(120, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aqh0")
 fill_mode = 1
 use_previous_state = false
 
 [node name="ProgressBarTemplate2" parent="." instance=ExtResource("1_mmko2")]
-custom_minimum_size = Vector2(120, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_eg58y")
 use_previous_state = false

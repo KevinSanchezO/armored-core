@@ -21,9 +21,9 @@ bg_color = Color(0.2, 0.2, 0.2, 0.654902)
 [node name="ProgressBarTemplate" type="ProgressBar"]
 z_index = 2
 z_as_relative = false
-custom_minimum_size = Vector2(120, 5)
+custom_minimum_size = Vector2(120, 4)
 offset_right = 120.0
-offset_bottom = 5.0
+offset_bottom = 2.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxEmpty_6pymr")

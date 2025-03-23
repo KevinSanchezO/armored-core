@@ -3,7 +3,7 @@ class_name EnergyNSlowmotion
 
 @onready var slow_motion_count := $SlowmotionCount as Label
 @onready var slow_motion_bar := $HBoxContainer/Slowmotion as ProgressBarMirror
-@onready var energy_bar := $Energy as ProgressBarMirror
+@onready var energy_bar := $HBoxContainer2/Energy as ProgressBarMirror
 
 var max_slow_motion_count := 2
 var current_slow_motion_count := 0

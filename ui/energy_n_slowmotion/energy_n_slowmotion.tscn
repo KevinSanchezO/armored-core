@@ -14,10 +14,8 @@ font_size = 32
 bg_color = Color(1, 1, 1, 1)
 
 [node name="EnergyNSlowmotion" type="VBoxContainer"]
-custom_minimum_size = Vector2(300, 60)
 offset_right = 300.0
 offset_bottom = 64.0
-theme_override_constants/separation = 10
 script = ExtResource("1_pw28s")
 
 [node name="SlowmotionCount" type="Label" parent="."]
@@ -34,7 +32,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(2, 10)
+custom_minimum_size = Vector2(2, 6)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -50,7 +48,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(2, 10)
+custom_minimum_size = Vector2(2, 6)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -60,6 +58,33 @@ value = 80.0
 fill_mode = 2
 show_percentage = false
 
-[node name="Energy" parent="." instance=ExtResource("1_jmtpe")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(2, 6)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_ca1u6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jspob")
+value = 80.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Energy" parent="HBoxContainer2" instance=ExtResource("1_jmtpe")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="ProgressBar2" type="ProgressBar" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(2, 6)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_ca1u6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jspob")
+value = 80.0
+fill_mode = 3
+show_percentage = false

@@ -37,7 +37,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
-custom_minimum_size = Vector2(2, 10)
+custom_minimum_size = Vector2(2, 6)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -57,7 +57,6 @@ label_settings = SubResource("LabelSettings_qtvml")
 vertical_alignment = 1
 
 [node name="ProgressBarTemplate" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3_547yb")]
-custom_minimum_size = Vector2(150, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_5fo6k")
 
@@ -75,13 +74,12 @@ label_settings = SubResource("LabelSettings_bl1i6")
 vertical_alignment = 2
 
 [node name="ProgressBarTemplate" parent="HBoxContainer2/VBoxContainer2" instance=ExtResource("3_547yb")]
-custom_minimum_size = Vector2(150, 8)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_75f4q")
 fill_mode = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer2"]
-custom_minimum_size = Vector2(2, 10)
+custom_minimum_size = Vector2(2, 6)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8

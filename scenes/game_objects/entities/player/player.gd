@@ -97,10 +97,11 @@ func _physics_process(_delta) -> void:
 
 
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("jump") and !energy_gauge.is_in_cooldown\
+	if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
 	and jump_handler.jump_cooldown.is_stopped():
 		velocity_3d.apply_upward_force(self)
 		energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+	if Input.is_action_just_released("jump") and !jump_handler.jump_cooldown.is_stopped():
 		jump_handler.jump_cooldown.start()
 
 
@@ -112,8 +113,6 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 		if wish_dir_dash == Vector3.ZERO:
 			wish_dir_dash = game_camera.global_transform.basis.z.normalized() * -1 # forward
 		air_momentum_dir = wish_dir_dash
-		
-		print(wish_dir_dash)
 		
 		dash_handler.trigger_dash(wish_dir_dash)
 
