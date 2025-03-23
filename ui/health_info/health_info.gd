@@ -8,16 +8,29 @@ class_name HealthInfo
 @onready var entity_health_bar:= $HBoxContainer2/VBoxContainer2/ProgressBarTemplate as ProgressBarTemplate
 
 func set_ready(new_armor_points, new_entity_health) -> void:
-	armor_points_label.text = "AP " + str(new_armor_points) + ".0"
-	entity_health_label.text = str(new_entity_health) + ".0" + " PH"
-	
 	armor_points_bar.init_value(new_armor_points)
 	entity_health_bar.init_value(new_entity_health)
+	
+	set_new_health_info(new_armor_points, new_entity_health)
 
 
 func set_new_health_info(new_armor_points, new_entity_health) -> void:
-	armor_points_label.text = "AP " + str(new_armor_points) + ".0"
-	entity_health_label.text = str(new_entity_health) + ".0" + " PH"
+	armor_points_label.text = "AP " + _stylize_value(new_armor_points)
+	entity_health_label.text = _stylize_value(new_entity_health) + " PH"
 	
 	armor_points_bar.value_progress_bar = new_armor_points
 	entity_health_bar.value_progress_bar = new_entity_health
+
+
+func _stylize_value(value)->String:
+	var stylize_string := ""
+	var value_string := str(value)
+	
+	if value <= 9999:
+		stylize_string = "0"
+		
+	if value <= 999:
+		stylize_string += "0"
+	
+	stylize_string += value_string 
+	return stylize_string

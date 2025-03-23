@@ -52,7 +52,7 @@ layout_mode = 2
 
 [node name="ArmorPoints" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "A.P 9999.0"
+text = "A.P 09999"
 label_settings = SubResource("LabelSettings_qtvml")
 vertical_alignment = 1
 
@@ -69,7 +69,7 @@ layout_mode = 2
 [node name="EntityHealth" type="Label" parent="HBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "100.0 P.H"
+text = "00100 P.H"
 label_settings = SubResource("LabelSettings_bl1i6")
 vertical_alignment = 2
 
