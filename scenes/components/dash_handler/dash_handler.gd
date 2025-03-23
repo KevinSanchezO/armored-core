@@ -20,13 +20,13 @@ func _ready():
 	cooldown.wait_time = cooldown_value
 	speed_lines.visible = false
 
-func trigger_dash(direction: Vector3, input_dir:=Vector2.ZERO, _speed:=current_speed as float, \
+func trigger_dash(direction: Vector3, _speed:=current_speed as float, \
 _duration:=current_duration as float) -> void:
 	var dash_data := {
 		speed = _speed,
 		duration = _duration,
 		entity = entity,
-		direction = _set_direction(direction, input_dir)
+		direction = _set_direction(direction)
 	}
 	dash = Dash.create(dash_data)
 	
@@ -38,9 +38,7 @@ _duration:=current_duration as float) -> void:
 	entity.add_loss_of_control_effect(dash, dash.dash_finished)
 	cooldown.start()
 
-func _set_direction(direction: Vector3, input_dir:Vector2) -> Vector3:
-	if entity != null and input_dir == Vector2.ZERO:
-		direction = -entity.global_transform.basis.z
+func _set_direction(direction: Vector3) -> Vector3:
 	return direction.normalized()
 
 func _enable_hitbox() -> void:

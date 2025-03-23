@@ -5,12 +5,8 @@ class_name Player
 @export_range(0.001, 0.01, 0.0001) var mouse_sensitivity := 0.006
 
 @export_group("Base Tilt")
-@export var tilt := 2.5
+@export var tilt := 4.0
 @export var time_tilt := 0.05
-
-@export_group("Boosting")
-@export var boost_consumption := 50.0
-@export var boost_cooldown_value := 0.2
 
 @export_group("Weapon holder")
 @export var weapon_rotation := 0.01
@@ -20,9 +16,9 @@ class_name Player
 @onready var game_camera := $Head/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
-@onready var boost_cooldown := $Velocity3d/BoostCooldown as Timer
 @onready var health_pilot := $HealthPilot as Health
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
+@onready var jump_handler := $JumpHandler as JumpHandler
 @onready var head := %Head as Node3D
 @onready var speed_lines := $Head/GameCamera/SpeedLines as MeshInstance3D
 @onready var weapon_manager := $Head/GameCamera/WeaponManager as WeaponManager
@@ -45,8 +41,6 @@ func _ready() -> void:
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_energy)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_energy)
-	
-	boost_cooldown.wait_time = boost_cooldown_value
 	
 	for child in %Model.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
@@ -95,42 +89,49 @@ func _physics_process(_delta) -> void:
 	velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed if not is_on_floor() else velocity_3d.current_speed)
 	velocity_3d.move(self)
 	
-	_handle_boost()
-	_handle_dash(wish_dir, input_dir)
+	_handle_jump()
+	_handle_dash(wish_dir)
 	_head_tilt(input_dir)
 	_weapon_sway()
 	_weapon_tilt(input_dir)
 
 
-func _handle_boost() -> void:
-	if Input.is_action_just_pressed("boost") and !energy_gauge.is_in_cooldown\
-	and boost_cooldown.is_stopped():
+func _handle_jump() -> void:
+	if Input.is_action_just_pressed("jump") and !energy_gauge.is_in_cooldown\
+	and jump_handler.jump_cooldown.is_stopped():
 		velocity_3d.apply_upward_force(self)
-		energy_gauge.modify_gauge_directly(boost_consumption)
-		boost_cooldown.start()
+		energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+		jump_handler.jump_cooldown.start()
 
 
-func _handle_dash(wish_dir_dash:Vector3, input_dir:Vector2) -> void:
+func _handle_dash(wish_dir_dash:Vector3) -> void:
 	if Input.is_action_just_pressed("dash") and dash_handler.cooldown.is_stopped()\
 	and energy_gauge.energy_gauge > 0 and !energy_gauge.is_in_cooldown:
 		energy_gauge.modify_gauge_directly(dash_handler.dash_consumption)
-		dash_handler.trigger_dash(wish_dir_dash, input_dir)
+		
+		if wish_dir_dash == Vector3.ZERO:
+			wish_dir_dash = game_camera.global_transform.basis.z.normalized() * -1 # forward
+		air_momentum_dir = wish_dir_dash
+		
+		print(wish_dir_dash)
+		
+		dash_handler.trigger_dash(wish_dir_dash)
 
 
 func _head_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(-tilt), current_time_tilt)
+		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(-tilt), current_time_tilt)
 	elif input_dir.x < 0:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(tilt), current_time_tilt)
+		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(tilt), current_time_tilt)
 	else:
-		%Head.rotation.z = lerp_angle(%Head.rotation.z, deg_to_rad(0), current_time_tilt)
+		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(0), current_time_tilt)
 	
 	if input_dir.y > 0:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(-tilt), current_time_tilt)
+		head.rotation.x = lerp_angle(head.rotation.x, deg_to_rad(-tilt), current_time_tilt)
 	elif input_dir.y < 0:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(tilt), current_time_tilt)
+		head.rotation.x = lerp_angle(head.rotation.x, deg_to_rad(tilt), current_time_tilt)
 	else:
-		%Head.rotation.x = lerp_angle(%Head.rotation.x, deg_to_rad(0), current_time_tilt)
+		head.rotation.x = lerp_angle(head.rotation.x, deg_to_rad(0), current_time_tilt)
 
 
 func _weapon_sway() -> void:

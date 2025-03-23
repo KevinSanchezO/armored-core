@@ -57,11 +57,6 @@ func _generate_impact(impact:PackedScene) -> void:
 	
 	impact_instance.global_position = impact_point.global_position
 	impact_instance.rotation = self.rotation
-	#var bullet_origin := self.global_transform.origin
-	#impact_instance.look_at(bullet_origin, Vector3.UP);
-	
-	#var desired_direction = -self.global_transform.basis.z
-	#impact_instance.rotate_impact(desired_direction)
 
 
 func generate_trail(random_direction:Vector3) -> void:

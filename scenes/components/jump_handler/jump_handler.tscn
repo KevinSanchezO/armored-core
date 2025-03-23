@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4euc76ad3uiy"]
+
+[ext_resource type="Script" path="res://scenes/components/jump_handler/jump_handler.gd" id="1_6p4gj"]
+
+[node name="JumpHandler" type="Node3D"]
+script = ExtResource("1_6p4gj")
+
+[node name="JumpCooldown" type="Timer" parent="."]
+one_shot = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=13 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="6_3jcd1"]
 [ext_resource type="PackedScene" uid="uid://ddtksqgtds031" path="res://scenes/components/raycast_range_weapons/raycast_range_weapon.tscn" id="6_17ftk"]
 [ext_resource type="PackedScene" uid="uid://d4qnqhtru75" path="res://scenes/components/slow_motion_handler/slow_motion_handler.tscn" id="7_uy4ey"]
+[ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
 
@@ -18,20 +19,22 @@ collision_layer = 8
 collision_mask = 7
 script = ExtResource("2_t4lea")
 mouse_sensitivity = 0.008
-tilt = 2.5
+tilt = 4.0
 time_tilt = 0.05
-boost_consumption = 50.0
-boost_cooldown_value = 0.2
 weapon_rotation = 0.01
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CapsuleShape3D_efd3n")
 
-[node name="BoostCooldown" type="Timer" parent="Velocity3d" index="0"]
-one_shot = true
-
 [node name="HealthEntity" parent="." index="3"]
-max_health = 2000.0
+max_health = 1800.0
+
+[node name="Hitbox" parent="." index="4"]
+collision_layer = 8
+collision_mask = 0
+blunt_defense = 0.3
+energy_defense = 0.3
+explosion_defense = 0.3
 
 [node name="Head" type="Node3D" parent="." index="5"]
 unique_name_in_owner = true
@@ -55,6 +58,7 @@ raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cooldown_value = 1.2
 entity = NodePath("..")
+dash_consumption = 5.0
 speed_lines = NodePath("../Head/GameCamera/SpeedLines")
 
 [node name="EnergyGauge" parent="." index="8" instance=ExtResource("4_067co")]
@@ -63,3 +67,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="SlowMotionHandler" parent="." index="9" node_paths=PackedStringArray("health") instance=ExtResource("7_uy4ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 health = NodePath("../HealthPilot")
+
+[node name="JumpHandler" parent="." index="10" instance=ExtResource("11_1b4s3")]
+jump_consumption = 10.0

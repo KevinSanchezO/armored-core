@@ -2,6 +2,7 @@ extends Area3D
 class_name Hurtbox
 
 @export var damage := 0.0
+@export_enum("BLUNT", "ENERGY", "EXPLOSION") var type_damage : String
 
 signal damage_dealt
 signal limit_impacted
@@ -18,7 +19,7 @@ func trigger_frame() -> void:
 
 func _on_area_entered(area) -> void:
 	if area is Hitbox:
-		area.deal_damage(damage)
+		area.deal_damage(damage, type_damage)
 		damage_dealt.emit()
 
 func _on_body_entered(body) -> void:

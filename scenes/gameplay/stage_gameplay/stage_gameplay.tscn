@@ -44,6 +44,7 @@ sky_mode = 1
 environment = SubResource("Environment_b6ich")
 
 [node name="Player" parent="SubViewport" instance=ExtResource("1_gwp2m")]
+tilt = 4.0
 
 [node name="GameplayUI" parent="SubViewport" instance=ExtResource("5_o5s6i")]
 
