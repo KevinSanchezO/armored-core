@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://tn8ndfalcyjc"]
+[gd_scene load_steps=6 format=3 uid="uid://tn8ndfalcyjc"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapon/range_weapon.tscn" id="1_svb7p"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/rifle/rifle.gd" id="2_4wfux"]
 [ext_resource type="Texture2D" uid="uid://chi2tqnhk82ym" path="res://scenes/game_objects/weapons/rifle/rifle.png" id="3_cgk8b"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_dpgb6"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/machine_gun/nail.wav" id="5_e8e3f"]
 
 [node name="Rifle" instance=ExtResource("1_svb7p")]
 script = ExtResource("2_4wfux")
@@ -12,7 +13,8 @@ spread = 0.002
 max_ammo = 120
 max_chamber = 30
 projectile = ExtResource("3_dpgb6")
-fire_rate_value = 0.6
+damage = 100.0
+fire_rate_value = 1.2
 buffed_by_slowmotion = true
 trauma = 0.85
 
@@ -22,6 +24,7 @@ texture_filter = 0
 texture = ExtResource("3_cgk8b")
 
 [node name="FireAudio" parent="Audio" index="0"]
+stream = ExtResource("5_e8e3f")
 max_distance = 5.0
 
 [node name="ProjectileSpawner" parent="." index="5"]

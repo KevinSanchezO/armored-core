@@ -3,7 +3,8 @@ class_name Health
 
 
 signal died()
-signal health_changed()
+signal health_reduced()
+signal health_increased()
 
 @export var max_health := 100.0
 
@@ -22,7 +23,7 @@ func damage(value: float) -> void:
 		return
 	
 	current_health = maxf(current_health - value, 0.0)
-	health_changed.emit()
+	health_reduced.emit()
 	
 	if dead:
 		check_death.call_deferred()

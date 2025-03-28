@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Projectile
 
+@export var is_player_projectile := false
 @export var impact_scene : PackedScene
 @export var debris : PackedScene
 @export var trail : PackedScene
@@ -37,6 +38,9 @@ func _get_direction() -> Vector3:
 
 func _update_impacts(impact:PackedScene, value := 1) -> void:
 	impacts += value
+
+	if is_player_projectile:
+		HitMark.hit_mark_showed.emit()
 
 	if impact != null:
 		_generate_impact(impact)

@@ -9,6 +9,7 @@ signal weapon_reloaded()
 @export var max_ammo : int
 @export var max_chamber : int
 @export var projectile : PackedScene
+@export var damage := 0.0
 
 var current_max_ammo : int
 var current_chamber : int
@@ -70,6 +71,8 @@ func generate_projectile():
 		
 		raycast_range_weapon.spread = spread
 		var random_direction := raycast_range_weapon.cast_ray()
+		
+		projectile_instance.hurtbox.damage = damage
 		
 		projectile_instance.global_position = projectile_spawner.global_position
 		

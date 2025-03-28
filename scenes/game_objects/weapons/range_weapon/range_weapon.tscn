@@ -10,6 +10,7 @@ spread = 0.01
 max_ammo = 0
 max_chamber = 0
 projectile = null
+damage = 0.0
 
 [node name="ProjectileSpawner" type="Node3D" parent="." index="5"]
 

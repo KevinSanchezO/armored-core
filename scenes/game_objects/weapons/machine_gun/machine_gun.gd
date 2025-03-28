@@ -9,6 +9,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("reload"):
 		_reload()
 	
-	if Input.is_action_pressed("shoot_weapon") and \
+	if Input.is_action_pressed("right_weapon") and \
 	fire_rate.is_stopped():
 		generate_projectile()

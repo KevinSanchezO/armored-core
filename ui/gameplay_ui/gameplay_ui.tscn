@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3tv3jc3cj5x7"]
+[gd_scene load_steps=5 format=3 uid="uid://c3tv3jc3cj5x7"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui/gameplay_ui.gd" id="1_d30ao"]
 [ext_resource type="PackedScene" uid="uid://b2siudy0fuobx" path="res://ui/health_info/health_info.tscn" id="2_h18qn"]
 [ext_resource type="PackedScene" uid="uid://bo1t3imqlwbs0" path="res://ui/energy_n_slowmotion/energy_n_slowmotion.tscn" id="3_m6hhs"]
+[ext_resource type="PackedScene" uid="uid://bpba2mbwq5u55" path="res://ui/hit_marker/hit_marker.tscn" id="4_jr780"]
 
 [node name="GameplayUI" type="CanvasLayer"]
 script = ExtResource("1_d30ao")
@@ -39,3 +40,6 @@ size_flags_vertical = 8
 [node name="EnergyNSlowmotion" parent="MarginContainer/Control/HBoxContainer" instance=ExtResource("3_m6hhs")]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="HitMarker" parent="MarginContainer/Control" instance=ExtResource("4_jr780")]
+layout_mode = 1

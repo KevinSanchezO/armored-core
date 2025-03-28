@@ -1,6 +1,8 @@
 extends Area3D
 class_name Hitbox
 
+signal damage_received
+
 @export var health:Health
 
 @export_range(0.1, 0.8, 0.1) var blunt_defense := 0.1
@@ -42,3 +44,4 @@ func deal_damage(attack_value: float, damage_type: String):
 		attack_value = attack_value - (attack_value * explosion_defense)
 	
 	health.damage(attack_value)
+	damage_received.emit()

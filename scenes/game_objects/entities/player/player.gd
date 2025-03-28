@@ -13,15 +13,16 @@ class_name Player
 
 @onready var current_time_tilt := time_tilt
 
-@onready var game_camera := $Head/GameCamera as GameCamera
+@onready var game_camera := $Head/CameraContainer/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
 @onready var health_pilot := $HealthPilot as Health
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var jump_handler := $JumpHandler as JumpHandler
-@onready var head := %Head as Node3D
-@onready var speed_lines := $Head/GameCamera/SpeedLines as MeshInstance3D
-@onready var weapon_manager := $Head/GameCamera/WeaponManager as WeaponManager
+@onready var head := $Head as Node3D
+@onready var camera_container := $Head/CameraContainer as Node3D
+@onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as MeshInstance3D
+@onready var weapon_manager := $Head/CameraContainer/GameCamera/WeaponManager as WeaponManager
 
 var air_momentum_dir := Vector3.ZERO
 var mouse_input:Vector2
@@ -60,8 +61,8 @@ func _unhandled_input(event) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * mouse_sensitivity)
-			game_camera.rotate_x(-event.relative.y * mouse_sensitivity)
-			game_camera.rotation.x = clamp(game_camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			camera_container.rotate_x(-event.relative.y * mouse_sensitivity)
+			camera_container.rotation.x = clamp(camera_container.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			mouse_input = event.relative
 
 
@@ -101,7 +102,7 @@ func _handle_jump() -> void:
 	and jump_handler.jump_cooldown.is_stopped():
 		velocity_3d.apply_upward_force(self)
 		energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
-	if Input.is_action_just_released("jump") and !jump_handler.jump_cooldown.is_stopped():
+	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
 		jump_handler.jump_cooldown.start()
 
 

@@ -16,7 +16,7 @@ func set_ready(new_armor_points, new_entity_health) -> void:
 
 func set_new_health_info(new_armor_points, new_entity_health) -> void:
 	armor_points_label.text = "AP " + _stylize_value(new_armor_points)
-	entity_health_label.text = _stylize_value(new_entity_health) + " PH"
+	entity_health_label.text = _stylize_value(new_entity_health) + " HP"
 	
 	armor_points_bar.value_progress_bar = new_armor_points
 	entity_health_bar.value_progress_bar = new_entity_health
@@ -27,9 +27,12 @@ func _stylize_value(value)->String:
 	var value_string := str(value)
 	
 	if value <= 9999:
-		stylize_string = "0"
-		
+		stylize_string += "0"
 	if value <= 999:
+		stylize_string += "0"
+	if value <= 99:
+		stylize_string += "0"
+	if value <= 9:
 		stylize_string += "0"
 	
 	stylize_string += value_string 

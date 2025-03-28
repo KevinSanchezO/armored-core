@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://p01sfnsjngs6"]
+
+[ext_resource type="PackedScene" uid="uid://cggqfu1mxlamm" path="res://scenes/game_objects/projectiles/projectile/projectile.tscn" id="1_1mdsh"]
+
+[node name="RayPlayer" instance=ExtResource("1_1mdsh")]
+rotate_impact = true
+speed_value_min = 180.0
+speed_value_max = 150.0

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpba2mbwq5u55"]
+
+[ext_resource type="Texture2D" uid="uid://kvlku5u2eulo" path="res://ui/hit_marker/hit_marker.png" id="1_5q145"]
+[ext_resource type="Script" path="res://ui/hit_marker/hit_marker.gd" id="1_bjamk"]
+
+[node name="HitMarker" type="TextureRect"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5q145")
+script = ExtResource("1_bjamk")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

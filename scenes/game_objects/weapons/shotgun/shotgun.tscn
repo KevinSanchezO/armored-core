@@ -13,6 +13,7 @@ spread = 0.2
 max_ammo = 16
 max_chamber = 4
 projectile = ExtResource("2_b6gg4")
+damage = 10.0
 fire_rate_value = 0.8
 buffed_by_slowmotion = true
 trauma = 1.0

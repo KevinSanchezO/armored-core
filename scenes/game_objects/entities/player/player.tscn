@@ -37,20 +37,21 @@ energy_defense = 0.3
 explosion_defense = 0.3
 
 [node name="Head" type="Node3D" parent="." index="5"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
-[node name="GameCamera" parent="Head" index="0" instance=ExtResource("2_wsddm")]
+[node name="CameraContainer" type="Node3D" parent="Head" index="0"]
 
-[node name="SpeedLines" parent="Head/GameCamera" index="0" instance=ExtResource("5_kkilw")]
+[node name="GameCamera" parent="Head/CameraContainer" index="0" instance=ExtResource("2_wsddm")]
+
+[node name="SpeedLines" parent="Head/CameraContainer/GameCamera" index="0" instance=ExtResource("5_kkilw")]
 transform = Transform3D(0.45, 0, 0, 0, -0.3, 1.50996e-07, 0, -4.52987e-08, -1, 0, 0, -0.305661)
 
-[node name="WeaponManager" parent="Head/GameCamera" index="1" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("5_dyrui")]
+[node name="WeaponManager" parent="Head/CameraContainer/GameCamera" index="1" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("5_dyrui")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, -0.165, -0.4)
-entity = NodePath("../../..")
+entity = NodePath("../../../..")
 raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 
-[node name="RaycastRangeWeapon" parent="Head/GameCamera" index="2" instance=ExtResource("6_17ftk")]
+[node name="RaycastRangeWeapon" parent="Head/CameraContainer/GameCamera" index="2" instance=ExtResource("6_17ftk")]
 
 [node name="HealthPilot" parent="." index="6" instance=ExtResource("6_3jcd1")]
 
@@ -58,7 +59,7 @@ raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cooldown_value = 1.2
 entity = NodePath("..")
-speed_lines = NodePath("../Head/GameCamera/SpeedLines")
+speed_lines = NodePath("../Head/CameraContainer/GameCamera/SpeedLines")
 
 [node name="JumpHandler" parent="." index="8" instance=ExtResource("11_1b4s3")]
 

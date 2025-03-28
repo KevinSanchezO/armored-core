@@ -8,9 +8,9 @@ const TRAUMA_REDUCTION_RATE = 1.0
 
 @export var noise : FastNoiseLite
 @export var noise_speed := 50.0
-@export var max_x := 5.0
-@export var max_y := 1.0
-@export var max_z := 5.0
+@export var max_x := 8.0
+@export var max_y := 4.0
+@export var max_z := 8.0
 
 var trauma := 0.0 #between 0 and 1
 var time := 0.0
@@ -25,9 +25,14 @@ func _process(delta) -> void:
 	time += delta
 	trauma = max(trauma - delta * current_trauma_reduction_rate, 0.0)
 	
-	#self.rotation_degrees.z = initial_rotation.z + max_z * \
-	#_get_shake_intensity() * _get_noise_from_seed(2)
-
+	self.rotation_degrees.x = initial_rotation.x + max_x * \
+	_get_shake_intensity() * _get_noise_from_seed(0)
+	
+	self.rotation_degrees.y = initial_rotation.y + max_y * \
+	_get_shake_intensity() * _get_noise_from_seed(1)
+	
+	self.rotation_degrees.z = initial_rotation.z + max_z * \
+	_get_shake_intensity() * _get_noise_from_seed(2)
 
 func add_trauma(trauma_ammount: float) -> void:
 	trauma = clamp(trauma + trauma_ammount, 0.0, 1.0)

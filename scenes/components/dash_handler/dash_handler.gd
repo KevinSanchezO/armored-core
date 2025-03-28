@@ -5,7 +5,7 @@ class_name DashHandler
 @export var entity : Entity
 @export var speed := 170.0
 @export var duration := 0.08
-@export var dash_consumption := 30.0
+@export var dash_consumption := 50.0
 @export var speed_lines : MeshInstance3D
 @export var speed_lines_duration := 0.1
 
