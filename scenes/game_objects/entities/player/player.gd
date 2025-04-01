@@ -2,7 +2,7 @@ extends Entity
 class_name Player
 
 @export_group("Mouse Sensitivity")
-@export_range(0.001, 0.01, 0.0001) var mouse_sensitivity := 0.006
+@export_range(0.001, 0.01, 0.0001) var mouse_sensitivity := 0.005
 
 @export_group("Base Tilt")
 @export var tilt := 4.0
@@ -22,27 +22,23 @@ class_name Player
 @onready var head := $Head as Node3D
 @onready var camera_container := $Head/CameraContainer as Node3D
 @onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as MeshInstance3D
-@onready var weapon_manager := $Head/CameraContainer/GameCamera/WeaponManager as WeaponManager
+@onready var range_weapon_manager := $Head/CameraContainer/GameCamera/RangeWeaponManager as RangeWeaponManager
 
 var air_momentum_dir := Vector3.ZERO
 var mouse_input:Vector2
 
+
 func _ready() -> void:
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_speed)
-	
-	SlowMotion.slow_motion_started.connect(_enter_slow_motion_dash)
-	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_dash)
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_tilt)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_tilt)
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
-	
-	SlowMotion.slow_motion_started.connect(_enter_slow_motion_energy)
-	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_energy)
-	
+
+
 	for child in %Model.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
@@ -53,7 +49,7 @@ func _unhandled_input(event) -> void:
 		return
 	
 	if Input.is_action_just_pressed("switch_weapon"):
-		weapon_manager.switch_weapon()
+		range_weapon_manager.switch_weapon()
 	
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -100,8 +96,9 @@ func _physics_process(_delta) -> void:
 func _handle_jump() -> void:
 	if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
 	and jump_handler.jump_cooldown.is_stopped():
-		velocity_3d.apply_upward_force(self)
-		energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+			velocity_3d.apply_upward_force(self)
+			energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+			
 	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
 		jump_handler.jump_cooldown.start()
 
@@ -137,27 +134,22 @@ func _head_tilt(input_dir:Vector2) -> void:
 func _weapon_sway() -> void:
 	var delta_time := get_process_delta_time() as float
 	mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta_time)
-	weapon_manager.rotation.x = lerp(weapon_manager.rotation.x, mouse_input.y * weapon_rotation, 10 * delta_time)
-	weapon_manager.rotation.y = lerp(weapon_manager.rotation.y, mouse_input.x * weapon_rotation, 10 * delta_time)
+	range_weapon_manager.rotation.x = lerp(range_weapon_manager.rotation.x, \
+		mouse_input.y * weapon_rotation, 10 * delta_time)
+	range_weapon_manager.rotation.y = lerp(range_weapon_manager.rotation.y, \
+		mouse_input.x * weapon_rotation, 10 * delta_time)
 
 
 func _weapon_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(-5), 0.05)
+		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+			deg_to_rad(-5), 0.05)
 	elif input_dir.x < 0:
-		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(5), 0.05)
+		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+			deg_to_rad(5), 0.05)
 	else:
-		weapon_manager.rotation.z = lerp_angle(weapon_manager.rotation.z, deg_to_rad(0), 0.05)
-
-
-func _enter_slow_motion_energy() -> void:
-	TweenManager.create_new_tween(energy_gauge.comsumption_timer, "wait_time",\
-	energy_gauge.consumption_timer_value / 2, 0.5, energy_gauge.comsumption_timer.wait_time)
-
-
-func _exit_slow_motion_energy() -> void:
-	TweenManager.create_new_tween(energy_gauge.comsumption_timer, "wait_time",\
-	energy_gauge.consumption_timer_value, 0.5, energy_gauge.comsumption_timer.wait_time)
+		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+			deg_to_rad(0), 0.05)
 
 
 func _enter_slow_motion_air() -> void:
@@ -206,31 +198,3 @@ func _enter_slow_motion_speed() -> void:
 func _exit_slow_motion_speed() -> void:
 	TweenManager.create_new_tween(velocity_3d, "current_speed", \
 	velocity_3d.max_speed, 0.5, velocity_3d.current_speed)
-
-
-func _enter_slow_motion_dash() -> void:
-	TweenManager.create_new_tween(dash_handler, "current_speed", \
-	dash_handler.speed * 2, 0.5, dash_handler.current_speed)
-	
-	TweenManager.create_new_tween(dash_handler, "current_duration", \
-	dash_handler.duration / 2, 0.5, dash_handler.current_duration)
-	
-	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
-	dash_handler.cooldown_value / 2, 0.5, dash_handler.cooldown.wait_time)
-	
-	TweenManager.create_new_tween(dash_handler, "current_speed_lines_duration", \
-	dash_handler.speed_lines_duration / 2, 0.5, dash_handler.current_speed_lines_duration)
-
-
-func _exit_slow_motion_dash() -> void:
-	TweenManager.create_new_tween(dash_handler, "current_speed", \
-	dash_handler.speed, 0.5, dash_handler.current_speed)
-	
-	TweenManager.create_new_tween(dash_handler, "current_duration", \
-	dash_handler.duration, 0.5, dash_handler.current_duration)
-	
-	TweenManager.create_new_tween(dash_handler.cooldown, "wait_time", \
-	dash_handler.cooldown_value, 0.5, dash_handler.cooldown.wait_time)
-	
-	TweenManager.create_new_tween(dash_handler, "current_speed_lines_duration", \
-	dash_handler.speed_lines_duration, 0.5, dash_handler.current_speed_lines_duration)

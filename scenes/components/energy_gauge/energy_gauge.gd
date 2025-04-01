@@ -18,6 +18,8 @@ var is_consuming := false
 var is_in_cooldown := false
 
 func _ready() -> void:
+	SlowMotion.slow_motion_started.connect(_enter_slow_motion_energy)
+	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_energy)
 	comsumption_timer.wait_time = consumption_timer_value
 	comsumption_timer.timeout.connect(_on_consumption_timer_timeout)
 
@@ -49,3 +51,13 @@ func _on_consumption_timer_timeout():
 	else:
 		energy_gauge -= consumption
 	energy_gauge_changed.emit()
+
+
+func _enter_slow_motion_energy() -> void:
+	TweenManager.create_new_tween(comsumption_timer, "wait_time",\
+	consumption_timer_value / 2, 0.5, comsumption_timer.wait_time)
+
+
+func _exit_slow_motion_energy() -> void:
+	TweenManager.create_new_tween(comsumption_timer, "wait_time",\
+	consumption_timer_value, 0.5, comsumption_timer.wait_time)

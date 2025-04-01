@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3ae7uvlokd0x" path="res://scenes/components/game_camera/game_camera.tscn" id="2_wsddm"]
 [ext_resource type="PackedScene" uid="uid://c3bkd544ybrrb" path="res://scenes/components/dash_handler/dash_handler.tscn" id="3_g53iv"]
 [ext_resource type="PackedScene" uid="uid://c1luyg6l6eaxb" path="res://scenes/components/energy_gauge/energy_gauge.tscn" id="4_067co"]
-[ext_resource type="PackedScene" uid="uid://442yidlyrn44" path="res://scenes/components/weapon_manager/weapon_manager.tscn" id="5_dyrui"]
+[ext_resource type="PackedScene" uid="uid://442yidlyrn44" path="res://scenes/components/range_weapon_manager/range_weapon_manager.tscn" id="5_dyrui"]
 [ext_resource type="PackedScene" uid="uid://gxxt1le4e1mj" path="res://scenes/game_objects/entities/player/speed_lines.tscn" id="5_kkilw"]
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="6_3jcd1"]
 [ext_resource type="PackedScene" uid="uid://ddtksqgtds031" path="res://scenes/components/raycast_range_weapons/raycast_range_weapon.tscn" id="6_17ftk"]
@@ -13,12 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
+radius = 0.8
 
 [node name="Player" groups=["player"] instance=ExtResource("1_vk4n6")]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("2_t4lea")
-mouse_sensitivity = 0.008
+mouse_sensitivity = 0.005
 tilt = 4.0
 time_tilt = 0.05
 weapon_rotation = 0.01
@@ -46,12 +47,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="SpeedLines" parent="Head/CameraContainer/GameCamera" index="0" instance=ExtResource("5_kkilw")]
 transform = Transform3D(0.45, 0, 0, 0, -0.3, 1.50996e-07, 0, -4.52987e-08, -1, 0, 0, -0.305661)
 
-[node name="WeaponManager" parent="Head/CameraContainer/GameCamera" index="1" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("5_dyrui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, -0.165, -0.4)
+[node name="RaycastRangeWeapon" parent="Head/CameraContainer/GameCamera" index="1" instance=ExtResource("6_17ftk")]
+
+[node name="RangeWeaponManager" parent="Head/CameraContainer/GameCamera" index="2" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("5_dyrui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, -0.4)
 entity = NodePath("../../../..")
 raycast_range_weapons = NodePath("../RaycastRangeWeapon")
-
-[node name="RaycastRangeWeapon" parent="Head/CameraContainer/GameCamera" index="2" instance=ExtResource("6_17ftk")]
 
 [node name="HealthPilot" parent="." index="6" instance=ExtResource("6_3jcd1")]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://442yidlyrn44"]
+
+[ext_resource type="Script" path="res://scenes/components/range_weapon_manager/range_weapon_manager.gd" id="1_vbiyb"]
+
+[node name="RangeWeaponManager" type="Node3D"]
+script = ExtResource("1_vbiyb")

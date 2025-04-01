@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce6dmkal8ga2r"]
+
+[ext_resource type="PackedScene" uid="uid://dsbenaf2j7t8t" path="res://scenes/game_objects/weapons/weapon/weapon.tscn" id="1_7so11"]
+
+[node name="MeleeWeapon" instance=ExtResource("1_7so11")]

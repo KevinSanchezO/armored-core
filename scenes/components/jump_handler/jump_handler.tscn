@@ -4,6 +4,7 @@
 
 [node name="JumpHandler" type="Node3D"]
 script = ExtResource("1_6p4gj")
+jump_cooldown_value = 0.5
 
 [node name="JumpCooldown" type="Timer" parent="."]
 one_shot = true
