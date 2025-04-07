@@ -3,14 +3,14 @@ class_name RangeWeaponManager
 
 const MAX_NUMBER_WEAPONS := 2
 
-@export var entity : Entity
+@export var entity : Player
 @export var raycast_range_weapons : RaycastRangeWeapon
 
 var active_weapon : Weapon
 var available_weapons := []
 
 func _ready() -> void:
-	for weapon_to_load in WeaponLoad.available_weapons:
+	for weapon_to_load in RangeWeaponLoad.available_weapons:
 		var weapon_scene := load(weapon_to_load) as PackedScene
 		var weapon_instance := weapon_scene.instantiate() as Weapon
 		available_weapons.append(weapon_instance)
@@ -18,8 +18,7 @@ func _ready() -> void:
 		weapon_instance.global_position = self.global_position
 		
 		weapon_instance.entity = entity
-		if weapon_instance is RangeWeapon:
-			weapon_instance.raycast_range_weapon = raycast_range_weapons
+		weapon_instance.raycast_range_weapon = raycast_range_weapons
 		weapon_instance.visible = false
 		print(weapon_instance)
 

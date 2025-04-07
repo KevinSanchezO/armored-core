@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxtxjn0jr25vc"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/range_weapon_load/range_weapon_load.gd" id="1_r5tfj"]
+
+[node name="RangeWeaponLoad" type="Node"]
+script = ExtResource("1_r5tfj")

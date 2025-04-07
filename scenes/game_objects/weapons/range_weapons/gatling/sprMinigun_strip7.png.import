@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbevdn65j3fu"
-path.s3tc="res://.godot/imported/shotgun.png-9a3f75dea02cb31d6396b5344026f19b.s3tc.ctex"
+uid="uid://bfuuw8nmadwbq"
+path="res://.godot/imported/sprMinigun_strip7.png-801cf52bda105067c0d7179260174d32.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/shotgun/shotgun.png"
-dest_files=["res://.godot/imported/shotgun.png-9a3f75dea02cb31d6396b5344026f19b.s3tc.ctex"]
+source_file="res://scenes/game_objects/weapons/range_weapons/gatling/sprMinigun_strip7.png"
+dest_files=["res://.godot/imported/sprMinigun_strip7.png-801cf52bda105067c0d7179260174d32.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

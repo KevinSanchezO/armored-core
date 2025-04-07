@@ -1,5 +1,5 @@
 extends RangeWeapon
-class_name MachineGun
+class_name BattleRifle
 
 
 func _process(_delta: float) -> void:

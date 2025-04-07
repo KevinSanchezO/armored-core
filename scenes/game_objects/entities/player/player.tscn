@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=14 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://busj06puknwia" path="res://scenes/components/health/health.tscn" id="6_3jcd1"]
 [ext_resource type="PackedScene" uid="uid://ddtksqgtds031" path="res://scenes/components/raycast_range_weapons/raycast_range_weapon.tscn" id="6_17ftk"]
 [ext_resource type="PackedScene" uid="uid://d4qnqhtru75" path="res://scenes/components/slow_motion_handler/slow_motion_handler.tscn" id="7_uy4ey"]
+[ext_resource type="PackedScene" uid="uid://6yufcq7hv4x5" path="res://scenes/components/support_weapon_manager/support_weapon_manager.tscn" id="7_y0pvn"]
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
@@ -50,7 +51,12 @@ transform = Transform3D(0.45, 0, 0, 0, -0.3, 1.50996e-07, 0, -4.52987e-08, -1, 0
 [node name="RaycastRangeWeapon" parent="Head/CameraContainer/GameCamera" index="1" instance=ExtResource("6_17ftk")]
 
 [node name="RangeWeaponManager" parent="Head/CameraContainer/GameCamera" index="2" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("5_dyrui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.25, -0.38)
+entity = NodePath("../../../..")
+raycast_range_weapons = NodePath("../RaycastRangeWeapon")
+
+[node name="SupportWeaponManager" parent="Head/CameraContainer/GameCamera" index="3" node_paths=PackedStringArray("entity", "raycast_range_weapons") instance=ExtResource("7_y0pvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.25, -0.38)
 entity = NodePath("../../../..")
 raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 

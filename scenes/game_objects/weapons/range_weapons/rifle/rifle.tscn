@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://tn8ndfalcyjc"]
+
+[ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_svb7p"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.gd" id="2_4wfux"]
+[ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_dpgb6"]
+[ext_resource type="Texture2D" uid="uid://dt521lhv7uu63" path="res://scenes/game_objects/weapons/range_weapons/rifle/sprPopoSlugger.png" id="4_3mrdd"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="5_e8e3f"]
+
+[node name="Rifle" instance=ExtResource("1_svb7p")]
+script = ExtResource("2_4wfux")
+projectiles_per_shoot = 1
+spread = 0.002
+max_ammo = 120
+max_chamber = 30
+projectile = ExtResource("3_dpgb6")
+fire_rate_value = 1.0
+buffed_by_slowmotion = true
+trauma = 0.85
+damage = 100.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.05)
+modulate = Color(0.784314, 0.784314, 0.784314, 1)
+texture_filter = 0
+texture = ExtResource("4_3mrdd")
+
+[node name="FireAudio" parent="Audio" index="0"]
+stream = ExtResource("5_e8e3f")
+volume_db = -30.0
+
+[node name="ProjectileSpawner" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45)

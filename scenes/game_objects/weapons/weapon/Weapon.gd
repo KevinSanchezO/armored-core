@@ -4,6 +4,8 @@ class_name Weapon
 @export var fire_rate_value := 0.1
 @export var buffed_by_slowmotion := false
 @export_range(0.0, 1.0, 0.05) var trauma : float
+@export var damage := 0.0
+@export var price := 0.0
 
 @onready var fire_rate := $Firerate as Timer
 @onready var animation := $AnimationPlayer as AnimationPlayer
@@ -15,8 +17,9 @@ class_name Weapon
 
 var active := false
 var can_change := true
+var spent := 0.0
 var firing := false
-var entity : Entity
+var entity : Player
 
 func _ready() -> void:
 	fire_rate.wait_time = fire_rate_value

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dmgbn1tymkwjf"
-path="res://.godot/imported/nail.wav-01e239a0f35844ee435bc0126eb50647.sample"
+path="res://.godot/imported/nail.wav-f1b88578234570fdb618e7c474924c32.sample"
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/machine_gun/nail.wav"
-dest_files=["res://.godot/imported/nail.wav-01e239a0f35844ee435bc0126eb50647.sample"]
+source_file="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav"
+dest_files=["res://.godot/imported/nail.wav-f1b88578234570fdb618e7c474924c32.sample"]
 
 [params]
 

@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 SlowMotion="*res://scenes/autoloads/slow_motion/slow_motion.tscn"
 TweenManager="*res://scenes/autoloads/tween_manager/tween_manager.tscn"
-WeaponLoad="*res://scenes/autoloads/weapon_load/weapon_load.tscn"
+RangeWeaponLoad="*res://scenes/autoloads/range_weapon_load/range_weapon_load.tscn"
 Camera="*res://scenes/autoloads/camera/camera.tscn"
 HitMark="*res://scenes/autoloads/hit_mark/hit_mark.tscn"
 

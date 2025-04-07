@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdtay6ifg25nb"]
+
+[ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_ef3wk"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.gd" id="2_2q3w0"]
+[ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="2_b6gg4"]
+[ext_resource type="Texture2D" uid="uid://cdg1h16u5glon" path="res://scenes/game_objects/weapons/range_weapons/shotgun/sprAutoNadeShotgun_strip7.png" id="4_vrv73"]
+[ext_resource type="AudioStream" uid="uid://blf4n068cy5e5" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgn2.wav" id="5_7mlhj"]
+
+[node name="Shotgun" instance=ExtResource("1_ef3wk")]
+script = ExtResource("2_2q3w0")
+projectiles_per_shoot = 12
+spread = 0.2
+max_ammo = 16
+max_chamber = 4
+projectile = ExtResource("2_b6gg4")
+fire_rate_value = 1.0
+buffed_by_slowmotion = true
+trauma = 1.0
+damage = 10.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.05)
+modulate = Color(0.784314, 0.784314, 0.784314, 1)
+texture_filter = 0
+texture = ExtResource("4_vrv73")
+hframes = 7
+
+[node name="FireAudio" parent="Audio" index="0"]
+stream = ExtResource("5_7mlhj")
+volume_db = -30.0
+
+[node name="ProjectileSpawner" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)

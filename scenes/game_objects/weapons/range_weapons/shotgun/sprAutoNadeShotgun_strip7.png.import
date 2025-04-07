@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqgl8wdx0026m"
-path.s3tc="res://.godot/imported/machine_gun.png-9f086ee64bb9bc1b08178f4b78182ee2.s3tc.ctex"
+uid="uid://cdg1h16u5glon"
+path="res://.godot/imported/sprAutoNadeShotgun_strip7.png-4df5ad68cfe763134f00dcb744310b4f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/machine_gun/machine_gun.png"
-dest_files=["res://.godot/imported/machine_gun.png-9f086ee64bb9bc1b08178f4b78182ee2.s3tc.ctex"]
+source_file="res://scenes/game_objects/weapons/range_weapons/shotgun/sprAutoNadeShotgun_strip7.png"
+dest_files=["res://.godot/imported/sprAutoNadeShotgun_strip7.png-4df5ad68cfe763134f00dcb744310b4f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

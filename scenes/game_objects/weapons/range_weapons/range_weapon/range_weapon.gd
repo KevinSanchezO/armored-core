@@ -9,7 +9,6 @@ signal weapon_reloaded()
 @export var max_ammo : int
 @export var max_chamber : int
 @export var projectile : PackedScene
-@export var damage := 0.0
 
 var current_max_ammo : int
 var current_chamber : int

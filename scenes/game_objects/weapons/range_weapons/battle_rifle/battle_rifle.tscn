@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvst64h2hnw0g"]
+
+[ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_dvj5m"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/battle_rifle.gd" id="2_jiljm"]
+[ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_d5d3e"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="4_gv6ps"]
+[ext_resource type="Texture2D" uid="uid://cm7ep4gx1o8mv" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/sprHyperRifle_strip7.png" id="4_lsfi3"]
+
+[node name="BattleRifle" instance=ExtResource("1_dvj5m")]
+script = ExtResource("2_jiljm")
+projectiles_per_shoot = 1
+spread = 0.05
+max_ammo = 150
+max_chamber = 50
+projectile = ExtResource("3_d5d3e")
+fire_rate_value = 0.3
+trauma = 0.3
+damage = 10.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.05)
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+texture_filter = 0
+texture = ExtResource("4_lsfi3")
+hframes = 7
+
+[node name="FireAudio" parent="Audio" index="0"]
+stream = ExtResource("4_gv6ps")
+volume_db = -30.0
+
+[node name="ProjectileSpawner" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
