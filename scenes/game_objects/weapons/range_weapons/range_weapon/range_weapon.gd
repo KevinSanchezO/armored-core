@@ -82,4 +82,5 @@ func generate_projectile():
 	firing = false
 	current_chamber -= 1
 	weapon_fired.emit()
+	animation.play("fire")
 	Camera.apply_screen_shake(trauma)
