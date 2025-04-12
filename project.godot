@@ -22,6 +22,7 @@ TweenManager="*res://scenes/autoloads/tween_manager/tween_manager.tscn"
 RangeWeaponLoad="*res://scenes/autoloads/range_weapon_load/range_weapon_load.tscn"
 Camera="*res://scenes/autoloads/camera/camera.tscn"
 HitMark="*res://scenes/autoloads/hit_mark/hit_mark.tscn"
+SupportWeaponLoad="*res://scenes/autoloads/support_weapon_load/support_weapon_load.tscn"
 
 [display]
 
@@ -37,6 +38,7 @@ enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 projectile_layer=""
 enemy_layer=""
 player=""
+gameplay_ui=""
 
 [input]
 

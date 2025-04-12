@@ -13,12 +13,11 @@ var slow_motion_handler : SlowMotionHandler
 
 @onready var health_info := $MarginContainer/Control/HBoxContainer/HealthInfo as HealthInfo
 @onready var energy_n_slowmotion := $MarginContainer/Control/HBoxContainer/EnergyNSlowmotion as EnergyNSlowmotion
-@onready var hit_marker :=  $MarginContainer/Control/HitMarker as HitMarker
+@onready var hit_marker := $MarginContainer/Control/HitMarkerContainer/HitMarker as HitMarker
 
 func _ready() -> void:
 	gameplay_ui_config.call_deferred()
-	HitMark.hit_mark_showed.connect(_show_hitmarker)
-
+	HitMark.hit_mark_showed.connect(hit_marker.show_hit_marker)
 
 func gameplay_ui_config() -> void:
 	entity = get_tree().get_first_node_in_group("player")
@@ -35,6 +34,9 @@ func gameplay_ui_config() -> void:
 	energy_n_slowmotion.set_ready(energy_gauge.energy_gauge, slow_motion_handler.slow_motion_gauge,\
 	slow_motion_handler.max_slow_motion_count)
 	
+	entity.range_weapon_manager.weapon_changed.connect(_handle_hit_marker_change)
+	_handle_hit_marker_change()
+	
 	energy_gauge.cooldown_started.connect(_energy_cooldown_started)
 	energy_gauge.cooldown_ended.connect(_energy_cooldown_ended)
 	
@@ -42,11 +44,11 @@ func gameplay_ui_config() -> void:
 	slow_motion_handler.cooldown_ended.connect(_slowmotion_cooldown_ended)
 	slow_motion_handler.count_updated.connect(_slowmotion_update_count)
 
-func _show_hitmarker() -> void:
-	hit_marker.show_hit_marker()
-
 func _process(_delta) -> void:
 	energy_n_slowmotion.update_bars_mirror(energy_gauge.energy_gauge, slow_motion_handler.slow_motion_gauge)
+
+func _handle_hit_marker_change() -> void:
+	hit_marker.set_size_hit_marker(entity.range_weapon_manager.active_weapon.hit_marker_size)
 
 func _update_health_info() -> void:
 	health_info.set_new_health_info(armor_points.current_health, health_pilot.current_health)

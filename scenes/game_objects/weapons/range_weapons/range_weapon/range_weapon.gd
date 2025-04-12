@@ -9,6 +9,7 @@ signal weapon_reloaded()
 @export var max_ammo : int
 @export var max_chamber : int
 @export var projectile : PackedScene
+@export_range(0, 160, 1) var hit_marker_size : int 
 
 var current_max_ammo : int
 var current_chamber : int
@@ -50,7 +51,6 @@ func _reload() -> void:
 	active = true
 
 func generate_projectile():
-	Camera.apply_screen_shake(trauma)
 	var entity_layer := get_tree().get_first_node_in_group("projectile_layer") as Node3D
 	if entity_layer == null:
 		push_error("No entity layer found.")
@@ -80,4 +80,6 @@ func generate_projectile():
 		projectile_instance.generate_trail(random_direction)
 	
 	firing = false
+	current_chamber -= 1
 	weapon_fired.emit()
+	Camera.apply_screen_shake(trauma)

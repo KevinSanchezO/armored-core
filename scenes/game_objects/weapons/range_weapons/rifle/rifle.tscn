@@ -13,9 +13,10 @@ spread = 0.002
 max_ammo = 120
 max_chamber = 30
 projectile = ExtResource("3_dpgb6")
-fire_rate_value = 1.0
+hit_marker_size = 24
+fire_rate_value = 0.6
 buffed_by_slowmotion = true
-trauma = 0.85
+trauma = 1.0
 damage = 100.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]

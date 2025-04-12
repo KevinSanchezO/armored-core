@@ -8,14 +8,16 @@
 
 [node name="Gatling" instance=ExtResource("1_rdget")]
 script = ExtResource("2_frgum")
+sleep_timer_value = 5.0
 projectiles_per_shoot = 1
-spread = 0.09
+spread = 0.2
 max_ammo = 300
 max_chamber = 100
 projectile = ExtResource("3_tlm7t")
+hit_marker_size = 80
 fire_rate_value = 0.05
-trauma = 0.4
-damage = 50.0
+trauma = 0.1
+damage = 20.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.2)
@@ -29,3 +31,6 @@ volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.52)
+
+[node name="SleepTimer" type="Timer" parent="." index="7"]
+one_shot = true

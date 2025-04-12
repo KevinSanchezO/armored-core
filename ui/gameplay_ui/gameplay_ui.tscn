@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://ui/gameplay_ui/gameplay_ui.gd" id="1_d30ao"]
 [ext_resource type="PackedScene" uid="uid://b2siudy0fuobx" path="res://ui/health_info/health_info.tscn" id="2_h18qn"]
 [ext_resource type="PackedScene" uid="uid://bo1t3imqlwbs0" path="res://ui/energy_n_slowmotion/energy_n_slowmotion.tscn" id="3_m6hhs"]
-[ext_resource type="PackedScene" uid="uid://bpba2mbwq5u55" path="res://ui/hit_marker/hit_marker.tscn" id="4_jr780"]
+[ext_resource type="PackedScene" uid="uid://bpba2mbwq5u55" path="res://ui/hit_marker/hit_marker.tscn" id="4_lx3hh"]
 
-[node name="GameplayUI" type="CanvasLayer"]
+[node name="GameplayUI" type="CanvasLayer" groups=["gameplay_ui"]]
 script = ExtResource("1_d30ao")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -41,5 +41,21 @@ size_flags_vertical = 8
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HitMarker" parent="MarginContainer/Control" instance=ExtResource("4_jr780")]
+[node name="HitMarkerContainer" type="Control" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HitMarker" parent="MarginContainer/Control/HitMarkerContainer" instance=ExtResource("4_lx3hh")]
+layout_direction = 3
 layout_mode = 1

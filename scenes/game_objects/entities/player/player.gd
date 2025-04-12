@@ -23,6 +23,8 @@ class_name Player
 @onready var camera_container := $Head/CameraContainer as Node3D
 @onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as MeshInstance3D
 @onready var range_weapon_manager := $Head/CameraContainer/GameCamera/RangeWeaponManager as RangeWeaponManager
+@onready var support_weapon_manager := $Head/CameraContainer/GameCamera/SupportWeaponManager as SupportWeaponManager
+
 
 var air_momentum_dir := Vector3.ZERO
 var mouse_input:Vector2
@@ -134,9 +136,15 @@ func _head_tilt(input_dir:Vector2) -> void:
 func _weapon_sway() -> void:
 	var delta_time := get_process_delta_time() as float
 	mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta_time)
+	
 	range_weapon_manager.rotation.x = lerp(range_weapon_manager.rotation.x, \
 		mouse_input.y * weapon_rotation, 10 * delta_time)
 	range_weapon_manager.rotation.y = lerp(range_weapon_manager.rotation.y, \
+		mouse_input.x * weapon_rotation, 10 * delta_time)
+	
+	support_weapon_manager.rotation.x = lerp(support_weapon_manager.rotation.x, \
+		mouse_input.y * weapon_rotation, 10 * delta_time)
+	support_weapon_manager.rotation.y = lerp(support_weapon_manager.rotation.y, \
 		mouse_input.x * weapon_rotation, 10 * delta_time)
 
 
@@ -144,11 +152,17 @@ func _weapon_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
 		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
 			deg_to_rad(-5), 0.05)
+		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
+			deg_to_rad(-5), 0.05)
 	elif input_dir.x < 0:
 		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
 			deg_to_rad(5), 0.05)
+		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
+			deg_to_rad(5), 0.05)
 	else:
 		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+			deg_to_rad(0), 0.05)
+		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
 			deg_to_rad(0), 0.05)
 
 

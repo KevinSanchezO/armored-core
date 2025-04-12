@@ -1,15 +1,21 @@
 extends Node3D
 class_name RangeWeaponManager
 
+signal weapon_changed()
+
 const MAX_NUMBER_WEAPONS := 2
 
 @export var entity : Player
 @export var raycast_range_weapons : RaycastRangeWeapon
 
-var active_weapon : Weapon
+var active_weapon : RangeWeapon
 var available_weapons := []
 
 func _ready() -> void:
+	_load_weapons()
+
+
+func _load_weapons() -> void:
 	for weapon_to_load in RangeWeaponLoad.available_weapons:
 		var weapon_scene := load(weapon_to_load) as PackedScene
 		var weapon_instance := weapon_scene.instantiate() as Weapon
@@ -45,3 +51,4 @@ func switch_weapon() -> void:
 	
 	active_weapon.visible = true
 	active_weapon.activate_weapon()
+	weapon_changed.emit()
