@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuting2b47p88"]
+
+[ext_resource type="PackedScene" uid="uid://b4mc2dmdujksl" path="res://ui/progress_bars/progress_bar_template/progress_bar_template.tscn" id="1_iiad7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up34y"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ProgressBarVertical" instance=ExtResource("1_iiad7")]
+custom_minimum_size = Vector2(3, 120)
+offset_right = 2.0
+offset_bottom = 120.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_up34y")
+fill_mode = 3
+
+[node name="PreviousState" parent="." index="0"]
+fill_mode = 3
+
+[node name="Background" parent="." index="1"]
+fill_mode = 3

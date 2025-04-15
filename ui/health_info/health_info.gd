@@ -11,6 +11,9 @@ func set_ready(new_armor_points, new_entity_health) -> void:
 	armor_points_bar.init_value(new_armor_points)
 	entity_health_bar.init_value(new_entity_health)
 	
+	energy_bar.update_value_bar_mirror(new_energy_gauge)
+	slow_motion_bar.update_value_bar_mirror(new_slowmotion_gauge)
+	
 	set_new_health_info(new_armor_points, new_entity_health)
 
 

@@ -19,6 +19,7 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 mouse_filter = 2
 border_color = Color(1, 1, 1, 0.784314)
+border_width = 1.1
 editor_only = false
 script = ExtResource("1_bjamk")
 

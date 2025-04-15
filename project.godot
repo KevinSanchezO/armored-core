@@ -26,6 +26,7 @@ SupportWeaponLoad="*res://scenes/autoloads/support_weapon_load/support_weapon_lo
 
 [display]
 
+window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="canvas_items"
 

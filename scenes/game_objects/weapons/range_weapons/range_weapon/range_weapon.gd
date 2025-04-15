@@ -46,6 +46,7 @@ func _reload() -> void:
 	else:
 		current_chamber += current_max_ammo
 		current_max_ammo = 0
+
 	weapon_reloaded.emit()
 	can_change = true
 	active = true
@@ -63,6 +64,7 @@ func generate_projectile():
 		return
 	
 	firing = true
+	animation.play("fire")
 	for p in projectiles_per_shoot:
 		var projectile_instance = projectile.instantiate() as Projectile
 		
@@ -82,5 +84,4 @@ func generate_projectile():
 	firing = false
 	current_chamber -= 1
 	weapon_fired.emit()
-	animation.play("fire")
 	Camera.apply_screen_shake(trauma)
