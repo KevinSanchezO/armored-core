@@ -16,7 +16,7 @@ class_name Player
 @onready var game_camera := $Head/CameraContainer/GameCamera as GameCamera
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var dash_handler := $DashHandler as DashHandler
-@onready var health_pilot := $HealthPilot as Health
+@onready var health_points := $HealthPoints as Health
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var jump_handler := $JumpHandler as JumpHandler
 @onready var head := $Head as Node3D
@@ -24,6 +24,7 @@ class_name Player
 @onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as MeshInstance3D
 @onready var range_weapon_manager := $Head/CameraContainer/GameCamera/RangeWeaponManager as RangeWeaponManager
 @onready var support_weapon_manager := $Head/CameraContainer/GameCamera/SupportWeaponManager as SupportWeaponManager
+@onready var repair_handler := $RepairHandler as RepairHandler
 
 
 var air_momentum_dir := Vector3.ZERO
@@ -88,11 +89,18 @@ func _physics_process(_delta) -> void:
 	velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed if not is_on_floor() else velocity_3d.current_speed)
 	velocity_3d.move(self)
 	
+	_handle_repair()
 	_handle_jump()
 	_handle_dash(wish_dir)
 	_head_tilt(input_dir)
 	_weapon_sway()
 	_weapon_tilt(input_dir)
+
+
+func _handle_repair() -> void:
+	if Input.is_action_just_pressed("repair") and repair_handler.check_repair_availability() \
+	and repair_handler.timer.is_stopped():
+		repair_handler.execute_repair()
 
 
 func _handle_jump() -> void:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3tv3jc3cj5x7"]
+[gd_scene load_steps=9 format=3 uid="uid://c3tv3jc3cj5x7"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui/gameplay_ui.gd" id="1_d30ao"]
 [ext_resource type="PackedScene" uid="uid://cuting2b47p88" path="res://ui/progress_bars/progress_bar_vertical/progress_bar_vertical.tscn" id="3_ujyml"]
-[ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="4_cs0rp"]
 [ext_resource type="PackedScene" uid="uid://bpba2mbwq5u55" path="res://ui/hit_marker/hit_marker.tscn" id="4_lx3hh"]
 [ext_resource type="PackedScene" uid="uid://dtcwukkva52n2" path="res://ui/progress_bars/progress_bar_mirror/progress_bar_mirror.tscn" id="4_ou76k"]
+[ext_resource type="LabelSettings" uid="uid://ic62h8sh4tw2" path="res://resources/fonts/gameplay_ui_label.tres" id="5_6een5"]
+[ext_resource type="PackedScene" uid="uid://ci2dwb3wk37pf" path="res://ui/repair_widget/repair_widget.tscn" id="5_t562l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7u4cd"]
 resource_local_to_scene = true
@@ -13,20 +14,6 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqoiy"]
 resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7iymb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wafwk"]
-bg_color = Color(1, 1, 1, 0.231373)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
 
 [node name="GameplayUI" type="CanvasLayer" groups=["gameplay_ui"]]
 script = ExtResource("1_d30ao")
@@ -37,11 +24,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
 [node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2
@@ -54,10 +43,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -126.0
+offset_top = -80.0
+offset_right = 126.0
+offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -66,18 +55,21 @@ alignment = 1
 
 [node name="EnergyLabel" type="Label" parent="MarginContainer/Control/CentralContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_cs0rp")
 text = "EN"
+label_settings = ExtResource("5_6een5")
 
 [node name="ProgressBarEnergy" parent="MarginContainer/Control/CentralContainer" instance=ExtResource("3_ujyml")]
 layout_mode = 2
+size_flags_horizontal = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_7u4cd")
 use_previous_state = false
 
 [node name="HitMarkerContainer" type="Control" parent="MarginContainer/Control/CentralContainer"]
 custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="HitMarker" parent="MarginContainer/Control/CentralContainer/HitMarkerContainer" instance=ExtResource("4_lx3hh")]
@@ -85,14 +77,16 @@ layout_mode = 1
 
 [node name="ProgressBarSlowMotion" parent="MarginContainer/Control/CentralContainer" instance=ExtResource("3_ujyml")]
 layout_mode = 2
+size_flags_horizontal = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_xqoiy")
 use_previous_state = false
 
 [node name="SlowMotionLabel" type="Label" parent="MarginContainer/Control/CentralContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_cs0rp")
 text = "SM"
+label_settings = ExtResource("5_6een5")
+uppercase = true
 
 [node name="GeneralInfo" type="HBoxContainer" parent="MarginContainer/Control"]
 layout_mode = 1
@@ -101,59 +95,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.00605, 0.997672)
 
 [node name="HealthContainer" type="HBoxContainer" parent="MarginContainer/Control/GeneralInfo"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="RepairContainer" type="VBoxContainer" parent="MarginContainer/Control/GeneralInfo/HealthContainer"]
+[node name="RepairWidget" parent="MarginContainer/Control/GeneralInfo/HealthContainer" instance=ExtResource("5_t562l")]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/Control/GeneralInfo/HealthContainer/RepairContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_cs0rp")
-theme_override_font_sizes/font_size = 16
-text = "Repairs"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/Control/GeneralInfo/HealthContainer/RepairContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_7iymb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_wafwk")
-value = 100.0
-show_percentage = false
 
 [node name="HealthInfoContainer" type="VBoxContainer" parent="MarginContainer/Control/GeneralInfo/HealthContainer"]
-custom_minimum_size = Vector2(224, 0)
+custom_minimum_size = Vector2(352, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="LabelArmorPoints" type="Label" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_cs0rp")
-theme_override_font_sizes/font_size = 24
-text = "HP 100"
-horizontal_alignment = 2
-
-[node name="ProgressBarArmorPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
-layout_mode = 2
-
 [node name="LabelHealthPoints" type="Label" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_cs0rp")
-theme_override_font_sizes/font_size = 24
+size_flags_vertical = 6
+text = "HP 065"
+label_settings = ExtResource("5_6een5")
+horizontal_alignment = 2
+
+[node name="ProgressBarHealthPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
+layout_mode = 2
+
+[node name="LabelArmorPoints" type="Label" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
+layout_mode = 2
+size_flags_vertical = 6
 text = "AP 0850"
+label_settings = ExtResource("5_6een5")
 horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 
-[node name="ProgressBarHealthPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
+[node name="ProgressBarArmorPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
 layout_mode = 2

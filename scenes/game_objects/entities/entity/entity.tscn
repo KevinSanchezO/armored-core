@@ -14,9 +14,11 @@ script = ExtResource("1_buys0")
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
 
+[node name="Audio" type="Node3D" parent="."]
+
 [node name="Velocity3d" parent="." instance=ExtResource("3_yg2io")]
 
-[node name="HealthEntity" parent="." instance=ExtResource("4_s6sxf")]
+[node name="ArmorPoints" parent="." instance=ExtResource("4_s6sxf")]
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_h2n0t")]
-health = NodePath("../HealthEntity")
+health = NodePath("../ArmorPoints")

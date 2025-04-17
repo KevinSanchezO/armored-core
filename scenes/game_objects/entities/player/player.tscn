@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=15 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d4qnqhtru75" path="res://scenes/components/slow_motion_handler/slow_motion_handler.tscn" id="7_uy4ey"]
 [ext_resource type="PackedScene" uid="uid://6yufcq7hv4x5" path="res://scenes/components/support_weapon_manager/support_weapon_manager.tscn" id="7_y0pvn"]
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
+[ext_resource type="PackedScene" uid="uid://dkmsx3f82d05o" path="res://scenes/components/repair_handler/repair_handler.tscn" id="13_ibu25"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
 radius = 0.8
@@ -28,17 +29,17 @@ weapon_rotation = 0.01
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CapsuleShape3D_efd3n")
 
-[node name="HealthEntity" parent="." index="3"]
-max_health = 1800.0
+[node name="ArmorPoints" parent="." index="4"]
+max_health = 850.0
 
-[node name="Hitbox" parent="." index="4"]
+[node name="Hitbox" parent="." index="5"]
 collision_layer = 8
 collision_mask = 0
 blunt_defense = 0.3
 energy_defense = 0.3
 explosion_defense = 0.3
 
-[node name="Head" type="Node3D" parent="." index="5"]
+[node name="Head" type="Node3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="CameraContainer" type="Node3D" parent="Head" index="0"]
@@ -60,19 +61,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.25, -0.38)
 entity = NodePath("../../../..")
 raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 
-[node name="HealthPilot" parent="." index="6" instance=ExtResource("6_3jcd1")]
+[node name="HealthPoints" parent="." index="7" instance=ExtResource("6_3jcd1")]
 
-[node name="DashHandler" parent="." index="7" node_paths=PackedStringArray("entity", "speed_lines") instance=ExtResource("3_g53iv")]
+[node name="DashHandler" parent="." index="8" node_paths=PackedStringArray("entity", "speed_lines") instance=ExtResource("3_g53iv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cooldown_value = 1.2
 entity = NodePath("..")
 speed_lines = NodePath("../Head/CameraContainer/GameCamera/SpeedLines")
 
-[node name="JumpHandler" parent="." index="8" instance=ExtResource("11_1b4s3")]
+[node name="JumpHandler" parent="." index="9" instance=ExtResource("11_1b4s3")]
 
-[node name="EnergyGauge" parent="." index="9" instance=ExtResource("4_067co")]
+[node name="EnergyGauge" parent="." index="10" instance=ExtResource("4_067co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
-[node name="SlowMotionHandler" parent="." index="10" node_paths=PackedStringArray("health") instance=ExtResource("7_uy4ey")]
+[node name="SlowMotionHandler" parent="." index="11" node_paths=PackedStringArray("health") instance=ExtResource("7_uy4ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-health = NodePath("../HealthPilot")
+health = NodePath("../HealthPoints")
+
+[node name="RepairHandler" parent="." index="12" node_paths=PackedStringArray("armor_points") instance=ExtResource("13_ibu25")]
+armor_points = NodePath("../ArmorPoints")

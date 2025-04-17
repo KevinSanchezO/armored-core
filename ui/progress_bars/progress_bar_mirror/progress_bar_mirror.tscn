@@ -12,18 +12,19 @@ resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 1)
 
 [node name="ProgressBarMirror" type="HBoxContainer"]
-offset_right = 239.0
-offset_bottom = 8.0
+offset_right = 59.0
+offset_bottom = 3.0
 theme_override_constants/separation = -1
 script = ExtResource("1_uqk1o")
+show_previous_state = true
 
 [node name="ProgressBarTemplate" parent="." instance=ExtResource("1_mmko2")]
+custom_minimum_size = Vector2(30, 3)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_5aqh0")
 fill_mode = 1
-use_previous_state = false
 
 [node name="ProgressBarTemplate2" parent="." instance=ExtResource("1_mmko2")]
+custom_minimum_size = Vector2(30, 3)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_eg58y")
-use_previous_state = false

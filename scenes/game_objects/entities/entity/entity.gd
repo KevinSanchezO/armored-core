@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Entity 
 
 @onready var velocity_3d := $Velocity3d as Velocity3D
-@onready var health_entity := $HealthEntity as Health
+@onready var armor_points := $ArmorPoints as Health
 @onready var hitbox := $Hitbox as Hitbox
 
 var loss_of_control_effects := []

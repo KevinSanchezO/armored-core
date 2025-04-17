@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkmsx3f82d05o"]
+
+[ext_resource type="Script" path="res://scenes/components/repair_handler/repair_handler.gd" id="1_sy1u4"]
+
+[node name="RepairHandler" type="Node"]
+script = ExtResource("1_sy1u4")
+max_repairs = 2
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
