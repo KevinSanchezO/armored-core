@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://gvosfy7rfep2"
-path="res://.godot/imported/AtariGames.ttf-e650a7dbf0cd12c607adb823fc65fe80.fontdata"
+uid="uid://vxax7b636l86"
+path="res://.godot/imported/Silver.ttf-e5ab6fa0129e04a0eced0fe1f5e10fe5.fontdata"
 
 [deps]
 
-source_file="res://resources/fonts/AtariGames.ttf"
-dest_files=["res://.godot/imported/AtariGames.ttf-e650a7dbf0cd12c607adb823fc65fe80.fontdata"]
+source_file="res://resources/fonts/Silver.ttf"
+dest_files=["res://.godot/imported/Silver.ttf-e5ab6fa0129e04a0eced0fe1f5e10fe5.fontdata"]
 
 [params]
 

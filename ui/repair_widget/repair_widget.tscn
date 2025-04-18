@@ -2,7 +2,7 @@
 
 [ext_resource type="LabelSettings" uid="uid://ic62h8sh4tw2" path="res://resources/fonts/gameplay_ui_label.tres" id="1_0vhlx"]
 [ext_resource type="Script" path="res://ui/repair_widget/repair_widget.gd" id="1_jdfst"]
-[ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="2_3kevt"]
+[ext_resource type="FontFile" uid="uid://ctlrdesvuvalj" path="res://resources/fonts/LCDBlock.ttf" id="3_c48nw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7iymb"]
 
@@ -52,7 +52,7 @@ offset_top = -69.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_3kevt")
+theme_override_fonts/font = ExtResource("3_c48nw")
 theme_override_font_sizes/font_size = 80
 text = "2"
 horizontal_alignment = 1

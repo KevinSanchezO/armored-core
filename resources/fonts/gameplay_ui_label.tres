@@ -1,7 +1,7 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ic62h8sh4tw2"]
 
-[ext_resource type="FontFile" uid="uid://gvosfy7rfep2" path="res://resources/fonts/AtariGames.ttf" id="1_pdmue"]
+[ext_resource type="FontFile" uid="uid://ctlrdesvuvalj" path="res://resources/fonts/LCDBlock.ttf" id="1_502nv"]
 
 [resource]
-font = ExtResource("1_pdmue")
-font_size = 40
+font = ExtResource("1_502nv")
+font_size = 48

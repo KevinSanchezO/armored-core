@@ -15,11 +15,10 @@ layout_mode = 2
 
 [node name="WeaponInfo" type="VBoxContainer" parent="."]
 layout_mode = 2
-alignment = 1
 
 [node name="Rounds" type="Label" parent="WeaponInfo"]
 layout_mode = 2
-text = "30 / 120"
+text = "30  |  120"
 label_settings = ExtResource("3_cys1o")
 
 [node name="WeaponName" type="Label" parent="WeaponInfo"]

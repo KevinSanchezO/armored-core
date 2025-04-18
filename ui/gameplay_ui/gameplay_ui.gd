@@ -69,8 +69,17 @@ func gameplay_ui_config() -> void:
 	
 	#range weapons
 	_init_weapon_widget(weapon_widget_1, range_weapon_manager.available_weapons[0])
+	if range_weapon_manager.available_weapons[0] is RangeWeapon:
+		range_weapon_manager.available_weapons[0].weapon_fired.connect(\
+		Callable(_update_weapon_widget).bind(weapon_widget_1, \
+		range_weapon_manager.available_weapons[0]))
+	
 	if range_weapon_manager.available_weapons.size() > 1:
 		_init_weapon_widget(weapon_widget_2, range_weapon_manager.available_weapons[1])
+		if range_weapon_manager.available_weapons[1] is RangeWeapon:
+			range_weapon_manager.available_weapons[1].weapon_fired.connect(
+			Callable(_update_weapon_widget).bind(weapon_widget_2, \
+			range_weapon_manager.available_weapons[1])) 
 
 
 func _energy_cooldown_started() -> void:
@@ -145,3 +154,8 @@ func _handle_hit_marker_change() -> void:
 
 func _init_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:
 	widget.set_weapon_name(weapon.weapon_name)
+	widget.set_weapon_rounds(weapon)
+
+
+func _update_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:
+	widget.set_weapon_rounds(weapon)
