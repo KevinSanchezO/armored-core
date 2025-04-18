@@ -16,7 +16,7 @@ bg_color = Color(0.717415, 2.90469e-05, 0.0833422, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3dva"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owyqn"]
-bg_color = Color(0.2, 0.2, 0.2, 0.654902)
+bg_color = Color(0.2, 0.2, 0.2, 0.901961)
 
 [node name="ProgressBarTemplate" type="ProgressBar"]
 z_index = 2

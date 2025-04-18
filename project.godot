@@ -23,6 +23,7 @@ RangeWeaponLoad="*res://scenes/autoloads/range_weapon_load/range_weapon_load.tsc
 Camera="*res://scenes/autoloads/camera/camera.tscn"
 HitMark="*res://scenes/autoloads/hit_mark/hit_mark.tscn"
 SupportWeaponLoad="*res://scenes/autoloads/support_weapon_load/support_weapon_load.tscn"
+ColorsUI="*res://scenes/autoloads/colors_ui/colors_ui.tscn"
 
 [display]
 

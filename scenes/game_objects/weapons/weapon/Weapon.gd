@@ -1,6 +1,7 @@
 extends Node3D
 class_name Weapon
 
+@export var weapon_name : String
 @export var fire_rate_value := 0.1
 @export var buffed_by_slowmotion := false
 @export_range(0.0, 1.0, 0.05) var trauma : float

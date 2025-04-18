@@ -1,26 +1,24 @@
 extends CanvasLayer
 class_name GameplayUI
 
-var SAFE_ENERGY_COLOR := Color.html("#ffffff")
-var DANGER_ENERGY_COLOR := Color.html("#e24937")
-var WARNING_SLOWMO_COLOR := Color.html("#f4c94d")
-
 var entity : Player
 
 var energy_gauge : EnergyGauge
 var armor_points : Health
 var health_points : Health
 var slow_motion_handler : SlowMotionHandler
+var range_weapon_manager : RangeWeaponManager
 
 @onready var hit_marker := $MarginContainer/Control/CentralContainer/HitMarkerContainer/HitMarker as HitMarker
-@onready var energy_bar := $MarginContainer/Control/CentralContainer/ProgressBarEnergy as ProgressBarTemplate
-@onready var slow_motion_bar := $MarginContainer/Control/CentralContainer/ProgressBarSlowMotion as ProgressBarTemplate
+@onready var energy_bar := $MarginContainer/Control/CentralContainer/Energy/ProgressBarEnergy as ProgressBarTemplate
+@onready var slow_motion_bar := $MarginContainer/Control/CentralContainer/SlowMotion/ProgressBarSlowMotion as ProgressBarTemplate
 @onready var repair_widget := $MarginContainer/Control/GeneralInfo/HealthContainer/RepairWidget as RepairWidget
 @onready var health_points_label := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/LabelHealthPoints as Label
-@onready var health_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/ProgressBarHealthPoints as ProgressBarMirror
+@onready var health_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/HealthBar/ProgressBarHealthPoints as ProgressBarMirror
 @onready var armor_points_label := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/LabelArmorPoints as Label
-@onready var armor_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/ProgressBarArmorPoints as ProgressBarMirror
-
+@onready var armor_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar/ProgressBarArmorPoints as ProgressBarMirror
+@onready var weapon_widget_1 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget1 as WeaponWidget
+@onready var weapon_widget_2 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget2 as WeaponWidget
 
 func _ready() -> void:
 	gameplay_ui_config.call_deferred()
@@ -39,6 +37,7 @@ func gameplay_ui_config() -> void:
 	armor_points = entity.armor_points
 	health_points = entity.health_points
 	slow_motion_handler = entity.slow_motion_handler
+	range_weapon_manager = entity.range_weapon_manager
 	
 	# energy progress bar
 	energy_bar.init_value(energy_gauge.energy_gauge)
@@ -67,24 +66,29 @@ func gameplay_ui_config() -> void:
 	# hit marker
 	entity.range_weapon_manager.weapon_changed.connect(_handle_hit_marker_change)
 	_handle_hit_marker_change()
+	
+	#range weapons
+	_init_weapon_widget(weapon_widget_1, range_weapon_manager.available_weapons[0])
+	if range_weapon_manager.available_weapons.size() > 1:
+		_init_weapon_widget(weapon_widget_2, range_weapon_manager.available_weapons[1])
 
 
 func _energy_cooldown_started() -> void:
-	energy_bar.update_color(DANGER_ENERGY_COLOR)
+	energy_bar.update_color(ColorsUI.RED)
 
 
 func _energy_cooldown_ended() -> void:
-	energy_bar.update_color(SAFE_ENERGY_COLOR)
+	energy_bar.update_color(ColorsUI.WHITE)
 
 
 func _slowmotion_cooldown_started() -> void:
-	slow_motion_bar.update_color(DANGER_ENERGY_COLOR)
+	slow_motion_bar.update_color(ColorsUI.RED)
 
 
 func _slowmotion_cooldown_ended() -> void:
 	var reached_limit := slow_motion_handler.slow_motion_count >= slow_motion_handler.max_slow_motion_count
 	
-	var color := SAFE_ENERGY_COLOR if !reached_limit else WARNING_SLOWMO_COLOR
+	var color := ColorsUI.WHITE if !reached_limit else ColorsUI.YELLOW
 	slow_motion_bar.update_color(color)
 
 
@@ -137,3 +141,7 @@ func _update_armor_points() -> void:
 
 func _handle_hit_marker_change() -> void:
 	hit_marker.set_size_hit_marker(entity.range_weapon_manager.active_weapon.hit_marker_size)
+
+
+func _init_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:
+	widget.set_weapon_name(weapon.weapon_name)

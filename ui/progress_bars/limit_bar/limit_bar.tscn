@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://yhbh8hjbl2en"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qtbq"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="LimitBar" type="ProgressBar"]
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_2qtbq")
+value = 100.0
+show_percentage = false

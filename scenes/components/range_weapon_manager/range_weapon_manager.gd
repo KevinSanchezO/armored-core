@@ -16,6 +16,9 @@ func _ready() -> void:
 
 
 func _load_weapons() -> void:
+	if RangeWeaponLoad.available_weapons.size() < 1:
+		push_error('No weapons to load')
+	
 	for weapon_to_load in RangeWeaponLoad.available_weapons:
 		var weapon_scene := load(weapon_to_load) as PackedScene
 		var weapon_instance := weapon_scene.instantiate() as Weapon

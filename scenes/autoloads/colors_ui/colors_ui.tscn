@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq2ujtt8rgtld"]
+
+[ext_resource type="Script" path="res://scenes/autoloads/colors_ui/colors_ui.gd" id="1_dl4uh"]
+
+[node name="ColorsUi" type="Node"]
+script = ExtResource("1_dl4uh")

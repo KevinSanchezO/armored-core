@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl8ylvjv13tly"]
+
+[ext_resource type="PackedScene" uid="uid://yhbh8hjbl2en" path="res://ui/progress_bars/limit_bar/limit_bar.tscn" id="1_cec7b"]
+[ext_resource type="Script" path="res://ui/weapon_widgets/weapon_widget/weapon_widget.gd" id="1_hw5p0"]
+[ext_resource type="LabelSettings" uid="uid://ic62h8sh4tw2" path="res://resources/fonts/gameplay_ui_label.tres" id="3_cys1o"]
+
+[node name="WeaponWidget" type="HBoxContainer"]
+offset_right = 170.0
+offset_bottom = 50.0
+theme_override_constants/separation = 10
+script = ExtResource("1_hw5p0")
+
+[node name="LimitBar" parent="." instance=ExtResource("1_cec7b")]
+layout_mode = 2
+
+[node name="WeaponInfo" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Rounds" type="Label" parent="WeaponInfo"]
+layout_mode = 2
+text = "30 / 120"
+label_settings = ExtResource("3_cys1o")
+
+[node name="WeaponName" type="Label" parent="WeaponInfo"]
+layout_mode = 2
+text = "Weapon Name"
+label_settings = ExtResource("3_cys1o")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3tv3jc3cj5x7"]
+[gd_scene load_steps=11 format=3 uid="uid://c3tv3jc3cj5x7"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui/gameplay_ui.gd" id="1_d30ao"]
 [ext_resource type="PackedScene" uid="uid://cuting2b47p88" path="res://ui/progress_bars/progress_bar_vertical/progress_bar_vertical.tscn" id="3_ujyml"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dtcwukkva52n2" path="res://ui/progress_bars/progress_bar_mirror/progress_bar_mirror.tscn" id="4_ou76k"]
 [ext_resource type="LabelSettings" uid="uid://ic62h8sh4tw2" path="res://resources/fonts/gameplay_ui_label.tres" id="5_6een5"]
 [ext_resource type="PackedScene" uid="uid://ci2dwb3wk37pf" path="res://ui/repair_widget/repair_widget.tscn" id="5_t562l"]
+[ext_resource type="PackedScene" uid="uid://yhbh8hjbl2en" path="res://ui/progress_bars/limit_bar/limit_bar.tscn" id="6_v5q7a"]
+[ext_resource type="PackedScene" uid="uid://bl8ylvjv13tly" path="res://ui/weapon_widgets/weapon_widget/weapon_widget.tscn" id="8_fhyh3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7u4cd"]
 resource_local_to_scene = true
@@ -58,16 +60,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "EN"
-label_settings = ExtResource("5_6een5")
 
-[node name="ProgressBarEnergy" parent="MarginContainer/Control/CentralContainer" instance=ExtResource("3_ujyml")]
+[node name="Energy" type="VBoxContainer" parent="MarginContainer/Control/CentralContainer"]
+layout_mode = 2
+
+[node name="LimitBar" parent="MarginContainer/Control/CentralContainer/Energy" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
+[node name="ProgressBarEnergy" parent="MarginContainer/Control/CentralContainer/Energy" instance=ExtResource("3_ujyml")]
+custom_minimum_size = Vector2(6, 120)
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_7u4cd")
 use_previous_state = false
 
+[node name="LimitBar2" parent="MarginContainer/Control/CentralContainer/Energy" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
 [node name="HitMarkerContainer" type="Control" parent="MarginContainer/Control/CentralContainer"]
-custom_minimum_size = Vector2(160, 160)
+custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -75,17 +86,26 @@ mouse_filter = 2
 [node name="HitMarker" parent="MarginContainer/Control/CentralContainer/HitMarkerContainer" instance=ExtResource("4_lx3hh")]
 layout_mode = 1
 
-[node name="ProgressBarSlowMotion" parent="MarginContainer/Control/CentralContainer" instance=ExtResource("3_ujyml")]
+[node name="SlowMotion" type="VBoxContainer" parent="MarginContainer/Control/CentralContainer"]
+layout_mode = 2
+
+[node name="LimitBar" parent="MarginContainer/Control/CentralContainer/SlowMotion" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
+[node name="ProgressBarSlowMotion" parent="MarginContainer/Control/CentralContainer/SlowMotion" instance=ExtResource("3_ujyml")]
+custom_minimum_size = Vector2(5, 120)
 layout_mode = 2
 size_flags_horizontal = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_xqoiy")
 use_previous_state = false
 
+[node name="LimitBar2" parent="MarginContainer/Control/CentralContainer/SlowMotion" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
 [node name="SlowMotionLabel" type="Label" parent="MarginContainer/Control/CentralContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "SM"
-label_settings = ExtResource("5_6een5")
 uppercase = true
 
 [node name="GeneralInfo" type="HBoxContainer" parent="MarginContainer/Control"]
@@ -119,17 +139,57 @@ text = "HP 065"
 label_settings = ExtResource("5_6een5")
 horizontal_alignment = 2
 
-[node name="ProgressBarHealthPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
+[node name="HealthBar" type="HBoxContainer" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LimitBar" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/HealthBar" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
+[node name="ProgressBarHealthPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/HealthBar" instance=ExtResource("4_ou76k")]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LimitBar2" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/HealthBar" instance=ExtResource("6_v5q7a")]
 layout_mode = 2
 
 [node name="LabelArmorPoints" type="Label" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "AP 0850"
+text = "AP 0050"
 label_settings = ExtResource("5_6een5")
 horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 
-[node name="ProgressBarArmorPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer" instance=ExtResource("4_ou76k")]
+[node name="SlowMotionBar" type="HBoxContainer" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer"]
+layout_mode = 2
+
+[node name="LimitBar" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
+[node name="ProgressBarArmorPoints" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar" instance=ExtResource("4_ou76k")]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LimitBar2" parent="MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar" instance=ExtResource("6_v5q7a")]
+layout_mode = 2
+
+[node name="WeaponContainer" type="HBoxContainer" parent="MarginContainer/Control/GeneralInfo"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 1
+
+[node name="RightWeapons" type="VBoxContainer" parent="MarginContainer/Control/GeneralInfo/WeaponContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="WeaponWidget2" parent="MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons" instance=ExtResource("8_fhyh3")]
+layout_mode = 2
+
+[node name="WeaponWidget1" parent="MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons" instance=ExtResource("8_fhyh3")]
 layout_mode = 2

@@ -17,6 +17,7 @@ max_ammo = 16
 max_chamber = 4
 projectile = ExtResource("2_b6gg4")
 hit_marker_size = 128
+weapon_name = "Shotgun ZH2"
 fire_rate_value = 1.0
 buffed_by_slowmotion = true
 trauma = 1.0
