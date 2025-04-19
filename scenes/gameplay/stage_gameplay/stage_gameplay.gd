@@ -1,2 +1,2 @@
 extends SubViewportContainer
-class_name StageGameplay
+class_name StageGameplaysa

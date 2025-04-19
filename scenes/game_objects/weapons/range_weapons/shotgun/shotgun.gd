@@ -7,7 +7,7 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("reload"):
-		_reload()
+		start_reload()
 	
 	if Input.is_action_just_pressed("right_weapon") and \
 	fire_rate.is_stopped():

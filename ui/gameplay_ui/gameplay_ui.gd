@@ -8,6 +8,7 @@ var armor_points : Health
 var health_points : Health
 var slow_motion_handler : SlowMotionHandler
 var range_weapon_manager : RangeWeaponManager
+var support_weapon_manager : SupportWeaponManager
 
 @onready var hit_marker := $MarginContainer/Control/CentralContainer/HitMarkerContainer/HitMarker as HitMarker
 @onready var energy_bar := $MarginContainer/Control/CentralContainer/Energy/ProgressBarEnergy as ProgressBarTemplate
@@ -19,6 +20,7 @@ var range_weapon_manager : RangeWeaponManager
 @onready var armor_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar/ProgressBarArmorPoints as ProgressBarMirror
 @onready var weapon_widget_1 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget1 as WeaponWidget
 @onready var weapon_widget_2 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget2 as WeaponWidget
+@onready var weapon_widget_support := $MarginContainer/Control/GeneralInfo/WeaponContainer/SupportWeapon as WeaponWidget
 
 func _ready() -> void:
 	gameplay_ui_config.call_deferred()
@@ -38,6 +40,7 @@ func gameplay_ui_config() -> void:
 	health_points = entity.health_points
 	slow_motion_handler = entity.slow_motion_handler
 	range_weapon_manager = entity.range_weapon_manager
+	support_weapon_manager = entity.support_weapon_manager
 	
 	# energy progress bar
 	energy_bar.init_value(energy_gauge.energy_gauge)
@@ -70,16 +73,36 @@ func gameplay_ui_config() -> void:
 	#range weapons
 	_init_weapon_widget(weapon_widget_1, range_weapon_manager.available_weapons[0])
 	if range_weapon_manager.available_weapons[0] is RangeWeapon:
-		range_weapon_manager.available_weapons[0].weapon_fired.connect(\
+		
+		range_weapon_manager.available_weapons[0].chamber_modified.connect(\
 		Callable(_update_weapon_widget).bind(weapon_widget_1, \
 		range_weapon_manager.available_weapons[0]))
+		
+		range_weapon_manager.available_weapons[0].reload_started.connect(\
+		Callable(_reload).bind(weapon_widget_1))
 	
 	if range_weapon_manager.available_weapons.size() > 1:
 		_init_weapon_widget(weapon_widget_2, range_weapon_manager.available_weapons[1])
 		if range_weapon_manager.available_weapons[1] is RangeWeapon:
-			range_weapon_manager.available_weapons[1].weapon_fired.connect(
+			
+			range_weapon_manager.available_weapons[1].chamber_modified.connect(
 			Callable(_update_weapon_widget).bind(weapon_widget_2, \
 			range_weapon_manager.available_weapons[1])) 
+			
+			range_weapon_manager.available_weapons[1].reload_started.connect(\
+			Callable(_reload).bind(weapon_widget_2))
+	
+	#support weapons
+	if support_weapon_manager.active_weapon != null:
+		_init_weapon_widget(weapon_widget_support, support_weapon_manager.active_weapon)
+		if support_weapon_manager.active_weapon is RangeWeapon:
+			
+			support_weapon_manager.active_weapon.chamber_modified.connect(
+			Callable(_update_weapon_widget).bind(weapon_widget_support, \
+			support_weapon_manager.active_weapon)) 
+			
+			support_weapon_manager.active_weapon.reload_started.connect(\
+			Callable(_reload).bind(weapon_widget_support))
 
 
 func _energy_cooldown_started() -> void:
@@ -159,3 +182,7 @@ func _init_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:
 
 func _update_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:
 	widget.set_weapon_rounds(weapon)
+
+
+func _reload(widget: WeaponWidget) -> void:
+	widget.reload_handling()

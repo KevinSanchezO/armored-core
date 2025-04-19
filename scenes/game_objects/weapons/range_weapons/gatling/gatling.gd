@@ -25,4 +25,4 @@ func _process(_delta: float) -> void:
 	if current_chamber == 0:
 		active_shooting = false
 		sleep_timer.start()
-		_reload()
+		start_reload()

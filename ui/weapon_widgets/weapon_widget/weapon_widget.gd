@@ -15,10 +15,25 @@ func set_weapon_rounds(weapon:Weapon) -> void:
 	
 	if weapon is RangeWeapon:
 		var format_string = "%s  |  %s"
-		var actual_string = format_string % [str(weapon.current_chamber), str(weapon.current_max_ammo)]
+		var actual_string = format_string % [_stylize_value(weapon.current_chamber), \
+		_stylize_value(weapon.current_max_ammo)]
+		
 		rounds_text = actual_string
 		
 	rounds_label.text = rounds_text
 
 func set_weapon_name(weapon_name:String) -> void:
 	weapon_name_label.text = weapon_name
+
+
+func _stylize_value(value:int) -> String:
+	var stylize_string = ""
+	
+	if value <= 99:
+		stylize_string += "0"
+	if value <= 9:
+		stylize_string += "0"
+	
+	stylize_string += str(value)
+	
+	return stylize_string

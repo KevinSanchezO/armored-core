@@ -15,6 +15,7 @@ projectiles_per_shoot = 1
 spread = 0.05
 max_ammo = 150
 max_chamber = 50
+reload_time = 2.0
 projectile = ExtResource("3_d5d3e")
 hit_marker_size = 48
 weapon_name = "Battle Rifle EVO"
