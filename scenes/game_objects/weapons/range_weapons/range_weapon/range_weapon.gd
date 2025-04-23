@@ -73,7 +73,7 @@ func generate_projectile():
 	if projectile == null:
 		push_error("No projectile found.")
 	
-	if current_chamber == 0:
+	if current_chamber == 0 and !empty_audio.playing:
 		empty_audio.play_audio()
 		return
 	
