@@ -11,7 +11,8 @@ signal reload_started()
 @export var max_chamber : int
 @export var reload_time : float
 @export var projectile : PackedScene
-@export_range(0, 160, 1) var hit_marker_size : int 
+@export_range(0, 160, 1) var hit_marker_size : int
+@export var recoil : Vector3
 
 var current_max_ammo : int
 var current_chamber : int
@@ -99,7 +100,7 @@ func generate_projectile():
 	current_chamber -= 1
 	weapon_fired.emit()
 	chamber_modified.emit()
-	Camera.apply_screen_shake(trauma)
+	Camera.camera_container.recoilFire()
 
 
 func _enter_slow_motion_reload() -> void:

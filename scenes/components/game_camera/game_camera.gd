@@ -28,8 +28,8 @@ func _process(delta) -> void:
 	self.rotation_degrees.x = initial_rotation.x + max_x * \
 	_get_shake_intensity() * _get_noise_from_seed(0)
 	
-	self.rotation_degrees.y = initial_rotation.y + max_y * \
-	_get_shake_intensity() * _get_noise_from_seed(1)
+	#self.rotation_degrees.y = initial_rotation.y + max_y * \
+	#_get_shake_intensity() * _get_noise_from_seed(1)
 	
 	#self.rotation_degrees.z = initial_rotation.z + max_z * \
 	#_get_shake_intensity() * _get_noise_from_seed(2)

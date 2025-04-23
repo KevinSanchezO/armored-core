@@ -18,6 +18,7 @@ max_chamber = 5
 reload_time = 3.0
 projectile = ExtResource("2_b6gg4")
 hit_marker_size = 128
+recoil = Vector3(5, 1.5, 0)
 weapon_name = "Shotgun ZH2"
 fire_rate_value = 1.0
 buffed_by_slowmotion = true

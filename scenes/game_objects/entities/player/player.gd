@@ -13,17 +13,18 @@ class_name Player
 
 @onready var current_time_tilt := time_tilt
 
-@onready var game_camera := $Head/CameraContainer/GameCamera as GameCamera
-@onready var energy_gauge := $EnergyGauge as EnergyGauge
-@onready var dash_handler := $DashHandler as DashHandler
-@onready var health_points := $HealthPoints as Health
-@onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
-@onready var jump_handler := $JumpHandler as JumpHandler
 @onready var head := $Head as Node3D
-@onready var camera_container := $Head/CameraContainer as Node3D
-@onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as SpeedLines
-@onready var range_weapon_manager := $Head/CameraContainer/GameCamera/RangeWeaponManager as RangeWeaponManager
-@onready var support_weapon_manager := $Head/CameraContainer/GameCamera/SupportWeaponManager as SupportWeaponManager
+@onready var view_container := $Head/ViewContainer as Node3D
+@onready var camera_container := %CameraContainer as CameraContainer
+@onready var game_camera := %GameCamera as GameCamera
+@onready var range_weapon_manager := %RangeWeaponManager as RangeWeaponManager
+@onready var support_weapon_manager := %SupportWeaponManager as SupportWeaponManager
+@onready var speed_lines := %SpeedLines as SpeedLines
+@onready var health_points := $HealthPoints as Health
+@onready var dash_handler := $DashHandler as DashHandler
+@onready var jump_handler := $JumpHandler as JumpHandler
+@onready var energy_gauge := $EnergyGauge as EnergyGauge
+@onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var repair_handler := $RepairHandler as RepairHandler
 
 
@@ -60,8 +61,8 @@ func _unhandled_input(event) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * mouse_sensitivity)
-			camera_container.rotate_x(-event.relative.y * mouse_sensitivity)
-			camera_container.rotation.x = clamp(camera_container.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			view_container.rotate_x(-event.relative.y * mouse_sensitivity)
+			view_container.rotation.x = clamp(view_container.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			mouse_input = event.relative
 
 
@@ -171,6 +172,22 @@ func _weapon_tilt(input_dir:Vector2) -> void:
 		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
 			deg_to_rad(0), 0.05)
 		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
+			deg_to_rad(0), 0.05)
+	
+	if input_dir.y > 0:
+		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+			deg_to_rad(-5), 0.05)
+		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+			deg_to_rad(-5), 0.05)
+	elif input_dir.y < 0:
+		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+			deg_to_rad(5), 0.05)
+		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+			deg_to_rad(5), 0.05)
+	else:
+		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+			deg_to_rad(0), 0.05)
+		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
 			deg_to_rad(0), 0.05)
 
 

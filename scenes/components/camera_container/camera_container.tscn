@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqex6jeyfl41s"]
+
+[ext_resource type="Script" path="res://scenes/components/camera_container/camera_container.gd" id="1_h1eva"]
+
+[node name="CameraContainer" type="Node3D"]
+script = ExtResource("1_h1eva")
+snappiness = 3.0
+returnSpeed = 12.0

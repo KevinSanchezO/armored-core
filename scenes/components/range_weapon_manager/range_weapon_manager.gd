@@ -12,7 +12,7 @@ var active_weapon : RangeWeapon
 var available_weapons := []
 
 func _ready() -> void:
-	_load_weapons()
+	_load_weapons.call_deferred()
 
 
 func _load_weapons() -> void:
@@ -34,6 +34,7 @@ func _load_weapons() -> void:
 	active_weapon = available_weapons[0]
 	active_weapon.activate_weapon()
 	active_weapon.visible = true
+	Camera.camera_container.setRecoil(active_weapon.recoil)
 
 
 func switch_weapon() -> void:
@@ -56,5 +57,6 @@ func switch_weapon() -> void:
 	previous_weapon.active = false
 	
 	active_weapon.visible = true
+	Camera.camera_container.setRecoil(active_weapon.recoil)
 	active_weapon.activate_weapon()
 	weapon_changed.emit()
