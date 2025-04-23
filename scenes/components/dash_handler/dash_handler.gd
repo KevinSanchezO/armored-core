@@ -6,7 +6,7 @@ class_name DashHandler
 @export var speed := 140.0
 @export var duration := 0.08
 @export var dash_consumption := 50.0
-@export var speed_lines : MeshInstance3D
+@export var speed_lines : SpeedLines
 @export var speed_lines_duration := 0.1
 
 var dash: Dash
@@ -20,7 +20,6 @@ func _ready():
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_dash)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_dash)
 	cooldown.wait_time = cooldown_value
-	speed_lines.visible = false
 
 
 func trigger_dash(direction: Vector3, _speed:=current_speed as float, \
@@ -48,11 +47,11 @@ func _enable_hitbox() -> void:
 	return
 
 func _show_speed_lines() -> void:
-	speed_lines.visible = true
+	speed_lines.show_speed_lines()
 
 func _hide_speed_lines() -> void:
-	await get_tree().create_timer(current_speed_lines_duration).timeout
-	speed_lines.visible = false
+	#await get_tree().create_timer(current_speed_lines_duration).timeout
+	speed_lines.hide_speed_lines(current_speed_lines_duration)
 
 
 func _enter_slow_motion_dash() -> void:

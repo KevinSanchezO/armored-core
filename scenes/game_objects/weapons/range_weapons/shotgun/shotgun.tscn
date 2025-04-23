@@ -30,7 +30,7 @@ mesh = ExtResource("5_f8t54")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ghy4o")
 
-[node name="FireAudio" parent="Audio" index="0"]
+[node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_7mlhj")
 volume_db = -30.0
 

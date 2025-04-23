@@ -43,6 +43,9 @@ func switch_weapon() -> void:
 	if not active_weapon.can_change and active_weapon.firing:
 		return
 	
+	if not active_weapon.reload_timer.is_stopped():
+		return
+	
 	var previous_weapon = active_weapon
 	if previous_weapon == available_weapons[0]:
 		active_weapon = available_weapons[1]

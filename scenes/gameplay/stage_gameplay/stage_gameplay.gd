@@ -1,2 +1,2 @@
-extends SubViewportContainer
-class_name StageGameplaysa
+extends Node3D
+class_name StageGameplay

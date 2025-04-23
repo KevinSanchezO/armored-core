@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bl8ylvjv13tly"]
+[gd_scene load_steps=5 format=3 uid="uid://bl8ylvjv13tly"]
 
 [ext_resource type="PackedScene" uid="uid://yhbh8hjbl2en" path="res://ui/progress_bars/limit_bar/limit_bar.tscn" id="1_cec7b"]
 [ext_resource type="Script" path="res://ui/weapon_widgets/weapon_widget/weapon_widget.gd" id="1_hw5p0"]
-[ext_resource type="LabelSettings" uid="uid://ic62h8sh4tw2" path="res://resources/fonts/gameplay_ui_label.tres" id="3_cys1o"]
+[ext_resource type="FontFile" uid="uid://ctlrdesvuvalj" path="res://resources/fonts/LCDBlock.ttf" id="3_cwd0r"]
+[ext_resource type="LabelSettings" uid="uid://87a5ajk1v6gh" path="res://resources/fonts/weapon_name.tres" id="4_sphbx"]
 
 [node name="WeaponWidget" type="HBoxContainer"]
 offset_right = 170.0
@@ -15,13 +16,32 @@ layout_mode = 2
 
 [node name="WeaponInfo" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Rounds" type="Label" parent="WeaponInfo"]
+[node name="Rounds" type="RichTextLabel" parent="WeaponInfo"]
 layout_mode = 2
-text = "30  |  120"
-label_settings = ExtResource("3_cys1o")
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_cwd0r")
+theme_override_fonts/mono_font = ExtResource("3_cwd0r")
+theme_override_fonts/italics_font = ExtResource("3_cwd0r")
+theme_override_fonts/bold_italics_font = ExtResource("3_cwd0r")
+theme_override_fonts/bold_font = ExtResource("3_cwd0r")
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "300  |  120"
+fit_content = true
+scroll_active = false
 
 [node name="WeaponName" type="Label" parent="WeaponInfo"]
 layout_mode = 2
 text = "Weapon Name"
-label_settings = ExtResource("3_cys1o")
+label_settings = ExtResource("4_sphbx")
+uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

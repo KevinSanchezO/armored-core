@@ -10,17 +10,17 @@ var slow_motion_handler : SlowMotionHandler
 var range_weapon_manager : RangeWeaponManager
 var support_weapon_manager : SupportWeaponManager
 
-@onready var hit_marker := $MarginContainer/Control/CentralContainer/HitMarkerContainer/HitMarker as HitMarker
-@onready var energy_bar := $MarginContainer/Control/CentralContainer/Energy/ProgressBarEnergy as ProgressBarTemplate
-@onready var slow_motion_bar := $MarginContainer/Control/CentralContainer/SlowMotion/ProgressBarSlowMotion as ProgressBarTemplate
-@onready var repair_widget := $MarginContainer/Control/GeneralInfo/HealthContainer/RepairWidget as RepairWidget
-@onready var health_points_label := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/LabelHealthPoints as Label
-@onready var health_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/HealthBar/ProgressBarHealthPoints as ProgressBarMirror
-@onready var armor_points_label := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/LabelArmorPoints as Label
-@onready var armor_points_bar := $MarginContainer/Control/GeneralInfo/HealthContainer/HealthInfoContainer/SlowMotionBar/ProgressBarArmorPoints as ProgressBarMirror
-@onready var weapon_widget_1 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget1 as WeaponWidget
-@onready var weapon_widget_2 := $MarginContainer/Control/GeneralInfo/WeaponContainer/RightWeapons/WeaponWidget2 as WeaponWidget
-@onready var weapon_widget_support := $MarginContainer/Control/GeneralInfo/WeaponContainer/SupportWeapon as WeaponWidget
+@onready var hit_marker := %HitMarker as HitMarker
+@onready var energy_bar := %ProgressBarEnergy as ProgressBarTemplate
+@onready var slow_motion_bar := %ProgressBarSlowMotion as ProgressBarTemplate
+@onready var repair_widget := %RepairWidget as RepairWidget
+@onready var health_points_label := %LabelHealthPoints as HealthLabel
+@onready var health_points_bar := %ProgressBarHealthPoints as ProgressBarMirror
+@onready var armor_points_label := %LabelArmorPoints as HealthLabel
+@onready var armor_points_bar := %ProgressBarArmorPoints as ProgressBarMirror
+@onready var weapon_widget_1 := %WeaponWidget1 as WeaponWidget
+@onready var weapon_widget_2 := %WeaponWidget2 as WeaponWidget
+@onready var weapon_widget_support := %SupportWeapon as WeaponWidget
 
 func _ready() -> void:
 	gameplay_ui_config.call_deferred()
@@ -58,12 +58,12 @@ func gameplay_ui_config() -> void:
 	
 	# health mirror progress bar
 	health_points_bar.init_progress_bar_mirror(health_points.current_health)
-	health_points_label.text = _stylize_health_points_text(health_points.current_health)
+	health_points_label.init_health_label(health_points.current_health)
 	health_points.health_reduced.connect(_update_health_points)
 	
 	# armor points progress bar
 	armor_points_bar.init_progress_bar_mirror(armor_points.current_health)
-	armor_points_label.text = _stylize_armor_points_text(armor_points.current_health)
+	armor_points_label.init_health_label(armor_points.current_health)
 	armor_points.health_reduced.connect(_update_armor_points)
 
 	# hit marker
@@ -128,47 +128,14 @@ func _update_repair_widget() -> void:
 	repair_widget.modify_repair_count(entity.repair_handler.repairs_left)
 
 
-func _stylize_health_points_text(value:float) -> String:
-	var stylize_string := "HP "
-	
-	var value_string := str(value)
-	
-	if value <= 99:
-		stylize_string += "0"
-	if value <= 9:
-		stylize_string += "0"
-	
-	stylize_string += value_string 
-	
-	return stylize_string
-
-
 func _update_health_points() -> void:
 	health_points_bar.update_value_bar_mirror(health_points.current_health)
-	health_points_label.text = _stylize_health_points_text(health_points.current_health)
-
-
-func _stylize_armor_points_text(value: float) -> String:
-	var stylize_string := "AP "
-	
-	var value_string := str(value)
-	
-	
-	if value <= 999:
-		stylize_string += "0"
-	if value <= 99:
-		stylize_string += "0"
-	if value <= 9:
-		stylize_string += "0"
-	
-	stylize_string += value_string 
-	
-	return stylize_string
+	health_points_label.damage_taken_label_update(health_points.current_health)
 
 
 func _update_armor_points() -> void:
 	armor_points_bar.update_value_bar_mirror(armor_points.current_health)
-	armor_points_label.text = _stylize_armor_points_text(armor_points.current_health)
+	armor_points_label.damage_taken_label_update(armor_points.current_health)
 
 
 func _handle_hit_marker_change() -> void:

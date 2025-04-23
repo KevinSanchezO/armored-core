@@ -16,7 +16,7 @@ max_chamber = 100
 reload_time = 6.0
 projectile = ExtResource("3_tlm7t")
 hit_marker_size = 80
-weapon_name = "Gatling JGN-T"
+weapon_name = "Gatling JGRN-T"
 fire_rate_value = 0.05
 trauma = 0.1
 damage = 20.0
@@ -27,12 +27,9 @@ texture_filter = 0
 texture = ExtResource("4_mu014")
 hframes = 7
 
-[node name="FireAudio" parent="Audio" index="0"]
+[node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_0drgl")
 volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.52)
-
-[node name="SleepTimer" type="Timer" parent="." index="7"]
-one_shot = true

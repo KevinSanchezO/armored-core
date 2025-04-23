@@ -12,13 +12,9 @@ script = ExtResource("1_baevi")
 
 [node name="Audio" type="Node3D" parent="."]
 
-[node name="FireAudio" parent="Audio" instance=ExtResource("2_burns")]
-
-[node name="ReloadAudio" parent="Audio" instance=ExtResource("2_burns")]
-
 [node name="ReadyAudio" parent="Audio" instance=ExtResource("2_burns")]
 
-[node name="EmptyAudio" parent="Audio" instance=ExtResource("2_burns")]
+[node name="FireAudio" parent="Audio" instance=ExtResource("2_burns")]
 
 [node name="Firerate" type="Timer" parent="."]
 one_shot = true

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbkrf3va0dtxf"]
+
+[ext_resource type="FontFile" uid="uid://ctlrdesvuvalj" path="res://resources/fonts/LCDBlock.ttf" id="1_5sbnv"]
+[ext_resource type="Script" path="res://ui/labels/health_label/health_label.gd" id="2_w5wfx"]
+
+[node name="HealthLabel" type="RichTextLabel"]
+size_flags_vertical = 6
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_5sbnv")
+theme_override_fonts/mono_font = ExtResource("1_5sbnv")
+theme_override_fonts/italics_font = ExtResource("1_5sbnv")
+theme_override_fonts/bold_italics_font = ExtResource("1_5sbnv")
+theme_override_fonts/bold_font = ExtResource("1_5sbnv")
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "HP [shake rate=50.0 level=15 connected=1]065[/shake]"
+fit_content = true
+scroll_active = false
+text_direction = 2
+script = ExtResource("2_w5wfx")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

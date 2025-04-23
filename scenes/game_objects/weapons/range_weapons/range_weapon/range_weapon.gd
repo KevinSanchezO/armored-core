@@ -18,6 +18,8 @@ var current_chamber : int
 var raycast_range_weapon : RaycastRangeWeapon
 
 @onready var projectile_spawner := $ProjectileSpawner as Node3D
+@onready var reload_audio := $Audio/ReloadAudio as Audio3D
+@onready var empty_audio := $Audio/EmptyAudio as Audio3D
 @onready var shell_spawner := $ShellSpawner as Node3D
 @onready var reload_timer := $ReloadTimer as Timer
 
@@ -31,8 +33,8 @@ func _ready() -> void:
 	
 	self.weapon_fired.connect(fire_rate.start)
 	self.weapon_fired.connect(fire_audio.play_audio)
-	reload_timer.timeout.connect(_reload)
 	
+	reload_timer.timeout.connect(_reload)
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_reload)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_reload)
 
@@ -43,8 +45,8 @@ func start_reload() -> void:
 	
 	active = false
 	can_change = false
-	reload_started.emit()
 	reload_timer.start()
+	reload_started.emit()
 
 
 func _reload() -> void:
@@ -57,9 +59,10 @@ func _reload() -> void:
 		current_chamber += current_max_ammo
 		current_max_ammo = 0
 
-	chamber_modified.emit()
 	can_change = true
 	active = true
+	reload_audio.play_audio()
+	chamber_modified.emit()
 
 
 func generate_projectile():

@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func show_hit_marker() -> void:
 	timer.start()
-	_change_color(ColorsUI.RED)
+	_change_color(ColorsUI.BRIGHT_RED)
 
 func hide_hit_marker() -> void:
 	_change_color(ColorsUI.WHITE_TRANSPARENT)

@@ -12,9 +12,7 @@ class_name Weapon
 @onready var animation := $AnimationPlayer as AnimationPlayer
 
 @onready var fire_audio := $Audio/FireAudio as Audio3D
-@onready var reload_audio := $Audio/ReloadAudio as Audio3D
 @onready var ready_audio := $Audio/ReadyAudio as Audio3D
-@onready var empty_audio := $Audio/EmptyAudio as Audio3D
 
 var active := false
 var can_change := true

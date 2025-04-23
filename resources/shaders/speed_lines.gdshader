@@ -49,3 +49,7 @@ void fragment() {
     ALBEDO = mix(scene_color, line_color.rgb, result);
     ALPHA = min(line_color.a, result);
 }
+
+void vertex(){
+	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
+}

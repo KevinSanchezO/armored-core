@@ -21,7 +21,7 @@ class_name Player
 @onready var jump_handler := $JumpHandler as JumpHandler
 @onready var head := $Head as Node3D
 @onready var camera_container := $Head/CameraContainer as Node3D
-@onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as MeshInstance3D
+@onready var speed_lines := $Head/CameraContainer/GameCamera/SpeedLines as SpeedLines
 @onready var range_weapon_manager := $Head/CameraContainer/GameCamera/RangeWeaponManager as RangeWeaponManager
 @onready var support_weapon_manager := $Head/CameraContainer/GameCamera/SupportWeaponManager as SupportWeaponManager
 @onready var repair_handler := $RepairHandler as RepairHandler
