@@ -8,9 +8,9 @@ const TRAUMA_REDUCTION_RATE = 1.0
 
 @export var noise : FastNoiseLite
 @export var noise_speed := 50.0
-@export var max_x := 16.0
-@export var max_y := 8.0
-@export var max_z := 16.0
+@export var max_x := 8.0
+@export var max_y := 4.0
+@export var max_z := 8.0
 
 var trauma := 0.0 #between 0 and 1
 var time := 0.0
@@ -45,6 +45,15 @@ func _get_shake_intensity() -> float:
 func _get_noise_from_seed(_seed: int) -> float:
 	noise.seed = _seed
 	return noise.get_noise_1d(time * noise_speed)
+
+
+func camera_bounce_landing():
+	var tween := get_tree().create_tween() as Tween
+	var original_rotation_x := rotation.x
+	var target_rotation_x := deg_to_rad(-4)
+	
+	tween.tween_property(self, "rotation:x", target_rotation_x, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "rotation:x", original_rotation_x, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 
 func _on_slow_motion_entered() -> void:

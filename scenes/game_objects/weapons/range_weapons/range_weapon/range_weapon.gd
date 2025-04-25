@@ -98,9 +98,11 @@ func generate_projectile():
 	
 	firing = false
 	current_chamber -= 1
+	Camera.camera_container.setRecoil(recoil)
+	Camera.camera_container.recoilFire()
+	Camera.apply_screen_shake(trauma)
 	weapon_fired.emit()
 	chamber_modified.emit()
-	Camera.camera_container.recoilFire()
 
 
 func _enter_slow_motion_reload() -> void:

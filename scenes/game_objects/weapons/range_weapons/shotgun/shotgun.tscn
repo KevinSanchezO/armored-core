@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdtay6ifg25nb"]
+[gd_scene load_steps=6 format=3 uid="uid://cdtay6ifg25nb"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_ef3wk"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.gd" id="2_2q3w0"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="2_b6gg4"]
+[ext_resource type="PackedScene" uid="uid://c34jegfb4umg" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.gltf" id="4_jph4v"]
 [ext_resource type="AudioStream" uid="uid://blf4n068cy5e5" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgn2.wav" id="5_7mlhj"]
-[ext_resource type="ArrayMesh" uid="uid://dx1es3av6nfh8" path="res://scenes/game_objects/weapons/range_weapons/shotgun/blaster-m.obj" id="5_f8t54"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghy4o"]
-albedo_color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="Shotgun" instance=ExtResource("1_ef3wk")]
 script = ExtResource("2_2q3w0")
@@ -22,18 +19,15 @@ recoil = Vector3(5, 1.5, 0)
 weapon_name = "Shotgun ZH2"
 fire_rate_value = 1.0
 buffed_by_slowmotion = true
-trauma = 1.0
+trauma = 0.5
 damage = 10.0
 
-[node name="Blaster-m" type="MeshInstance3D" parent="Model" index="0"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.0447703, -0.0697817)
-mesh = ExtResource("5_f8t54")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ghy4o")
+[node name="shotgun" parent="Model" index="0" instance=ExtResource("4_jph4v")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.01, -0.2)
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_7mlhj")
 volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.34)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.58)

@@ -5,7 +5,7 @@ class_name Player
 @export_range(0.001, 0.01, 0.0001) var mouse_sensitivity := 0.005
 
 @export_group("Base Tilt")
-@export var tilt := 4.0
+@export var tilt := 3.0
 @export var time_tilt := 0.05
 
 @export_group("Weapon holder")
@@ -29,10 +29,13 @@ class_name Player
 
 
 var air_momentum_dir := Vector3.ZERO
-var mouse_input:Vector2
-
+var mouse_input : Vector2
+var on_ground : bool
+var was_on_ground : bool
 
 func _ready() -> void:
+	on_ground = is_on_floor()
+	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_speed)
 	
@@ -41,7 +44,6 @@ func _ready() -> void:
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
-
 
 	for child in %Model.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
@@ -93,9 +95,14 @@ func _physics_process(_delta) -> void:
 	_handle_repair()
 	_handle_jump()
 	_handle_dash(wish_dir)
+	
+	was_on_ground = on_ground
+	on_ground = is_on_floor()
+	_handle_landing()
+	
 	_head_tilt(input_dir)
-	_weapon_sway()
 	_weapon_tilt(input_dir)
+	_weapon_sway()
 
 
 func _handle_repair() -> void:
@@ -109,7 +116,6 @@ func _handle_jump() -> void:
 	and jump_handler.jump_cooldown.is_stopped():
 			velocity_3d.apply_upward_force(self)
 			energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
-			
 	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
 		jump_handler.jump_cooldown.start()
 
@@ -126,13 +132,18 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 		dash_handler.trigger_dash(wish_dir_dash)
 
 
+func _handle_landing() -> void:
+	if on_ground and not was_on_ground:
+		game_camera.camera_bounce_landing()
+
+
 func _head_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(-tilt), current_time_tilt)
+		game_camera.rotation.z = lerp_angle(game_camera.rotation.z, deg_to_rad(-tilt), current_time_tilt)
 	elif input_dir.x < 0:
-		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(tilt), current_time_tilt)
+		game_camera.rotation.z = lerp_angle(game_camera.rotation.z, deg_to_rad(tilt), current_time_tilt)
 	else:
-		head.rotation.z = lerp_angle(head.rotation.z, deg_to_rad(0), current_time_tilt)
+		game_camera.rotation.z = lerp_angle(game_camera.rotation.z, deg_to_rad(0), current_time_tilt)
 	
 	if input_dir.y > 0:
 		head.rotation.x = lerp_angle(head.rotation.x, deg_to_rad(-tilt), current_time_tilt)

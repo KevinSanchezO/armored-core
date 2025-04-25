@@ -6,6 +6,6 @@ const _SHOTGUN := "res://scenes/game_objects/weapons/range_weapons/shotgun/shotg
 const _BATTLE_RIFLE := "res://scenes/game_objects/weapons/range_weapons/battle_rifle/battle_rifle.tscn"
 
 var available_weapons := [
-	_SHOTGUN,
-	_BATTLE_RIFLE
+	_BATTLE_RIFLE,
+	_SHOTGUN
 ]

@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvst64h2hnw0g"]
+[gd_scene load_steps=6 format=3 uid="uid://dvst64h2hnw0g"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_dvj5m"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/battle_rifle.gd" id="2_jiljm"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_d5d3e"]
-[ext_resource type="ArrayMesh" uid="uid://hgekmkpet235" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/blaster-p.obj" id="4_323au"]
 [ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="4_gv6ps"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ggka"]
-albedo_color = Color(0.372549, 0.372549, 0.372549, 1)
+[ext_resource type="PackedScene" uid="uid://yguwfwq56mkn" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/battle_rifle.gltf" id="5_xqc6k"]
 
 [node name="BattleRifle" instance=ExtResource("1_dvj5m")]
 script = ExtResource("2_jiljm")
@@ -18,21 +15,18 @@ max_chamber = 50
 reload_time = 2.0
 projectile = ExtResource("3_d5d3e")
 hit_marker_size = 48
-recoil = Vector3(0.8, 0.4, 0)
+recoil = Vector3(0.8, 0.8, 0)
 weapon_name = "Battle Rifle EVO"
 fire_rate_value = 0.15
-trauma = 0.25
+trauma = 0.1
 damage = 10.0
 
-[node name="Blaster-p" type="MeshInstance3D" parent="Model" index="0"]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.02, -0.02)
-mesh = ExtResource("4_323au")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2ggka")
+[node name="battle_rifle" parent="Model" index="0" instance=ExtResource("5_xqc6k")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.035, -0.1)
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("4_gv6ps")
 volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.325)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.37)

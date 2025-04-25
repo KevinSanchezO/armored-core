@@ -14,7 +14,6 @@ func _process(_delta: float) -> void:
 		active_shooting = true
 	
 	if current_chamber != 0 and active_shooting and fire_rate.is_stopped() and active:
-		Camera.camera_container.setRecoil(recoil)
 		generate_projectile()
 	
 	if current_chamber == 0 and active_shooting:
