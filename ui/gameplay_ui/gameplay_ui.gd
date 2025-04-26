@@ -7,7 +7,7 @@ var energy_gauge : EnergyGauge
 var armor_points : Health
 var health_points : Health
 var slow_motion_handler : SlowMotionHandler
-var range_weapon_manager : RangeWeaponManager
+var primary_weapon_manager : PrimaryWeaponManager
 var support_weapon_manager : SupportWeaponManager
 
 @onready var hit_marker := %HitMarker as HitMarker
@@ -39,7 +39,7 @@ func gameplay_ui_config() -> void:
 	armor_points = entity.armor_points
 	health_points = entity.health_points
 	slow_motion_handler = entity.slow_motion_handler
-	range_weapon_manager = entity.range_weapon_manager
+	primary_weapon_manager = entity.primary_weapon_manager
 	support_weapon_manager = entity.support_weapon_manager
 	
 	# energy progress bar
@@ -67,29 +67,29 @@ func gameplay_ui_config() -> void:
 	armor_points.health_reduced.connect(_update_armor_points)
 
 	# hit marker
-	entity.range_weapon_manager.weapon_changed.connect(_handle_hit_marker_change)
+	entity.primary_weapon_manager.weapon_changed.connect(_handle_hit_marker_change)
 	_handle_hit_marker_change()
 	
-	#range weapons
-	_init_weapon_widget(weapon_widget_1, range_weapon_manager.available_weapons[0])
-	if range_weapon_manager.available_weapons[0] is RangeWeapon:
+	#primary weapons
+	_init_weapon_widget(weapon_widget_1, primary_weapon_manager.available_weapons[0])
+	if primary_weapon_manager.available_weapons[0] is RangeWeapon:
 		
-		range_weapon_manager.available_weapons[0].chamber_modified.connect(\
+		primary_weapon_manager.available_weapons[0].chamber_modified.connect(\
 		Callable(_update_weapon_widget).bind(weapon_widget_1, \
-		range_weapon_manager.available_weapons[0]))
+		primary_weapon_manager.available_weapons[0]))
 		
-		range_weapon_manager.available_weapons[0].reload_started.connect(\
+		primary_weapon_manager.available_weapons[0].reload_started.connect(\
 		Callable(_reload).bind(weapon_widget_1))
 	
-	if range_weapon_manager.available_weapons.size() > 1:
-		_init_weapon_widget(weapon_widget_2, range_weapon_manager.available_weapons[1])
-		if range_weapon_manager.available_weapons[1] is RangeWeapon:
+	if primary_weapon_manager.available_weapons.size() > 1:
+		_init_weapon_widget(weapon_widget_2, primary_weapon_manager.available_weapons[1])
+		if primary_weapon_manager.available_weapons[1] is RangeWeapon:
 			
-			range_weapon_manager.available_weapons[1].chamber_modified.connect(
+			primary_weapon_manager.available_weapons[1].chamber_modified.connect(
 			Callable(_update_weapon_widget).bind(weapon_widget_2, \
-			range_weapon_manager.available_weapons[1])) 
+			primary_weapon_manager.available_weapons[1])) 
 			
-			range_weapon_manager.available_weapons[1].reload_started.connect(\
+			primary_weapon_manager.available_weapons[1].reload_started.connect(\
 			Callable(_reload).bind(weapon_widget_2))
 	
 	#support weapons
@@ -139,7 +139,7 @@ func _update_armor_points() -> void:
 
 
 func _handle_hit_marker_change() -> void:
-	hit_marker.set_size_hit_marker(entity.range_weapon_manager.active_weapon.hit_marker_size)
+	hit_marker.set_size_hit_marker(entity.primary_weapon_manager.active_weapon.hit_marker_size)
 
 
 func _init_weapon_widget(widget: WeaponWidget, weapon:Weapon) -> void:

@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 func _load_support_weapon() -> void:
-	var weapon_to_load := SupportWeaponLoad.available_weapon as String
+	var weapon_to_load := WeaponLoad.available_support_weapon as String
 	var weapon_scene := load(weapon_to_load) as PackedScene
 	var weapon_instance := weapon_scene.instantiate() as Weapon
 	

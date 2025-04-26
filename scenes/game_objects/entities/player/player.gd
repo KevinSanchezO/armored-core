@@ -17,7 +17,7 @@ class_name Player
 @onready var view_container := $Head/ViewContainer as Node3D
 @onready var camera_container := %CameraContainer as CameraContainer
 @onready var game_camera := %GameCamera as GameCamera
-@onready var range_weapon_manager := %RangeWeaponManager as RangeWeaponManager
+@onready var primary_weapon_manager := %PrimaryWeaponManager as PrimaryWeaponManager
 @onready var support_weapon_manager := %SupportWeaponManager as SupportWeaponManager
 @onready var speed_lines := %SpeedLines as SpeedLines
 @onready var health_points := $HealthPoints as Health
@@ -55,7 +55,7 @@ func _unhandled_input(event) -> void:
 		return
 	
 	if Input.is_action_just_pressed("switch_weapon"):
-		range_weapon_manager.switch_weapon()
+		primary_weapon_manager.switch_weapon()
 	
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -64,7 +64,7 @@ func _unhandled_input(event) -> void:
 		if event is InputEventMouseMotion:
 			head.rotate_y(-event.relative.x * mouse_sensitivity)
 			view_container.rotate_x(-event.relative.y * mouse_sensitivity)
-			view_container.rotation.x = clamp(view_container.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			view_container.rotation.x = clamp(view_container.rotation.x, deg_to_rad(-70), deg_to_rad(70))
 			mouse_input = event.relative
 
 
@@ -134,7 +134,7 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 
 func _handle_landing() -> void:
 	if on_ground and not was_on_ground:
-		game_camera.camera_bounce_landing()
+		game_camera.camera_bounce(-6)
 
 
 func _head_tilt(input_dir:Vector2) -> void:
@@ -157,9 +157,9 @@ func _weapon_sway() -> void:
 	var delta_time := get_process_delta_time() as float
 	mouse_input = lerp(mouse_input, Vector2.ZERO, 10 * delta_time)
 	
-	range_weapon_manager.rotation.x = lerp(range_weapon_manager.rotation.x, \
+	primary_weapon_manager.rotation.x = lerp(primary_weapon_manager.rotation.x, \
 		mouse_input.y * weapon_rotation, 10 * delta_time)
-	range_weapon_manager.rotation.y = lerp(range_weapon_manager.rotation.y, \
+	primary_weapon_manager.rotation.y = lerp(primary_weapon_manager.rotation.y, \
 		mouse_input.x * weapon_rotation, 10 * delta_time)
 	
 	support_weapon_manager.rotation.x = lerp(support_weapon_manager.rotation.x, \
@@ -170,35 +170,35 @@ func _weapon_sway() -> void:
 
 func _weapon_tilt(input_dir:Vector2) -> void:
 	if input_dir.x > 0:
-		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+		primary_weapon_manager.rotation.z = lerp_angle(primary_weapon_manager.rotation.z, \
 			deg_to_rad(-5), 0.05)
 		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
 			deg_to_rad(-5), 0.05)
 	elif input_dir.x < 0:
-		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+		primary_weapon_manager.rotation.z = lerp_angle(primary_weapon_manager.rotation.z, \
 			deg_to_rad(5), 0.05)
 		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
 			deg_to_rad(5), 0.05)
 	else:
-		range_weapon_manager.rotation.z = lerp_angle(range_weapon_manager.rotation.z, \
+		primary_weapon_manager.rotation.z = lerp_angle(primary_weapon_manager.rotation.z, \
 			deg_to_rad(0), 0.05)
 		support_weapon_manager.rotation.z = lerp_angle(support_weapon_manager.rotation.z, \
 			deg_to_rad(0), 0.05)
 	
 	if input_dir.y > 0:
-		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		primary_weapon_manager.rotation.x = lerp_angle(primary_weapon_manager.rotation.x, \
 			deg_to_rad(-5), 0.05)
-		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		support_weapon_manager.rotation.x = lerp_angle(support_weapon_manager.rotation.x, \
 			deg_to_rad(-5), 0.05)
 	elif input_dir.y < 0:
-		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		primary_weapon_manager.rotation.x = lerp_angle(primary_weapon_manager.rotation.x, \
 			deg_to_rad(5), 0.05)
-		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		support_weapon_manager.rotation.x = lerp_angle(support_weapon_manager.rotation.x, \
 			deg_to_rad(5), 0.05)
 	else:
-		range_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		primary_weapon_manager.rotation.x = lerp_angle(primary_weapon_manager.rotation.x, \
 			deg_to_rad(0), 0.05)
-		support_weapon_manager.rotation.x = lerp_angle(range_weapon_manager.rotation.x, \
+		support_weapon_manager.rotation.x = lerp_angle(support_weapon_manager.rotation.x, \
 			deg_to_rad(0), 0.05)
 
 

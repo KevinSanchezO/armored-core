@@ -28,11 +28,13 @@ func _process(delta) -> void:
 	self.rotation_degrees.x = initial_rotation.x + max_x * \
 	_get_shake_intensity() * _get_noise_from_seed(0)
 	
-	#self.rotation_degrees.y = initial_rotation.y + max_y * \
-	#_get_shake_intensity() * _get_noise_from_seed(1)
+	self.rotation_degrees.y = initial_rotation.y + max_y * \
+	_get_shake_intensity() * _get_noise_from_seed(1)
 	
 	#self.rotation_degrees.z = initial_rotation.z + max_z * \
 	#_get_shake_intensity() * _get_noise_from_seed(2)
+	
+	self.rotation.x = clamp(self.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 func add_trauma(trauma_ammount: float) -> void:
 	trauma = clamp(trauma + trauma_ammount, 0.0, 1.0)
@@ -47,14 +49,13 @@ func _get_noise_from_seed(_seed: int) -> float:
 	return noise.get_noise_1d(time * noise_speed)
 
 
-func camera_bounce_landing():
+func camera_bounce(bounce_value:float=-6) -> void:
 	var tween := get_tree().create_tween() as Tween
 	var original_rotation_x := rotation.x
-	var target_rotation_x := deg_to_rad(-4)
+	var target_rotation_x := deg_to_rad(bounce_value)
 	
 	tween.tween_property(self, "rotation:x", target_rotation_x, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "rotation:x", original_rotation_x, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
-
 
 func _on_slow_motion_entered() -> void:
 	return

@@ -13,6 +13,7 @@ signal reload_started()
 @export var projectile : PackedScene
 @export_range(0, 160, 1) var hit_marker_size : int
 @export var recoil : Vector3
+@export var recoil_mult := 0.2
 
 var current_max_ammo : int
 var current_chamber : int
@@ -23,6 +24,8 @@ var raycast_range_weapon : RaycastRangeWeapon
 @onready var empty_audio := $Audio/EmptyAudio as Audio3D
 @onready var shell_spawner := $ShellSpawner as Node3D
 @onready var reload_timer := $ReloadTimer as Timer
+@onready var recoil_timer := $RecoilTimer as Timer
+@onready var current_recoil := recoil
 
 
 func _ready() -> void:
@@ -31,11 +34,13 @@ func _ready() -> void:
 	current_max_ammo = max_ammo
 	current_chamber = max_chamber
 	reload_timer.wait_time = reload_time
+	recoil_timer.wait_time = fire_rate_value * 0.1
 	
 	self.weapon_fired.connect(fire_rate.start)
 	self.weapon_fired.connect(fire_audio.play_audio)
 	
 	reload_timer.timeout.connect(_reload)
+	recoil_timer.timeout.connect(_set_default_recoil)
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_reload)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_reload)
 
@@ -79,7 +84,7 @@ func generate_projectile():
 		return
 	
 	firing = true
-	animation.play("fire")
+	#animation.play("fire")
 	for p in projectiles_per_shoot:
 		var projectile_instance = projectile.instantiate() as Projectile
 		
@@ -98,11 +103,27 @@ func generate_projectile():
 	
 	firing = false
 	current_chamber -= 1
-	Camera.camera_container.setRecoil(recoil)
+	_update_recoil()
+	Camera.camera_container.setRecoil(current_recoil)
 	Camera.camera_container.recoilFire()
+	recoil_timer.start()
 	Camera.apply_screen_shake(trauma)
 	weapon_fired.emit()
 	chamber_modified.emit()
+
+
+func _update_recoil() -> void:
+	var new_recoil:Vector3
+	new_recoil = Vector3(\
+		current_recoil.x + (current_recoil.x * recoil_mult), \
+		current_recoil.y + (current_recoil.y * recoil_mult), \
+		current_recoil.z + (current_recoil.z * recoil_mult)\
+	)
+	current_recoil = new_recoil
+
+
+func _set_default_recoil() -> void:
+	current_recoil = recoil
 
 
 func _enter_slow_motion_reload() -> void:

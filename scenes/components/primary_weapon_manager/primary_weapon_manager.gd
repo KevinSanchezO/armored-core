@@ -1,5 +1,5 @@
 extends Node3D
-class_name RangeWeaponManager
+class_name PrimaryWeaponManager
 
 signal weapon_changed()
 
@@ -16,10 +16,10 @@ func _ready() -> void:
 
 
 func _load_weapons() -> void:
-	if RangeWeaponLoad.available_weapons.size() < 1:
+	if WeaponLoad.available_primary_weapons.size() < 1:
 		push_error('No weapons to load')
 	
-	for weapon_to_load in RangeWeaponLoad.available_weapons:
+	for weapon_to_load in WeaponLoad.available_primary_weapons:
 		var weapon_scene := load(weapon_to_load) as PackedScene
 		var weapon_instance := weapon_scene.instantiate() as Weapon
 		available_weapons.append(weapon_instance)

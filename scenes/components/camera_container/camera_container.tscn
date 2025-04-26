@@ -5,4 +5,4 @@
 [node name="CameraContainer" type="Node3D"]
 script = ExtResource("1_h1eva")
 snappiness = 0.8
-returnSpeed = 5.0
+returnSpeed = 10.0

@@ -16,6 +16,7 @@ reload_time = 2.0
 projectile = ExtResource("3_d5d3e")
 hit_marker_size = 48
 recoil = Vector3(0.8, 0.8, 0)
+recoil_mult = 0.2
 weapon_name = "Battle Rifle EVO"
 fire_rate_value = 0.15
 trauma = 0.1
