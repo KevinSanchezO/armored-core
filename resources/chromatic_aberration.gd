@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name ChromaticAberration
 
-@export var strength_shader := 0.4
+@export var strength_shader := 0.2
 
 @onready var shader_color_rect := $Control/ColorRect
 

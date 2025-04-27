@@ -16,6 +16,7 @@ reload_time = 3.0
 projectile = ExtResource("3_dpgb6")
 hit_marker_size = 24
 recoil = Vector3(1.65, 0.6, 0)
+weapon_name = "RLF-BREDA-506"
 fire_rate_value = 0.5
 buffed_by_slowmotion = true
 trauma = 0.2

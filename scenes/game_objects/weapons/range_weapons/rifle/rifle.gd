@@ -1,6 +1,7 @@
 extends RangeWeapon
 class_name Rifle
 
+const BURST_SHOOTS := 3
 
 func _process(_delta: float) -> void:
 	if entity.loss_of_control_effects != [] or !active:
@@ -11,4 +12,11 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("right_weapon") and \
 	fire_rate.is_stopped():
+		_burst_fire()
+		
+
+
+func _burst_fire() -> void:
+	for i in BURST_SHOOTS:
 		generate_projectile()
+		await get_tree().create_timer(fire_rate.wait_time/BURST_SHOOTS).timeout
