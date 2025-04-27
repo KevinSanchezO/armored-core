@@ -2,26 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfuuw8nmadwbq"
-path="res://.godot/imported/sprMinigun_strip7.png-801cf52bda105067c0d7179260174d32.ctex"
+uid="uid://bi4n80dj6s1xy"
+path="res://.godot/imported/battle_rifle.png-c62320c746118a2f705590fe11e67cf5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/range_weapons/gatling/sprMinigun_strip7.png"
-dest_files=["res://.godot/imported/sprMinigun_strip7.png-801cf52bda105067c0d7179260174d32.ctex"]
+source_file="res://scenes/game_objects/weapons/range_weapons/battle_rifle/battle_rifle.png"
+dest_files=["res://.godot/imported/battle_rifle.png-c62320c746118a2f705590fe11e67cf5.ctex"]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

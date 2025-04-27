@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_ef3wk"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.gd" id="2_2q3w0"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="2_b6gg4"]
-[ext_resource type="PackedScene" uid="uid://c34jegfb4umg" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.gltf" id="4_jph4v"]
+[ext_resource type="Texture2D" uid="uid://cp14xccdf74ju" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgun.png" id="4_6ubur"]
 [ext_resource type="AudioStream" uid="uid://blf4n068cy5e5" path="res://scenes/game_objects/weapons/range_weapons/shotgun/shotgn2.wav" id="5_7mlhj"]
 
 [node name="Shotgun" instance=ExtResource("1_ef3wk")]
@@ -16,19 +16,20 @@ reload_time = 3.0
 projectile = ExtResource("2_b6gg4")
 hit_marker_size = 128
 recoil = Vector3(5, 1.8, 0)
-recoil_mult = 0.2
 weapon_name = "Shotgun ZH2"
 fire_rate_value = 1.0
 buffed_by_slowmotion = true
 trauma = 0.5
 damage = 10.0
 
-[node name="shotgun" parent="Model" index="0" instance=ExtResource("4_jph4v")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.01, -0.2)
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.108862)
+texture_filter = 0
+texture = ExtResource("4_6ubur")
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_7mlhj")
 volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.58)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45)

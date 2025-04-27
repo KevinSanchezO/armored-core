@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_svb7p"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.gd" id="2_4wfux"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_dpgb6"]
-[ext_resource type="PackedScene" uid="uid://dtnv2uhwpbwyq" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.gltf" id="4_fa2wv"]
+[ext_resource type="Texture2D" uid="uid://cfgljnwe5hps4" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.png" id="4_ob63b"]
 [ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="5_e8e3f"]
 
 [node name="Rifle" instance=ExtResource("1_svb7p")]
@@ -16,14 +16,15 @@ reload_time = 3.0
 projectile = ExtResource("3_dpgb6")
 hit_marker_size = 24
 recoil = Vector3(1.5, 1.2, 0)
-recoil_mult = 0.2
 fire_rate_value = 0.6
 buffed_by_slowmotion = true
 trauma = 0.2
 damage = 100.0
 
-[node name="rifle" parent="Model" index="0" instance=ExtResource("4_fa2wv")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -0.1)
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.15)
+texture_filter = 0
+texture = ExtResource("4_ob63b")
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_e8e3f")

@@ -8,7 +8,7 @@ const _BATTLE_RIFLE := "res://scenes/game_objects/weapons/range_weapons/battle_r
 
 var available_primary_weapons := [
 	_BATTLE_RIFLE,
-	_RIFLE
+	_SHOTGUN
 ]
 
 

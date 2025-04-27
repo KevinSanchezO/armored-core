@@ -116,6 +116,7 @@ func _handle_jump() -> void:
 	and jump_handler.jump_cooldown.is_stopped():
 			velocity_3d.apply_upward_force(self)
 			energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+			game_camera.camera_bounce()
 	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
 		jump_handler.jump_cooldown.start()
 
