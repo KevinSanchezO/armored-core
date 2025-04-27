@@ -1,3 +1,5 @@
+// source: https://godotshaders.com/shader/chromatic-abberation-with-offset/
+
 shader_type canvas_item;
 
 uniform sampler2D offset_image : hint_default_white;
