@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://60hr0tyner4h"]
+
+[ext_resource type="Shader" path="res://resources/shaders/chromatic_aberration.gdshader" id="1_e5lhb"]
+
+[resource]
+shader = ExtResource("1_e5lhb")
+shader_parameter/strength = 1.0

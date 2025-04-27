@@ -119,10 +119,10 @@ points = PackedVector3Array(13, 10, -15, 13, 3, -15, 16, 3, -15, 16, 10, -15, 13
 
 [node name="GeneralTesting" instance=ExtResource("1_mwhq3")]
 
-[node name="Player" parent="." index="2"]
+[node name="Player" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96632, 0)
 
-[node name="FuncGodotMap" parent="." index="6"]
+[node name="FuncGodotMap" parent="." index="7"]
 local_map_file = "res://trenchbroom/maps/first_test_trenchbroom.map"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap" index="0"]
