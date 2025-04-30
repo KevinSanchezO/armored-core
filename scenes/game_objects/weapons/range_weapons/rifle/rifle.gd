@@ -1,7 +1,7 @@
 extends RangeWeapon
 class_name Rifle
 
-const BURST_SHOOTS := 3
+const BURST_SHOOTS := 4
 
 func _process(_delta: float) -> void:
 	if entity.loss_of_control_effects != [] or !active:
