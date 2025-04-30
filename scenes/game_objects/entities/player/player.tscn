@@ -91,5 +91,6 @@ health = NodePath("../HealthPoints")
 [node name="RepairHandler" parent="." index="12" node_paths=PackedStringArray("armor_points") instance=ExtResource("13_ibu25")]
 armor_points = NodePath("../ArmorPoints")
 
-[node name="Glitch" parent="." index="13" node_paths=PackedStringArray("hitbox") instance=ExtResource("15_1wwet")]
-hitbox = NodePath("../Hitbox")
+[node name="Glitch" parent="." index="13" node_paths=PackedStringArray("armor_points", "health_points") instance=ExtResource("15_1wwet")]
+armor_points = NodePath("../ArmorPoints")
+health_points = NodePath("../HealthPoints")

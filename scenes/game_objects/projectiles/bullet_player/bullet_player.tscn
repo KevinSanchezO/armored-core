@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8kl6207syrhk"]
+[gd_scene load_steps=9 format=3 uid="uid://b8kl6207syrhk"]
 
 [ext_resource type="PackedScene" uid="uid://cggqfu1mxlamm" path="res://scenes/game_objects/projectiles/projectile/projectile.tscn" id="1_atww6"]
 [ext_resource type="PackedScene" uid="uid://bgrmy7twue1tg" path="res://vfx/impacts/limit_impacts/bullet_limit_impact/bullet_limit_impact.tscn" id="2_3c873"]
 [ext_resource type="PackedScene" uid="uid://brwfwhyvb2286" path="res://vfx/trails/bullet_trail/bullet_trail.tscn" id="2_81re2"]
+[ext_resource type="PackedScene" uid="uid://p0jtxrykbhm7" path="res://vfx/impacts/hit_impacts/bullet_hit_impact/bullet_hit_impact.tscn" id="2_smehr"]
 [ext_resource type="PackedScene" uid="uid://doygpmn80a6u4" path="res://vfx/projectiles/bullet_player_particle.tscn" id="4_5fjrn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_45rkm"]
-size = Vector3(0.05, 0.05, 0.3)
+size = Vector3(0.03, 0.03, 0.08)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8n70"]
 albedo_color = Color(0, 0, 0, 1)
@@ -15,12 +16,13 @@ emission = Color(0.729412, 0.0784314, 0, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xd4ds"]
-size = Vector3(0.1, 0.1, 0.5)
+size = Vector3(0.1, 0.1, 0.3)
 
 [node name="BulletPlayer" instance=ExtResource("1_atww6")]
 collision_layer = 32
 collision_mask = 0
 is_player_projectile = true
+impact_scene = ExtResource("2_smehr")
 debris = ExtResource("2_3c873")
 trail = ExtResource("2_81re2")
 rotate_impact = true
@@ -34,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0583641)
 mesh = SubResource("BoxMesh_45rkm")
 surface_material_override/0 = SubResource("StandardMaterial3D_c8n70")
 

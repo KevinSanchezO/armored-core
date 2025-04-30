@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://p0jtxrykbhm7"]
+
+[ext_resource type="PackedScene" uid="uid://3y6a0220jp8o" path="res://vfx/impacts/impact/impact.tscn" id="1_hl0fh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtt14"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_t5cls"]
+offsets = PackedFloat32Array(0.003663, 0.208791, 0.802198)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.482353, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fxlem"]
+gradient = SubResource("Gradient_t5cls")
+
+[sub_resource type="Curve" id="Curve_vg22v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.496662), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c6ywh"]
+curve = SubResource("Curve_vg22v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mn6u0"]
+direction = Vector3(0, 0, 0)
+spread = 20.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_c6ywh")
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("GradientTexture1D_fxlem")
+
+[sub_resource type="BoxMesh" id="BoxMesh_h35aw"]
+size = Vector3(0.15, 0.15, 0)
+
+[node name="BulletHitImpact" instance=ExtResource("1_hl0fh")]
+material_override = SubResource("StandardMaterial3D_qtt14")
+amount = 6
+lifetime = 0.4
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_mn6u0")
+draw_pass_1 = SubResource("BoxMesh_h35aw")
