@@ -30,11 +30,11 @@ func set_weapon_rounds(weapon:Weapon) -> void:
 			var format_string:String
 			var actual_string:String
 			if just_reloaded:
-				format_string = "%s  |  %s"
+				format_string = "%s | %s"
 				actual_string = format_string % [_stylize_value(weapon.current_chamber), \
 				_stylize_value(weapon.current_max_ammo)]
 			else:
-				format_string = "[color=%s][shake rate=20.0 level=2 connected=1]%s[/shake][/color]  |  %s"
+				format_string = "[color=%s][shake rate=20.0 level=2 connected=1]%s[/shake][/color] | %s"
 				actual_string = format_string% [ColorsUI.BRIGHT_RED_STR, _stylize_value(weapon.current_chamber), \
 				_stylize_value(weapon.current_max_ammo)]
 				timer.start()
@@ -63,7 +63,7 @@ func _reset_rounds_label() -> void:
 	if no_reload:
 		rounds_text = _stylize_value(last_value_chamber)
 	else:
-		var format_string = "%s  |  %s"
+		var format_string = "%s | %s"
 		var actual_string = format_string % [_stylize_value(last_value_chamber), \
 		_stylize_value(last_value_ammo)]
 		rounds_text = actual_string

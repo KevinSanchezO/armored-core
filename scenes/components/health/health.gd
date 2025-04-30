@@ -13,7 +13,6 @@ var dead: bool:
 	get:
 		return current_health <= 0.0
 
-
 func _ready() -> void:
 	current_health = max_health
 
@@ -27,6 +26,19 @@ func damage(value: float) -> void:
 	
 	if dead:
 		check_death.call_deferred()
+
+
+func heal(value: float) -> void:
+	if dead:
+		return
+	
+	var new_health = current_health + value
+	
+	if new_health >= max_health:
+		current_health = max_health
+	else:
+		current_health = new_health
+	health_increased.emit()
 
 
 func get_health_percent() -> float:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=17 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://6yufcq7hv4x5" path="res://scenes/components/support_weapon_manager/support_weapon_manager.tscn" id="7_y0pvn"]
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 [ext_resource type="PackedScene" uid="uid://dkmsx3f82d05o" path="res://scenes/components/repair_handler/repair_handler.tscn" id="13_ibu25"]
+[ext_resource type="PackedScene" uid="uid://dpetaskxqstpb" path="res://resources/glitch.tscn" id="15_1wwet"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
 radius = 0.8
@@ -89,3 +90,6 @@ health = NodePath("../HealthPoints")
 
 [node name="RepairHandler" parent="." index="12" node_paths=PackedStringArray("armor_points") instance=ExtResource("13_ibu25")]
 armor_points = NodePath("../ArmorPoints")
+
+[node name="Glitch" parent="." index="13" node_paths=PackedStringArray("hitbox") instance=ExtResource("15_1wwet")]
+hitbox = NodePath("../Hitbox")

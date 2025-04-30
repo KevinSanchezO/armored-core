@@ -119,6 +119,9 @@ points = PackedVector3Array(13, 10, -15, 13, 3, -15, 16, 3, -15, 16, 10, -15, 13
 
 [node name="GeneralTesting" instance=ExtResource("1_mwhq3")]
 
+[node name="ChromaticAberration" parent="." index="0"]
+layer = 3
+
 [node name="Player" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96632, 0)
 

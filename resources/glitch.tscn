@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpetaskxqstpb"]
+
+[ext_resource type="Script" path="res://resources/glitch.gd" id="1_ewu7g"]
+[ext_resource type="Material" uid="uid://de0ovlmsh5xow" path="res://resources/materials/new_shader_material.tres" id="2_fjhb0"]
+
+[node name="Glitch" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_ewu7g")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = ExtResource("2_fjhb0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
