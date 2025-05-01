@@ -29,7 +29,7 @@ func _ready() -> void:
 	consumption_timer.timeout.connect(_on_consumption_timer_timeout)
 
 
-func _process(_delta) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("slow_motion"):
 		if health.current_health > penalty:
 			if SlowMotion.slow_motion_active:

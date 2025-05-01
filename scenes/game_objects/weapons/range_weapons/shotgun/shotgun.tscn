@@ -9,7 +9,7 @@
 [node name="Shotgun" instance=ExtResource("1_ef3wk")]
 script = ExtResource("2_2q3w0")
 projectiles_per_shoot = 12
-spread = 0.2
+spread = 0.12
 max_ammo = 20
 max_chamber = 5
 reload_time = 3.0
@@ -29,7 +29,6 @@ texture = ExtResource("4_6ubur")
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_7mlhj")
-volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45)

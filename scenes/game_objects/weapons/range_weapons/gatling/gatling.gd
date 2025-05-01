@@ -5,7 +5,7 @@ class_name Gatling
 
 var active_shooting := false
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if entity.loss_of_control_effects != [] or !active:
 		return
 	

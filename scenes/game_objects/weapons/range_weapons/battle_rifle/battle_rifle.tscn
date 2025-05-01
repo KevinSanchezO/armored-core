@@ -28,7 +28,6 @@ texture = ExtResource("4_j252j")
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("4_gv6ps")
-volume_db = -30.0
 
 [node name="ProjectileSpawner" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)

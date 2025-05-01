@@ -21,7 +21,7 @@ func _ready() -> void:
 	SlowMotion.slow_motion_ended.connect(_on_slow_motion_ended)
 
 
-func _process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	time += delta
 	trauma = max(trauma - delta * current_trauma_reduction_rate, 0.0)
 	

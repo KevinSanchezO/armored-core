@@ -21,13 +21,13 @@ var velocity := Vector3.ZERO
 
 func accelerate(direction: Vector3, speed := current_speed as float) -> void:
 	var desired_velocity := direction * speed
-	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
+	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_physics_process_delta_time()))
 
 func apply_gravity(entity:Entity) -> void:
 	if entity.velocity.y >= 0:
-		entity.velocity.y -= current_gravity * get_process_delta_time()
+		entity.velocity.y -= current_gravity * get_physics_process_delta_time()
 	else:
-		entity.velocity.y -= current_fall_gravity * get_process_delta_time()
+		entity.velocity.y -= current_fall_gravity * get_physics_process_delta_time()
 
 func apply_upward_force(entity:Entity) -> void:
 	upward_force_applied.emit()

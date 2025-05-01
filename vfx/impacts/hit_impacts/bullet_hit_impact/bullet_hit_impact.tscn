@@ -33,7 +33,6 @@ initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_c6ywh")
-color = Color(1, 1, 0, 1)
 color_ramp = SubResource("GradientTexture1D_fxlem")
 
 [sub_resource type="BoxMesh" id="BoxMesh_h35aw"]

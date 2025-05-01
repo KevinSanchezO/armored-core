@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://degnjf01f2wkv"]
+
+[ext_resource type="PackedScene" uid="uid://cggqfu1mxlamm" path="res://scenes/game_objects/projectiles/projectile/projectile.tscn" id="1_uybke"]
+[ext_resource type="PackedScene" uid="uid://0xnpeacya4oh" path="res://vfx/impacts/hit_impacts/laser_hit_impact/laser_hit_impact.tscn" id="2_fpjsi"]
+[ext_resource type="PackedScene" uid="uid://bgrmy7twue1tg" path="res://vfx/impacts/limit_impacts/bullet_limit_impact/bullet_limit_impact.tscn" id="3_vbiva"]
+[ext_resource type="PackedScene" uid="uid://pgfvk1nj2f5c" path="res://vfx/trails/laser_trail/laser_trail.tscn" id="4_akqi5"]
+[ext_resource type="PackedScene" uid="uid://cwy3bqn1uv6n0" path="res://vfx/projectiles/laser_player_particle.tscn" id="5_4adxa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ofiuu"]
+size = Vector3(0.03, 0.03, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ieisf"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.0156863, 0.227451, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d050s"]
+radius = 0.25
+
+[node name="LaserPlayer" instance=ExtResource("1_uybke")]
+collision_layer = 32
+collision_mask = 0
+is_player_projectile = true
+impact_scene = ExtResource("2_fpjsi")
+debris = ExtResource("3_vbiva")
+trail = ExtResource("4_akqi5")
+rotate_impact = true
+speed_value_min = 200.0
+speed_value_max = 180.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
+mesh = SubResource("BoxMesh_ofiuu")
+surface_material_override/0 = SubResource("StandardMaterial3D_ieisf")
+
+[node name="LaserPlayerParticle" parent="Model" index="1" instance=ExtResource("5_4adxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.780184)
+
+[node name="Hurtbox" parent="." index="2"]
+collision_layer = 32
+collision_mask = 7
+type_damage = "ENERGY"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0956957)
+shape = SubResource("SphereShape3D_d050s")
+
+[node name="FaceDirection" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.107524)

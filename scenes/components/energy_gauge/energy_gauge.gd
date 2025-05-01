@@ -24,7 +24,7 @@ func _ready() -> void:
 	comsumption_timer.timeout.connect(_on_consumption_timer_timeout)
 
 
-func _process(_delta) -> void:
+func _physics_process(_delta) -> void:
 	if energy_gauge <= 0:
 		energy_gauge = 0
 		is_in_cooldown = true

@@ -15,8 +15,8 @@ emission_enabled = true
 emission = Color(0.729412, 0.0784314, 0, 1)
 emission_energy_multiplier = 2.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xd4ds"]
-size = Vector3(0.1, 0.1, 0.3)
+[sub_resource type="SphereShape3D" id="SphereShape3D_f3ss2"]
+radius = 0.25
 
 [node name="BulletPlayer" instance=ExtResource("1_atww6")]
 collision_layer = 32
@@ -29,14 +29,11 @@ rotate_impact = true
 speed_value_min = 180.0
 speed_value_max = 150.0
 
-[node name="ImpactPoint" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
-
 [node name="Model" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0583641)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 mesh = SubResource("BoxMesh_45rkm")
 surface_material_override/0 = SubResource("StandardMaterial3D_c8n70")
 
@@ -49,7 +46,7 @@ collision_mask = 7
 type_damage = "BLUNT"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
-shape = SubResource("BoxShape3D_xd4ds")
+shape = SubResource("SphereShape3D_f3ss2")
 
 [node name="FaceDirection" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)

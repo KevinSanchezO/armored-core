@@ -13,6 +13,7 @@ config_version=5
 config/name="armored-core"
 run/main_scene="res://scenes/game_objects/entities/entity/entity.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+run/max_fps=20
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,6 +24,10 @@ WeaponLoad="*res://scenes/autoloads/weapon_load/weapon_load.tscn"
 Camera="*res://scenes/autoloads/camera/camera.tscn"
 HitMark="*res://scenes/autoloads/hit_mark/hit_mark.tscn"
 ColorsUI="*res://scenes/autoloads/colors_ui/colors_ui.tscn"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

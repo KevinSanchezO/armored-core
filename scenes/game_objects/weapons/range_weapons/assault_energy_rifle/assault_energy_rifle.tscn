@@ -1,25 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://b32kiko3cytnq"]
+[gd_scene load_steps=13 format=3 uid="uid://b32kiko3cytnq"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_1iung"]
 [ext_resource type="Texture2D" uid="uid://cwnvirjdas0xh" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/assault_energy_rifle.png" id="2_g72j2"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/assault_energy_rifle.gd" id="2_xwahi"]
+[ext_resource type="PackedScene" uid="uid://degnjf01f2wkv" path="res://scenes/game_objects/projectiles/laser_player/laser_player.tscn" id="3_rytv6"]
+[ext_resource type="Texture2D" uid="uid://cdjahpxp2edom" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/charging.png" id="5_68c37"]
+[ext_resource type="AudioStream" uid="uid://jfuy8g730d6a" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/laserg.wav" id="5_ro4c1"]
+[ext_resource type="Texture2D" uid="uid://d2cy6jqgk2cug" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/charged.png" id="6_vclrs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ehm7"]
+atlas = ExtResource("5_68c37")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtcdw"]
+atlas = ExtResource("5_68c37")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4tsb"]
+atlas = ExtResource("5_68c37")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ttmf"]
+atlas = ExtResource("5_68c37")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qnury"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ehm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtcdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4tsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ttmf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="AssaultEnergyRifle" instance=ExtResource("1_1iung")]
 script = ExtResource("2_xwahi")
+charge_limit = 50.0
+increase_value = 1.0
 projectiles_per_shoot = 1
-spread = 0.05
+spread = 0.0
 max_chamber = 200
-hit_marker_size = 40
-recoil = Vector3(0.4, 0.6, 0)
+projectile = ExtResource("3_rytv6")
+hit_marker_size = 16
+recoil = Vector3(2.5, 0.6, 0)
 weapon_name = "KRSW-1997"
 fire_rate_value = 0.3
+buffed_by_slowmotion = true
 trauma = 0.2
-damage = 50.0
+damage = 500.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.12)
 texture_filter = 0
 texture = ExtResource("2_g72j2")
 
+[node name="Charging" type="AnimatedSprite3D" parent="Model" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_qnury")
+autoplay = "default"
+frame_progress = 0.24322
+speed_scale = 2.0
+
+[node name="Charged" type="Sprite3D" parent="Model" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+texture_filter = 0
+texture = ExtResource("6_vclrs")
+
+[node name="FireAudio" parent="Audio" index="1"]
+stream = ExtResource("5_ro4c1")
+
 [node name="ProjectileSpawner" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.239529)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.419049)

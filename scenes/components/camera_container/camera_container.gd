@@ -18,7 +18,7 @@ var targetRotation : Vector3
 func _ready() -> void:
 	Camera.camera_container = self
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	# Lerp target rotation to (0,0,0) and lerp current rotation to target rotation
 	targetRotation = lerp(targetRotation, Vector3.ZERO, returnSpeed * delta)
 	currentRotation = lerp(currentRotation, targetRotation, snappiness * delta)
