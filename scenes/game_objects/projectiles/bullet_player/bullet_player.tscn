@@ -26,8 +26,8 @@ impact_scene = ExtResource("2_smehr")
 debris = ExtResource("2_3c873")
 trail = ExtResource("2_81re2")
 rotate_impact = true
-speed_value_min = 180.0
-speed_value_max = 150.0
+speed_value_min = 160.0
+speed_value_max = 130.0
 
 [node name="Model" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)

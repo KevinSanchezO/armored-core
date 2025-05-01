@@ -57,7 +57,7 @@ recoil = Vector3(2.5, 0.6, 0)
 weapon_name = "KRSW-1997"
 fire_rate_value = 0.3
 buffed_by_slowmotion = true
-trauma = 0.2
+trauma = 0.7
 damage = 500.0
 
 [node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]

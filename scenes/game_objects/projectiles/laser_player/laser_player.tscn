@@ -25,8 +25,8 @@ impact_scene = ExtResource("2_fpjsi")
 debris = ExtResource("3_vbiva")
 trail = ExtResource("4_akqi5")
 rotate_impact = true
-speed_value_min = 200.0
-speed_value_max = 180.0
+speed_value_min = 180.0
+speed_value_max = 150.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)

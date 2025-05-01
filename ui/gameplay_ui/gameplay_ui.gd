@@ -27,7 +27,7 @@ func _ready() -> void:
 	HitMark.hit_mark_showed.connect(hit_marker.show_hit_marker)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if energy_gauge != null and slow_motion_handler != null:
 		energy_bar.value_progress_bar = energy_gauge.energy_gauge
 		slow_motion_bar.value_progress_bar = slow_motion_handler.slow_motion_gauge

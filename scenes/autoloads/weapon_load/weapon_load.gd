@@ -8,7 +8,7 @@ const _BATTLE_RIFLE := "res://scenes/game_objects/weapons/range_weapons/battle_r
 const _ASSAULT_ENERGY := "res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/assault_energy_rifle.tscn"
 
 var available_primary_weapons := [
-	_SHOTGUN,
+	_BATTLE_RIFLE,
 	_ASSAULT_ENERGY
 ]
 
