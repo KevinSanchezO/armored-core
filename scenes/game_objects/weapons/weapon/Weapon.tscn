@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dsbenaf2j7t8t"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/weapons/weapon/Weapon.gd" id="1_uc7ij"]
-[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="2_burns"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/weapon/weapon.gd" id="1_0n0it"]
+[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="2_ca1r4"]
 
 [node name="Weapon" type="Node3D"]
-script = ExtResource("1_uc7ij")
+script = ExtResource("1_0n0it")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -12,9 +12,9 @@ script = ExtResource("1_uc7ij")
 
 [node name="Audio" type="Node3D" parent="."]
 
-[node name="ReadyAudio" parent="Audio" instance=ExtResource("2_burns")]
+[node name="ReadyAudio" parent="Audio" instance=ExtResource("2_ca1r4")]
 
-[node name="FireAudio" parent="Audio" instance=ExtResource("2_burns")]
+[node name="FireAudio" parent="Audio" instance=ExtResource("2_ca1r4")]
 
 [node name="Firerate" type="Timer" parent="."]
 one_shot = true

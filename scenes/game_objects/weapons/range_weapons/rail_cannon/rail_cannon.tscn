@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckbdde06vpq3d"]
+
+[ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_oan17"]
+[ext_resource type="PackedScene" uid="uid://degnjf01f2wkv" path="res://scenes/game_objects/projectiles/laser_player/laser_player.tscn" id="2_1jlem"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.gd" id="2_hc3hk"]
+[ext_resource type="Texture2D" uid="uid://cwxaqnspp7bmf" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.png" id="2_muou7"]
+[ext_resource type="AudioStream" uid="uid://jfuy8g730d6a" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/laserg.wav" id="5_kra83"]
+
+[node name="RailCannon" instance=ExtResource("1_oan17")]
+script = ExtResource("2_hc3hk")
+projectiles_per_shoot = 1
+spread = 0.0
+max_ammo = 10
+max_chamber = 1
+reload_time = 5.0
+projectile = ExtResource("2_1jlem")
+hit_marker_size = 32
+recoil = Vector3(5.5, 0.4, 0)
+weapon_name = "∀-R01-Cannon"
+buffed_by_slowmotion = true
+trauma = 1.0
+damage = 1000.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.161525)
+texture_filter = 0
+texture = ExtResource("2_muou7")
+
+[node name="FireAudio" parent="Audio" index="1"]
+stream = ExtResource("5_kra83")
+
+[node name="ProjectileSpawner" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.536057)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://byryatimrsrhf"]
 
-[ext_resource type="PackedScene" uid="uid://dsbenaf2j7t8t" path="res://scenes/game_objects/weapons/weapon/Weapon.tscn" id="1_8s7uc"]
+[ext_resource type="PackedScene" uid="uid://dsbenaf2j7t8t" path="res://scenes/game_objects/weapons/weapon/weapon.tscn" id="1_8s7uc"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.gd" id="2_lif4x"]
 [ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="3_abduc"]
 [ext_resource type="AudioStream" uid="uid://dpkmn62m0aai2" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/reload.wav" id="4_8a8n1"]
