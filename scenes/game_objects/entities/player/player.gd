@@ -26,6 +26,7 @@ class_name Player
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var repair_handler := $RepairHandler as RepairHandler
+@onready var hurtbox_melee := %HurtboxMelee as Hurtbox
 
 
 var air_momentum_dir := Vector3.ZERO

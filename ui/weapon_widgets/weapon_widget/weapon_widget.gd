@@ -48,10 +48,12 @@ func set_weapon_rounds(weapon:Weapon) -> void:
 				var actual_string = format_string% [ColorsUI.BRIGHT_RED_STR, _stylize_value(weapon.current_chamber)]
 				rounds_text = actual_string
 				timer.start()
-	last_value_chamber = weapon.current_chamber
-	last_value_ammo = weapon.current_max_ammo
-	rounds_label.text = rounds_text
-	just_reloaded = false
+		last_value_chamber = weapon.current_chamber
+		last_value_ammo = weapon.current_max_ammo
+		rounds_label.text = rounds_text
+		just_reloaded = false
+	else:
+		rounds_label.text = rounds_text
 
 
 func set_weapon_name(weapon_name:String) -> void:

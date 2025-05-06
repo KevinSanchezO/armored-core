@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://dl2onf6p8oyym"]
+
+[ext_resource type="PackedScene" uid="uid://ce6dmkal8ga2r" path="res://scenes/game_objects/weapons/melee_weapons/melee_weapon/melee_weapon.tscn" id="1_2vyhu"]
+[ext_resource type="Texture2D" uid="uid://c0frnu6v6k2qj" path="res://scenes/game_objects/weapons/melee_weapons/chainsaw/chainsaw.png" id="2_8jarg"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/melee_weapons/chainsaw/chainsaw.gd" id="2_oo002"]
+[ext_resource type="PackedScene" uid="uid://dsfyv40csaq40" path="res://vfx/melee_impacts/stun_impact/stun_impact.tscn" id="4_j05wn"]
+[ext_resource type="AudioStream" uid="uid://b82mw1j3tyu1s" path="res://scenes/game_objects/weapons/melee_weapons/chainsaw/chainsaw_firerate.wav" id="5_bfkit"]
+[ext_resource type="AudioStream" uid="uid://dgcydqg8m30di" path="res://scenes/game_objects/weapons/melee_weapons/chainsaw/chainsaw_active.wav" id="6_e7ew3"]
+
+[sub_resource type="Animation" id="Animation_wnyot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0ufk5"]
+resource_name = "fire"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.133333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_handle_hurtbox"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vdktj"]
+resource_name = "reset"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.1), Vector3(0, 0, 0.05), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gfn20"]
+resource_name = "fire"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2333, 2.63333, 2.76667, 2.9),
+"transitions": PackedFloat32Array(5.65685, 7.46428, 0.217641, 0.574349, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.15), Vector3(0, 0, -0.15), Vector3(0, 0, 0.1), Vector3(0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.233333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_active_attack_anim"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_okmym"]
+_data = {
+"RESET": SubResource("Animation_wnyot"),
+"active": SubResource("Animation_0ufk5"),
+"reset": SubResource("Animation_vdktj"),
+"start": SubResource("Animation_gfn20")
+}
+
+[node name="Chainsaw" instance=ExtResource("1_2vyhu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+script = ExtResource("2_oo002")
+hurtbox_size = Vector3(1, 1, 0.8)
+type_damage = "BLUNT"
+weapon_name = "Chainsaw R-001"
+fire_rate_value = 1.0
+buffed_by_slowmotion = false
+trauma = 0.05
+damage = 30.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.05)
+texture_filter = 0
+texture = ExtResource("2_8jarg")
+
+[node name="StunImpact" parent="Model/Sprite3D" index="0" instance=ExtResource("4_j05wn")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.192602, 0, 8.41888e-09)
+
+[node name="ReadyAudio" parent="Audio" index="0"]
+stream = ExtResource("5_bfkit")
+
+[node name="FireAudio" parent="Audio" index="1"]
+stream = ExtResource("6_e7ew3")
+randomize_pitch = false
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_okmym")
+}

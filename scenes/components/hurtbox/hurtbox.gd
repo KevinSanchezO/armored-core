@@ -11,11 +11,20 @@ func _ready() -> void:
 	self.area_entered.connect(_on_area_entered)
 	self.body_entered.connect(_on_body_entered)
 
-func trigger_frame() -> void:
-	disable()
-	await get_tree().process_frame
-	await get_tree().process_frame
+func trigger_frame(frames:int) -> void:
 	enable()
+	for i in frames:
+		await get_tree().process_frame
+	disable()
+
+func set_parameters(damage_value:float, type_damage_string:String, size:Vector3, child = 0) -> void:
+	damage = damage_value
+	type_damage = type_damage_string
+	
+	var collision = get_child(child)
+	if collision is CollisionShape3D:
+		if collision.shape is BoxShape3D:
+			collision.shape.set_size(size)
 
 func _on_area_entered(area) -> void:
 	if area is Hitbox:

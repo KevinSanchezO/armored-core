@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cffj3or6ica6r" path="res://scenes/gameplay/stage_gameplay/stage_gameplay.tscn" id="1_mwhq3"]
 [ext_resource type="Material" uid="uid://dpq0nig44lswm" path="res://trenchbroom/textures/test/test_texture_dark.tres" id="2_ik5p6"]
-[ext_resource type="PackedScene" uid="uid://lnev2qv3y5j" path="res://scenes/game_objects/entities/enemy/enemy.tscn" id="2_q7beq"]
+[ext_resource type="PackedScene" uid="uid://lnev2qv3y5j" path="res://scenes/game_objects/entities/enemies/enemy/enemy.tscn" id="2_q7beq"]
 [ext_resource type="Material" uid="uid://yuwmnc243kh6" path="res://trenchbroom/textures/test/test_texture_purple.tres" id="3_cp26h"]
 [ext_resource type="Material" uid="uid://bmqv57mme4fy0" path="res://trenchbroom/textures/test/test_texture_orange.tres" id="4_hrmo1"]
 
@@ -124,7 +124,7 @@ points = PackedVector3Array(13, 10, -15, 13, 3, -15, 16, 3, -15, 16, 10, -15, 13
 layer = 3
 
 [node name="Player" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.96632, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="Enemy" parent="EnemyLayer" index="0" instance=ExtResource("2_q7beq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.28625, 1, -7.96993)

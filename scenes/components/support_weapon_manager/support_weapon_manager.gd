@@ -19,9 +19,9 @@ func _load_support_weapon() -> void:
 	weapon_instance.global_position = self.global_position
 	
 	weapon_instance.entity = entity
-	weapon_instance.raycast_range_weapon = raycast_range_weapons
+	if weapon_instance is RangeWeapon:
+		weapon_instance.raycast_range_weapon = raycast_range_weapons
 	weapon_instance.visible = false
-	print(weapon_instance)
 	
 	active_weapon = weapon_instance
 	active_weapon.activate_weapon()

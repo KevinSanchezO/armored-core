@@ -29,7 +29,6 @@ func _load_weapons() -> void:
 		weapon_instance.entity = entity
 		weapon_instance.raycast_range_weapon = raycast_range_weapons
 		weapon_instance.visible = false
-		print(weapon_instance)
 
 	active_weapon = available_weapons[0]
 	active_weapon.activate_weapon()

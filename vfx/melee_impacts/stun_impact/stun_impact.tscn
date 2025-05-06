@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsfyv40csaq40"]
+
+[ext_resource type="PackedScene" uid="uid://1wxfu7qnllc5" path="res://vfx/melee_impacts/melee_impact/melee_impact.tscn" id="1_5xxj3"]
+[ext_resource type="Material" uid="uid://cf3umtteissdt" path="res://vfx/melee_impacts/stun_impact/stun_impact.tres" id="2_7gye0"]
+
+[node name="StunImpact" instance=ExtResource("1_5xxj3")]
+amount = 16
+lifetime = 0.15
+process_material = ExtResource("2_7gye0")

@@ -10,7 +10,6 @@ func _ready() -> void:
 
 func show_speed_lines() -> void:
 	material_speed_lines.set('shader_parameter/line_color.a', 127)
-	print(material_speed_lines.get('shader_parameter/line_color.a'))
 	self.visible = true
 
 

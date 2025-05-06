@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://1wxfu7qnllc5"]
+
+[ext_resource type="Script" path="res://vfx/melee_impacts/melee_impact/melee_impact.gd" id="1_qqf20"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov32v"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_ksynr"]
+size = Vector3(0.1, 0.1, 0)
+
+[node name="MeleeImpact" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_ov32v")
+emitting = false
+amount = 6
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.6
+draw_pass_1 = SubResource("BoxMesh_ksynr")
+script = ExtResource("1_qqf20")

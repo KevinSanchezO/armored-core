@@ -8,17 +8,15 @@ const TRAUMA_REDUCTION_RATE = 1.0
 
 @export var noise : FastNoiseLite
 @export var noise_speed := 50.0
-@export var max_x := 8.0
-@export var max_y := 4.0
-@export var max_z := 8.0
+@export var max_x := 14.0
+@export var max_y := 10.0
+@export var max_z := 14.0
 
 var trauma := 0.0 #between 0 and 1
 var time := 0.0
 
 func _ready() -> void:
 	Camera.camera = self
-	SlowMotion.slow_motion_started.connect(_on_slow_motion_entered)
-	SlowMotion.slow_motion_ended.connect(_on_slow_motion_ended)
 
 
 func _physics_process(delta: float) -> void:
@@ -56,10 +54,3 @@ func camera_bounce(bounce_value:float=-6) -> void:
 	
 	tween.tween_property(self, "rotation:x", target_rotation_x, 0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(self, "rotation:x", original_rotation_x, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
-
-func _on_slow_motion_entered() -> void:
-	return
-
-
-func _on_slow_motion_ended() -> void:
-	return

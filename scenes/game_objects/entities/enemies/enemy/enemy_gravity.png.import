@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bve2k0uowhu2j"
-path.s3tc="res://.godot/imported/enemy_gravity.png-12f74488d3cde5d229c2487d1b44c1a2.s3tc.ctex"
+path.s3tc="res://.godot/imported/enemy_gravity.png-0574974246319d594853a6a34690432b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/game_objects/entities/enemy/enemy_gravity.png"
-dest_files=["res://.godot/imported/enemy_gravity.png-12f74488d3cde5d229c2487d1b44c1a2.s3tc.ctex"]
+source_file="res://scenes/game_objects/entities/enemies/enemy/enemy_gravity.png"
+dest_files=["res://.godot/imported/enemy_gravity.png-0574974246319d594853a6a34690432b.s3tc.ctex"]
 
 [params]
 

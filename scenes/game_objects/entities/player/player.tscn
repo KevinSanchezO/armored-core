@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=19 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -12,12 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://ddtksqgtds031" path="res://scenes/components/raycast_range_weapons/raycast_range_weapon.tscn" id="6_17ftk"]
 [ext_resource type="PackedScene" uid="uid://d4qnqhtru75" path="res://scenes/components/slow_motion_handler/slow_motion_handler.tscn" id="7_uy4ey"]
 [ext_resource type="PackedScene" uid="uid://6yufcq7hv4x5" path="res://scenes/components/support_weapon_manager/support_weapon_manager.tscn" id="7_y0pvn"]
+[ext_resource type="PackedScene" uid="uid://chsacjn7iqxlc" path="res://scenes/components/hurtbox/hurtbox.tscn" id="9_fjbj7"]
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 [ext_resource type="PackedScene" uid="uid://dkmsx3f82d05o" path="res://scenes/components/repair_handler/repair_handler.tscn" id="13_ibu25"]
 [ext_resource type="PackedScene" uid="uid://dpetaskxqstpb" path="res://resources/glitch.tscn" id="15_1wwet"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
-radius = 0.8
+radius = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i45fe"]
 
 [node name="Player" groups=["player"] instance=ExtResource("1_vk4n6")]
 collision_layer = 8
@@ -51,6 +54,7 @@ unique_name_in_owner = true
 
 [node name="GameCamera" parent="Head/ViewContainer/CameraContainer" index="0" instance=ExtResource("2_wsddm")]
 unique_name_in_owner = true
+fov = 80.0
 
 [node name="RaycastRangeWeapon" parent="Head/ViewContainer/CameraContainer/GameCamera" index="0" instance=ExtResource("6_17ftk")]
 unique_name_in_owner = true
@@ -70,6 +74,16 @@ raycast_range_weapons = NodePath("../RaycastRangeWeapon")
 [node name="SpeedLines" parent="Head/ViewContainer/CameraContainer/GameCamera" index="3" instance=ExtResource("5_kkilw")]
 unique_name_in_owner = true
 visible = false
+
+[node name="HurtboxMelee" parent="Head/ViewContainer/CameraContainer/GameCamera" index="5" instance=ExtResource("9_fjbj7")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+collision_layer = 32
+collision_mask = 7
+
+[node name="CollisionHurtboxMelee" type="CollisionShape3D" parent="Head/ViewContainer/CameraContainer/GameCamera/HurtboxMelee" index="0"]
+shape = SubResource("BoxShape3D_i45fe")
+disabled = true
 
 [node name="HealthPoints" parent="." index="7" instance=ExtResource("6_3jcd1")]
 
