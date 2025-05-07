@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=20 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
 [ext_resource type="PackedScene" uid="uid://d3ae7uvlokd0x" path="res://scenes/components/game_camera/game_camera.tscn" id="2_wsddm"]
 [ext_resource type="PackedScene" uid="uid://cqex6jeyfl41s" path="res://scenes/components/camera_container/camera_container.tscn" id="3_6usvm"]
+[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="3_ard1q"]
 [ext_resource type="PackedScene" uid="uid://c3bkd544ybrrb" path="res://scenes/components/dash_handler/dash_handler.tscn" id="3_g53iv"]
 [ext_resource type="PackedScene" uid="uid://c1luyg6l6eaxb" path="res://scenes/components/energy_gauge/energy_gauge.tscn" id="4_067co"]
 [ext_resource type="PackedScene" uid="uid://442yidlyrn44" path="res://scenes/components/primary_weapon_manager/primary_weapon_manager.tscn" id="5_dyrui"]
@@ -21,6 +22,7 @@
 radius = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i45fe"]
+size = Vector3(2, 1, 1)
 
 [node name="Player" groups=["player"] instance=ExtResource("1_vk4n6")]
 collision_layer = 8
@@ -33,6 +35,14 @@ weapon_rotation = 0.01
 
 [node name="Collision" parent="." index="0"]
 shape = SubResource("CapsuleShape3D_efd3n")
+
+[node name="Audio" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="HitMarkSound" parent="Audio" index="0" instance=ExtResource("3_ard1q")]
+volume_db = 50.0
+bus = &"SFX Hitbox"
+randomize_pitch = false
 
 [node name="ArmorPoints" parent="." index="4"]
 max_health = 850.0

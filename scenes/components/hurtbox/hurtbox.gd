@@ -1,6 +1,7 @@
 extends Area3D
 class_name Hurtbox
 
+@export var is_player := true
 @export var damage := 0.0
 @export_enum("BLUNT", "ENERGY", "EXPLOSION") var type_damage : String
 
@@ -30,6 +31,8 @@ func _on_area_entered(area) -> void:
 	if area is Hitbox:
 		area.deal_damage(damage, type_damage)
 		damage_dealt.emit()
+		if is_player:
+			HitMark.hit_mark_showed.emit()
 
 func _on_body_entered(body) -> void:
 	if body.get_collision_layer() == 1:

@@ -10,13 +10,13 @@
 size = Vector3(0.03, 0.03, 0.08)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8n70"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(1, 1, 0, 1)
 emission_enabled = true
-emission = Color(0.729412, 0.0784314, 0, 1)
+emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 2.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_f3ss2"]
-radius = 0.25
+[sub_resource type="BoxShape3D" id="BoxShape3D_fsd5u"]
+size = Vector3(0.1, 0.15, 0.1)
 
 [node name="BulletPlayer" instance=ExtResource("1_atww6")]
 collision_layer = 32
@@ -26,8 +26,8 @@ impact_scene = ExtResource("2_smehr")
 debris = ExtResource("2_3c873")
 trail = ExtResource("2_81re2")
 rotate_impact = true
-speed_value_min = 160.0
-speed_value_max = 130.0
+speed_value_min = 100.0
+speed_value_max = 80.0
 
 [node name="Model" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)
@@ -46,7 +46,8 @@ collision_mask = 7
 type_damage = "BLUNT"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
-shape = SubResource("SphereShape3D_f3ss2")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fsd5u")
 
 [node name="FaceDirection" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0945867)

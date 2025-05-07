@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scenes/game_objects/entities/enemies/enemy/enemy.gd" id="2_1ekty"]
 [ext_resource type="Texture2D" uid="uid://bve2k0uowhu2j" path="res://scenes/game_objects/entities/enemies/enemy/enemy_gravity.png" id="3_hvrs0"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wi0la"]
-size = Vector3(2.8, 2, 2.8)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aak18"]
+radius = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pfk2r"]
 atlas = ExtResource("3_hvrs0")
@@ -65,7 +65,7 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6215a"]
-size = Vector3(2.8, 2, 2.8)
+size = Vector3(2.5, 2, 2.5)
 
 [node name="Enemy" instance=ExtResource("1_amq1n")]
 collision_layer = 4
@@ -73,7 +73,7 @@ collision_mask = 0
 script = ExtResource("2_1ekty")
 
 [node name="Collision" parent="." index="0"]
-shape = SubResource("BoxShape3D_wi0la")
+shape = SubResource("CapsuleShape3D_aak18")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Model" index="0"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.2, 0)

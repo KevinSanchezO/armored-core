@@ -26,7 +26,6 @@ func _ready() -> void:
 	
 	hurtbox.limit_impacted.connect(_update_impacts.bind(debris, max_impacts))
 	hurtbox.damage_dealt.connect(_update_impacts.bind(impact_scene))
-	hurtbox.damage_dealt.connect(_handle_hitmark)
 	queue_free_timer.timeout.connect(queue_free)
 
 func _physics_process(_delta) -> void:
@@ -78,8 +77,3 @@ func generate_trail(random_direction:Vector3) -> void:
 	
 	trail_instance.velocity_3d.max_speed = velocity_3d.max_speed
 	trail_instance.velocity_3d.current_speed = velocity_3d.max_speed
-
-
-func _handle_hitmark() -> void:
-	if is_player_projectile:
-		HitMark.hit_mark_showed.emit()

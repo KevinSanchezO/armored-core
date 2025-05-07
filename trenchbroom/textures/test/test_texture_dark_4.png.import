@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg5cbnck32yjc"
-path="res://.godot/imported/test_texture_orange.png-d2a4547473ad1cd42bf77db0c7a87455.ctex"
+uid="uid://cjuutesfmtbi0"
+path="res://.godot/imported/test_texture_dark_4.png-b47eafdcfe6d6635f08112e9191f600c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://trenchbroom/textures/test/test_texture_orange.png"
-dest_files=["res://.godot/imported/test_texture_orange.png-d2a4547473ad1cd42bf77db0c7a87455.ctex"]
+source_file="res://trenchbroom/textures/test/test_texture_dark_4.png"
+dest_files=["res://.godot/imported/test_texture_dark_4.png-b47eafdcfe6d6635f08112e9191f600c.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

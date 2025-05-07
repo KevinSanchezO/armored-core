@@ -1,7 +1,7 @@
 extends MeleeWeapon
 class_name Chainsaw
 
-@onready var particle_effect_impact := $Model/Sprite3D/StunImpact as MeleeImpact
+@onready var particle_effect_impact := $Model/StunImpact as MeleeImpact
 
 
 var chainsaw_active := false
@@ -11,7 +11,6 @@ var current_hurtbox_active := false
 func _ready() -> void:
 	super()
 	
-	fire_rate.timeout.connect(_firerate_audio_play)
 	_particle_ready.call_deferred()
 
 
@@ -30,15 +29,22 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_released("left_weapon"):
 		chainsaw_active = false
 		fire_audio.stop()
+		ready_audio.play_audio()
 		entity.hurtbox_melee.trigger_frame(5)
 		if fire_rate.is_stopped():
 			_reset_attack_anim()
 		fire_rate.start()
 
 
+func _screen_shake() -> void:
+	Camera.apply_screen_shake(trauma)
+
+
 func _particle_ready() -> void:
 	entity.hurtbox_melee.damage_dealt.connect(_particle_impact_chainsaw)
 	entity.hurtbox_melee.limit_impacted.connect(_particle_limit_chainsaw)
+	entity.hurtbox_melee.damage_dealt.connect(_frame_freeze)
+
 
 func _particle_impact_chainsaw() -> void:
 	particle_effect_impact.particle_is_emitting(true)
@@ -56,8 +62,9 @@ func _fire_audio_play() -> void:
 	if chainsaw_active and not(fire_audio.playing):
 		fire_audio.play_audio()
 
-func _firerate_audio_play() -> void:
-	ready_audio.play_audio()
+
+func _frame_freeze() -> void:
+	FrameFreeze.frame_freeze(frame_freeze_value)
 
 
 func _start_attack_anim() -> void:

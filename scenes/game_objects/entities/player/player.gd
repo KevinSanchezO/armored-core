@@ -27,6 +27,7 @@ class_name Player
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var repair_handler := $RepairHandler as RepairHandler
 @onready var hurtbox_melee := %HurtboxMelee as Hurtbox
+@onready var hit_mark_sound := $Audio/HitMarkSound as Audio3D
 
 
 var air_momentum_dir := Vector3.ZERO
@@ -36,6 +37,8 @@ var was_on_ground : bool
 
 func _ready() -> void:
 	on_ground = is_on_floor()
+	
+	HitMark.hit_mark_showed.connect(_handle_hitmark_showed)
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_speed)
@@ -132,6 +135,10 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 		air_momentum_dir = wish_dir_dash
 		
 		dash_handler.trigger_dash(wish_dir_dash)
+
+
+func _handle_hitmark_showed() -> void:
+	hit_mark_sound.play_audio()
 
 
 func _handle_landing() -> void:

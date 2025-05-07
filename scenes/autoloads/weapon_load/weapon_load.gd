@@ -21,7 +21,7 @@ const _GATLING := "res://scenes/game_objects/weapons/range_weapons/gatling/gatli
 const _PILE_BUNKER := ""
 const _KATANA := ""
 const _MISSILE_LAUNCHER := ""
-const _ENERGY_SWORD := ""
+const _ENERGY_SWORD := "res://scenes/game_objects/weapons/melee_weapons/energy_sword/energy_sword.tscn"
 const _ENERGY_SPEAR := ""
 const _RAIL_CANNON := "res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.tscn"
 

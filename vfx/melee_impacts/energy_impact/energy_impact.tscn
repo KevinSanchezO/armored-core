@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://1wptcr1aoiyi"]
+
+[ext_resource type="PackedScene" uid="uid://1wxfu7qnllc5" path="res://vfx/melee_impacts/melee_impact/melee_impact.tscn" id="1_1llrq"]
+[ext_resource type="Material" uid="uid://dqp5d0d7bxgmd" path="res://vfx/melee_impacts/energy_impact/energy_impact.tres" id="2_i2gtd"]
+
+[node name="EnergyImpact" instance=ExtResource("1_1llrq")]
+emitting = true
+amount = 16
+lifetime = 0.2
+one_shot = false
+process_material = ExtResource("2_i2gtd")
+is_one_shot = false
