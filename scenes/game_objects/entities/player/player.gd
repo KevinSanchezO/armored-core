@@ -27,8 +27,13 @@ class_name Player
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
 @onready var repair_handler := $RepairHandler as RepairHandler
 @onready var hurtbox_melee := %HurtboxMelee as Hurtbox
-@onready var hit_mark_sound := $Audio/HitMarkSound as Audio3D
 
+@onready var hit_mark_sound := $Audio/HitMarkSound as Audio3D
+@onready var jump_sound := $Audio/JumpSound as Audio3D
+@onready var landing_sound := $Audio/LandingSound as Audio3D
+@onready var movement_sound := $Audio/MovementSound as Audio3D
+@onready var stop_movement_sound := $Audio/StoppedMovementSound as Audio3D
+@onready var dash_sound := $Audio/DashSound as Audio3D
 
 var air_momentum_dir := Vector3.ZERO
 var mouse_input : Vector2
@@ -96,6 +101,7 @@ func _physics_process(_delta) -> void:
 	velocity_3d.accelerate(wish_dir, velocity_3d.current_air_speed if not is_on_floor() else velocity_3d.current_speed)
 	velocity_3d.move(self)
 	
+	_handle_movement_sfx(input_dir)
 	_handle_repair()
 	_handle_jump()
 	_handle_dash(wish_dir)
@@ -109,6 +115,16 @@ func _physics_process(_delta) -> void:
 	_weapon_sway()
 
 
+func _handle_movement_sfx(input_dir:Vector2):
+	if input_dir != Vector2.ZERO:
+		if not(movement_sound.playing):
+			movement_sound.play_audio()
+	else:
+		if movement_sound.playing:
+			stop_movement_sound.play_audio()
+			movement_sound.stop()
+
+
 func _handle_repair() -> void:
 	if Input.is_action_just_pressed("repair") and repair_handler.check_repair_availability() \
 	and repair_handler.timer.is_stopped():
@@ -119,6 +135,7 @@ func _handle_jump() -> void:
 	if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
 	and jump_handler.jump_cooldown.is_stopped():
 			velocity_3d.apply_upward_force(self)
+			jump_sound.play_audio()
 			energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
 			game_camera.camera_bounce()
 	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
@@ -135,6 +152,7 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 		air_momentum_dir = wish_dir_dash
 		
 		dash_handler.trigger_dash(wish_dir_dash)
+		dash_sound.play_audio()
 
 
 func _handle_hitmark_showed() -> void:
@@ -144,6 +162,7 @@ func _handle_hitmark_showed() -> void:
 func _handle_landing() -> void:
 	if on_ground and not was_on_ground:
 		game_camera.camera_bounce(-6)
+		landing_sound.play_audio()
 
 
 func _head_tilt(input_dir:Vector2) -> void:

@@ -3,7 +3,7 @@ class_name Rifle
 
 const BURST_SHOOTS := 4
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if entity.loss_of_control_effects != [] or !active:
 		return
 	

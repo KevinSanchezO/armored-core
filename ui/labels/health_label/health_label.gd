@@ -33,7 +33,7 @@ func _reset_health_label() -> void:
 
 
 func _stylize_points(value: float) -> String:
-	var stylize_string : String
+	var stylize_string := ""
 	
 	var value_string := str(value)
 	
