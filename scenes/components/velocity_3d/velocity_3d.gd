@@ -29,9 +29,9 @@ func apply_gravity(entity:Entity) -> void:
 	else:
 		entity.velocity.y -= current_fall_gravity * get_physics_process_delta_time()
 
-func apply_upward_force(entity:Entity) -> void:
+func apply_upward_force(entity:Entity, jump_multiplier=1) -> void:
 	upward_force_applied.emit()
-	entity.velocity.y = current_jump_velocity
+	entity.velocity.y = current_jump_velocity * jump_multiplier
 
 func move(body:CharacterBody3D, ignore_y := true) -> void:
 	if not ignore_y:

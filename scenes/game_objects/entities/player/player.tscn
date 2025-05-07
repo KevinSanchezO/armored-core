@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b77cvkvbt6lo7"]
+[gd_scene load_steps=28 format=3 uid="uid://b77cvkvbt6lo7"]
 
 [ext_resource type="PackedScene" uid="uid://fngl836w0ov7" path="res://scenes/game_objects/entities/entity/entity.tscn" id="1_vk4n6"]
 [ext_resource type="Script" path="res://scenes/game_objects/entities/player/player.gd" id="2_t4lea"]
@@ -22,12 +22,21 @@
 [ext_resource type="PackedScene" uid="uid://d4euc76ad3uiy" path="res://scenes/components/jump_handler/jump_handler.tscn" id="11_1b4s3"]
 [ext_resource type="PackedScene" uid="uid://dkmsx3f82d05o" path="res://scenes/components/repair_handler/repair_handler.tscn" id="13_ibu25"]
 [ext_resource type="PackedScene" uid="uid://dpetaskxqstpb" path="res://resources/glitch.tscn" id="15_1wwet"]
+[ext_resource type="PackedScene" uid="uid://b1tfx2bxa2qd" path="res://scenes/components/wall_jump_handler/wall_jump_handler.tscn" id="16_kyopl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efd3n"]
 radius = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i45fe"]
 size = Vector3(2, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_n42nf"]
+inner_radius = 1.39
+outer_radius = 1.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pwdx6"]
+height = 0.5
+radius = 1.3
 
 [node name="Player" groups=["player"] instance=ExtResource("1_vk4n6")]
 collision_layer = 8
@@ -134,26 +143,37 @@ collision_mask = 7
 shape = SubResource("BoxShape3D_i45fe")
 disabled = true
 
-[node name="HealthPoints" parent="." index="7" instance=ExtResource("6_3jcd1")]
+[node name="WallJumpVisualizer" type="MeshInstance3D" parent="." index="7"]
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("TorusMesh_n42nf")
+skeleton = NodePath("../WallJumpHandler")
 
-[node name="DashHandler" parent="." index="8" node_paths=PackedStringArray("entity", "speed_lines") instance=ExtResource("3_g53iv")]
+[node name="WallJumpHandler" parent="." index="8" instance=ExtResource("16_kyopl")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallJumpHandler" index="0"]
+shape = SubResource("CylinderShape3D_pwdx6")
+
+[node name="HealthPoints" parent="." index="9" instance=ExtResource("6_3jcd1")]
+
+[node name="DashHandler" parent="." index="10" node_paths=PackedStringArray("entity", "speed_lines") instance=ExtResource("3_g53iv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cooldown_value = 1.2
 entity = NodePath("..")
 speed_lines = NodePath("../Head/ViewContainer/CameraContainer/GameCamera/SpeedLines")
 
-[node name="JumpHandler" parent="." index="9" instance=ExtResource("11_1b4s3")]
+[node name="JumpHandler" parent="." index="11" instance=ExtResource("11_1b4s3")]
 
-[node name="EnergyGauge" parent="." index="10" instance=ExtResource("4_067co")]
+[node name="EnergyGauge" parent="." index="12" instance=ExtResource("4_067co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
-[node name="SlowMotionHandler" parent="." index="11" node_paths=PackedStringArray("health") instance=ExtResource("7_uy4ey")]
+[node name="SlowMotionHandler" parent="." index="13" node_paths=PackedStringArray("health") instance=ExtResource("7_uy4ey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 health = NodePath("../HealthPoints")
 
-[node name="RepairHandler" parent="." index="12" node_paths=PackedStringArray("armor_points") instance=ExtResource("13_ibu25")]
+[node name="RepairHandler" parent="." index="14" node_paths=PackedStringArray("armor_points") instance=ExtResource("13_ibu25")]
 armor_points = NodePath("../ArmorPoints")
 
-[node name="Glitch" parent="." index="13" node_paths=PackedStringArray("armor_points", "health_points") instance=ExtResource("15_1wwet")]
+[node name="Glitch" parent="." index="15" node_paths=PackedStringArray("armor_points", "health_points") instance=ExtResource("15_1wwet")]
 armor_points = NodePath("../ArmorPoints")
 health_points = NodePath("../HealthPoints")

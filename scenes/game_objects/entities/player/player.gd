@@ -25,6 +25,7 @@ class_name Player
 @onready var jump_handler := $JumpHandler as JumpHandler
 @onready var energy_gauge := $EnergyGauge as EnergyGauge
 @onready var slow_motion_handler := $SlowMotionHandler as SlowMotionHandler
+@onready var wall_jump_handler := $WallJumpHandler as WallJumpHandler
 @onready var repair_handler := $RepairHandler as RepairHandler
 @onready var hurtbox_melee := %HurtboxMelee as Hurtbox
 
@@ -54,9 +55,9 @@ func _ready() -> void:
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
 
-	for child in %Model.find_children("*", "VisualInstance3D"):
-		child.set_layer_mask_value(1, false)
-		child.set_layer_mask_value(2, true)
+	#for child in %Model.find_children("*", "VisualInstance3D"):
+		#child.set_layer_mask_value(1, false)
+		#child.set_layer_mask_value(2, true)
 
 
 func _unhandled_input(event) -> void:
@@ -132,15 +133,22 @@ func _handle_repair() -> void:
 
 
 func _handle_jump() -> void:
-	if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
-	and jump_handler.jump_cooldown.is_stopped():
-			velocity_3d.apply_upward_force(self)
+	if wall_jump_handler.colliding_with_surface and not(is_on_floor()):
+		if Input.is_action_just_pressed("jump") and wall_jump_handler.colliding_with_surface\
+		and not(is_on_floor()) and wall_jump_handler.sleep_timer.is_stopped() and jump_handler.jump_cooldown.is_stopped():
+			velocity_3d.apply_upward_force(self, 1.5)
 			jump_sound.play_audio()
-			energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
 			game_camera.camera_bounce()
-	if Input.is_action_just_released("jump") and jump_handler.jump_cooldown.is_stopped():
-		jump_handler.jump_cooldown.start()
-
+			wall_jump_handler.sleep_timer.start()
+	else:
+		if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
+		and jump_handler.jump_cooldown.is_stopped():
+				velocity_3d.apply_upward_force(self)
+				jump_sound.play_audio()
+				energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
+				game_camera.camera_bounce()
+		if Input.is_action_just_released("jump"):
+			jump_handler.jump_cooldown.start()
 
 func _handle_dash(wish_dir_dash:Vector3) -> void:
 	if Input.is_action_just_pressed("dash") and dash_handler.cooldown.is_stopped()\

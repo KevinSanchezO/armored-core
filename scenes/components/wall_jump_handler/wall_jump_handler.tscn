@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1tfx2bxa2qd"]
+
+[ext_resource type="Script" path="res://scenes/components/wall_jump_handler/wall_jump_handler.gd" id="1_t6v8g"]
+
+[node name="WallJumpHandler" type="Area3D"]
+collision_layer = 0
+script = ExtResource("1_t6v8g")
+
+[node name="SleepTimer" type="Timer" parent="."]
+one_shot = true
