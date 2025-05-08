@@ -29,12 +29,13 @@ class_name Player
 @onready var repair_handler := $RepairHandler as RepairHandler
 @onready var hurtbox_melee := %HurtboxMelee as Hurtbox
 
-@onready var hit_mark_sound := $Audio/HitMarkSound as Audio3D
-@onready var jump_sound := $Audio/JumpSound as Audio3D
-@onready var landing_sound := $Audio/LandingSound as Audio3D
-@onready var movement_sound := $Audio/MovementSound as Audio3D
-@onready var stop_movement_sound := $Audio/StoppedMovementSound as Audio3D
-@onready var dash_sound := $Audio/DashSound as Audio3D
+@onready var hit_mark_sfx := $Audio/HitMark as Audio3D
+@onready var hit_mark_death_sfx := $Audio/HitMarkDeath as Audio3D
+@onready var jump_sfx := $Audio/Jump as Audio3D
+@onready var landing_sfx := $Audio/Landing as Audio3D
+@onready var movement_sfx := $Audio/Movement as Audio3D
+@onready var stop_movement_sfx := $Audio/StopMovementSoun as Audio3D
+@onready var dash_sfx := $Audio/Dash as Audio3D
 
 var air_momentum_dir := Vector3.ZERO
 var mouse_input : Vector2
@@ -45,6 +46,7 @@ func _ready() -> void:
 	on_ground = is_on_floor()
 	
 	HitMark.hit_mark_showed.connect(_handle_hitmark_showed)
+	HitMark.hit_mark_dead_showed.connect(_handle_hitmark_death)
 	
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_speed)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_speed)
@@ -55,9 +57,9 @@ func _ready() -> void:
 	SlowMotion.slow_motion_started.connect(_enter_slow_motion_air)
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion_air)
 
-	#for child in %Model.find_children("*", "VisualInstance3D"):
-		#child.set_layer_mask_value(1, false)
-		#child.set_layer_mask_value(2, true)
+	for child in %Model.find_children("*", "VisualInstance3D"):
+		child.set_layer_mask_value(1, false)
+		child.set_layer_mask_value(2, true)
 
 
 func _unhandled_input(event) -> void:
@@ -118,12 +120,12 @@ func _physics_process(_delta) -> void:
 
 func _handle_movement_sfx(input_dir:Vector2):
 	if input_dir != Vector2.ZERO:
-		if not(movement_sound.playing):
-			movement_sound.play_audio()
+		if not(movement_sfx.playing):
+			movement_sfx.play_audio()
 	else:
-		if movement_sound.playing:
-			stop_movement_sound.play_audio()
-			movement_sound.stop()
+		if movement_sfx.playing:
+			stop_movement_sfx.play_audio()
+			movement_sfx.stop()
 
 
 func _handle_repair() -> void:
@@ -137,14 +139,14 @@ func _handle_jump() -> void:
 		if Input.is_action_just_pressed("jump") and wall_jump_handler.colliding_with_surface\
 		and not(is_on_floor()) and wall_jump_handler.sleep_timer.is_stopped() and jump_handler.jump_cooldown.is_stopped():
 			velocity_3d.apply_upward_force(self, 1.5)
-			jump_sound.play_audio()
+			jump_sfx.play_audio()
 			game_camera.camera_bounce()
 			wall_jump_handler.sleep_timer.start()
 	else:
 		if Input.is_action_pressed("jump") and !energy_gauge.is_in_cooldown\
 		and jump_handler.jump_cooldown.is_stopped():
 				velocity_3d.apply_upward_force(self)
-				jump_sound.play_audio()
+				jump_sfx.play_audio()
 				energy_gauge.modify_gauge_directly(jump_handler.jump_consumption)
 				game_camera.camera_bounce()
 		if Input.is_action_just_released("jump"):
@@ -160,17 +162,21 @@ func _handle_dash(wish_dir_dash:Vector3) -> void:
 		air_momentum_dir = wish_dir_dash
 		
 		dash_handler.trigger_dash(wish_dir_dash)
-		dash_sound.play_audio()
+		dash_sfx.play_audio()
 
 
 func _handle_hitmark_showed() -> void:
-	hit_mark_sound.play_audio()
+	hit_mark_sfx.play_audio()
+
+
+func _handle_hitmark_death() -> void:
+	hit_mark_death_sfx.play_audio()
 
 
 func _handle_landing() -> void:
 	if on_ground and not was_on_ground:
 		game_camera.camera_bounce(-6)
-		landing_sound.play_audio()
+		landing_sfx.play_audio()
 
 
 func _head_tilt(input_dir:Vector2) -> void:

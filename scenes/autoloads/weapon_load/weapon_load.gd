@@ -9,7 +9,7 @@ const _ASSAULT_ENERGY := "res://scenes/game_objects/weapons/range_weapons/assaul
 const _REVOLVER_ENERGY := ""
 
 var available_primary_weapons := [
-	_RIFLE,
+	_BATTLE_RIFLE,
 	_SHOTGUN
 ]
 
