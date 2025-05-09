@@ -1,5 +1,5 @@
 extends RangeWeapon
-class_name BattleRifle
+class_name EnergyRevolver
 
 
 func _physics_process(_delta: float) -> void:
@@ -9,6 +9,6 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("reload"):
 		start_reload()
 	
-	if Input.is_action_pressed("right_weapon") and \
+	if Input.is_action_just_pressed("right_weapon") and \
 	fire_rate.is_stopped():
 		generate_projectile()

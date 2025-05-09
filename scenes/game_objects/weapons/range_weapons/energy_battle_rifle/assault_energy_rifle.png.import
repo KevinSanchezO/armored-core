@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdjahpxp2edom"
-path.s3tc="res://.godot/imported/charging.png-204d2469aa7d3aefd63d678e28ba5915.s3tc.ctex"
+uid="uid://cwnvirjdas0xh"
+path="res://.godot/imported/assault_energy_rifle.png-b53d9361b9567c6ec17aae8f838a1213.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/charging.png"
-dest_files=["res://.godot/imported/charging.png-204d2469aa7d3aefd63d678e28ba5915.s3tc.ctex"]
+source_file="res://scenes/game_objects/weapons/range_weapons/energy_battle_rifle/assault_energy_rifle.png"
+dest_files=["res://.godot/imported/assault_energy_rifle.png-b53d9361b9567c6ec17aae8f838a1213.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

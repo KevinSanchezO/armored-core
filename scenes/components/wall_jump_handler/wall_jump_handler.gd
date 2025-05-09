@@ -19,13 +19,11 @@ func _ready() -> void:
 func _on_body_entered(body) -> void:
 	if body.get_collision_layer() == 1:
 		colliding_with_surface = true
-		print("wall jump available")
 
 
 func _on_body_exited(body) -> void:
 	if body.get_collision_layer() == 1:
 		colliding_with_surface = false
-		print("wall NOT jump available")
 
 
 func _enter_slow_motion_jump() -> void:

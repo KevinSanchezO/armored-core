@@ -51,7 +51,7 @@ func _show_speed_lines() -> void:
 
 func _hide_speed_lines() -> void:
 	#await get_tree().create_timer(current_speed_lines_duration).timeout
-	speed_lines.hide_speed_lines(current_speed_lines_duration)
+	speed_lines.hide_speed_lines()
 
 
 func _enter_slow_motion_dash() -> void:

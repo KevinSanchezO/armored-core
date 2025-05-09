@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/gatling/gatling.gd" id="2_frgum"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_tlm7t"]
 [ext_resource type="Texture2D" uid="uid://cyp0bn3ffrpjc" path="res://scenes/game_objects/weapons/range_weapons/gatling/gatling.png" id="4_6vm2w"]
-[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="5_0drgl"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/rifle/nail.wav" id="5_0drgl"]
 
 [node name="Gatling" instance=ExtResource("1_rdget")]
 script = ExtResource("2_frgum")

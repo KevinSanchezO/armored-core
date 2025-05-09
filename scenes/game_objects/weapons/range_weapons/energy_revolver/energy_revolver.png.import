@@ -2,26 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwnvirjdas0xh"
-path="res://.godot/imported/assault_energy_rifle.png-c96894e2d0d84c06adbb2527cb29cd15.ctex"
+uid="uid://hv1bo34n63f4"
+path="res://.godot/imported/energy_revolver.png-0cb7582e10acfda6b69e0f4b8a2bf8e0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/assault_energy_rifle.png"
-dest_files=["res://.godot/imported/assault_energy_rifle.png-c96894e2d0d84c06adbb2527cb29cd15.ctex"]
+source_file="res://scenes/game_objects/weapons/range_weapons/energy_revolver/energy_revolver.png"
+dest_files=["res://.godot/imported/energy_revolver.png-0cb7582e10acfda6b69e0f4b8a2bf8e0.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

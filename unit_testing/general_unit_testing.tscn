@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cffj3or6ica6r" path="res://scenes/gameplay/stage_gameplay/stage_gameplay.tscn" id="1_nyl71"]
 [ext_resource type="Material" uid="uid://dpq0nig44lswm" path="res://trenchbroom/textures/test/test_texture_dark.tres" id="2_m1sxv"]
 [ext_resource type="PackedScene" uid="uid://lnev2qv3y5j" path="res://scenes/game_objects/entities/enemies/enemy/enemy.tscn" id="2_yv3yf"]
-[ext_resource type="Material" path="res://trenchbroom/textures/test/test_texture_purple.tres" id="3_outuu"]
+[ext_resource type="Material" uid="uid://yuwmnc243kh6" path="res://trenchbroom/textures/test/test_texture_purple.tres" id="3_outuu"]
 [ext_resource type="Texture2D" uid="uid://go4tmjcywvg" path="res://trenchbroom/textures/test/test_texture_red.png" id="4_4e0h0"]
 [ext_resource type="Material" uid="uid://rhv7o54gc3sg" path="res://trenchbroom/textures/test/test_texture_dark_3.tres" id="4_xuj0k"]
 [ext_resource type="Material" uid="uid://cmjdrb2woklmg" path="res://trenchbroom/textures/test/test_texture_dark_2.tres" id="5_al2cc"]

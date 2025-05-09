@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.gd" id="2_4wfux"]
 [ext_resource type="PackedScene" uid="uid://b8kl6207syrhk" path="res://scenes/game_objects/projectiles/bullet_player/bullet_player.tscn" id="3_dpgb6"]
 [ext_resource type="Texture2D" uid="uid://cfgljnwe5hps4" path="res://scenes/game_objects/weapons/range_weapons/rifle/rifle.png" id="4_ob63b"]
-[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/battle_rifle/nail.wav" id="5_e8e3f"]
+[ext_resource type="AudioStream" uid="uid://dmgbn1tymkwjf" path="res://scenes/game_objects/weapons/range_weapons/rifle/nail.wav" id="5_e8e3f"]
 
 [node name="Rifle" instance=ExtResource("1_svb7p")]
 script = ExtResource("2_4wfux")

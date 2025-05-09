@@ -1,22 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckbdde06vpq3d"]
+[gd_scene load_steps=13 format=3 uid="uid://ckbdde06vpq3d"]
 
 [ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_oan17"]
 [ext_resource type="PackedScene" uid="uid://degnjf01f2wkv" path="res://scenes/game_objects/projectiles/laser_player/laser_player.tscn" id="2_1jlem"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.gd" id="2_hc3hk"]
 [ext_resource type="Texture2D" uid="uid://cwxaqnspp7bmf" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.png" id="2_muou7"]
-[ext_resource type="AudioStream" uid="uid://jfuy8g730d6a" path="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/laserg.wav" id="5_kra83"]
+[ext_resource type="AudioStream" uid="uid://jfuy8g730d6a" path="res://scenes/game_objects/weapons/range_weapons/energy_battle_rifle/laserg.wav" id="5_kra83"]
+[ext_resource type="Texture2D" uid="uid://cdjahpxp2edom" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/charging.png" id="5_riwp5"]
+[ext_resource type="Texture2D" uid="uid://d2cy6jqgk2cug" path="res://scenes/game_objects/weapons/range_weapons/rail_cannon/charged.png" id="6_1qjuh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ehm7"]
+atlas = ExtResource("5_riwp5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtcdw"]
+atlas = ExtResource("5_riwp5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4tsb"]
+atlas = ExtResource("5_riwp5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ttmf"]
+atlas = ExtResource("5_riwp5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cw6vs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ehm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtcdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4tsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ttmf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="RailCannon" instance=ExtResource("1_oan17")]
 script = ExtResource("2_hc3hk")
+charge_limit = 200.0
+increase_value = 1.0
 projectiles_per_shoot = 1
 spread = 0.0
-max_ammo = 10
-max_chamber = 1
+max_chamber = 12
 reload_time = 5.0
 projectile = ExtResource("2_1jlem")
-hit_marker_size = 32
+hit_marker_size = 8
 recoil = Vector3(5.5, 0.4, 0)
 weapon_name = "∀-R01-Cannon"
+fire_rate_value = 3.0
 buffed_by_slowmotion = true
 trauma = 1.0
 damage = 1000.0
@@ -25,6 +65,20 @@ damage = 1000.0
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.161525)
 texture_filter = 0
 texture = ExtResource("2_muou7")
+
+[node name="Charging" type="AnimatedSprite3D" parent="Model" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.485976)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_cw6vs")
+autoplay = "default"
+frame = 3
+frame_progress = 0.617735
+speed_scale = 2.0
+
+[node name="Charged" type="Sprite3D" parent="Model" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.485976)
+texture_filter = 0
+texture = ExtResource("6_1qjuh")
 
 [node name="FireAudio" parent="Audio" index="1"]
 stream = ExtResource("5_kra83")

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jfuy8g730d6a"
-path="res://.godot/imported/laserg.wav-214d9605a56c32d5a78f387f227fe333.sample"
+path="res://.godot/imported/laserg.wav-d3a30818fbb7af76f0d528202052c40f.sample"
 
 [deps]
 
-source_file="res://scenes/game_objects/weapons/range_weapons/assault_energy_rifle/laserg.wav"
-dest_files=["res://.godot/imported/laserg.wav-214d9605a56c32d5a78f387f227fe333.sample"]
+source_file="res://scenes/game_objects/weapons/range_weapons/energy_battle_rifle/laserg.wav"
+dest_files=["res://.godot/imported/laserg.wav-d3a30818fbb7af76f0d528202052c40f.sample"]
 
 [params]
 

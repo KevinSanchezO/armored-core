@@ -13,5 +13,5 @@ func show_speed_lines() -> void:
 	self.visible = true
 
 
-func hide_speed_lines(duration:float) -> void:
+func hide_speed_lines() -> void:
 	self.visible = false

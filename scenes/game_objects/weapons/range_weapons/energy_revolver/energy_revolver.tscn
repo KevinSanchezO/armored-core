@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b32kiko3cytnq"]
+
+[ext_resource type="PackedScene" uid="uid://byryatimrsrhf" path="res://scenes/game_objects/weapons/range_weapons/range_weapon/range_weapon.tscn" id="1_frqlu"]
+[ext_resource type="Script" path="res://scenes/game_objects/weapons/range_weapons/energy_revolver/energy_revolver.gd" id="2_smxlk"]
+[ext_resource type="PackedScene" uid="uid://degnjf01f2wkv" path="res://scenes/game_objects/projectiles/laser_player/laser_player.tscn" id="3_wlgua"]
+[ext_resource type="Texture2D" uid="uid://hv1bo34n63f4" path="res://scenes/game_objects/weapons/range_weapons/energy_revolver/energy_revolver.png" id="4_vqy8x"]
+[ext_resource type="AudioStream" uid="uid://jfuy8g730d6a" path="res://scenes/game_objects/weapons/range_weapons/energy_battle_rifle/laserg.wav" id="7_7pule"]
+
+[node name="EnergyRevolver" instance=ExtResource("1_frqlu")]
+script = ExtResource("2_smxlk")
+projectiles_per_shoot = 1
+spread = 0.0
+max_ammo = 30
+max_chamber = 6
+projectile = ExtResource("3_wlgua")
+hit_marker_size = 16
+recoil = Vector3(2.5, 0.2, 0)
+weapon_name = "MZBK-LONG C0LT"
+buffed_by_slowmotion = true
+trauma = 0.7
+damage = 500.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Model" index="0"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, -0.0685052)
+texture_filter = 0
+texture = ExtResource("4_vqy8x")
+
+[node name="FireAudio" parent="Audio" index="1"]
+stream = ExtResource("7_7pule")
+
+[node name="ProjectileSpawner" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.322727)
