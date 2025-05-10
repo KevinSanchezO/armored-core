@@ -17,15 +17,12 @@ hit_marker_size = 0
 recoil = Vector3(0, 0, 0)
 recoil_mult = 0.2
 
-[node name="FireAudio" parent="Audio" index="1"]
-volume_db = -25.0
-
-[node name="ReloadAudio" parent="Audio" index="2" instance=ExtResource("3_abduc")]
+[node name="ReloadAudio" parent="Audio" index="1" instance=ExtResource("3_abduc")]
 stream = ExtResource("4_8a8n1")
-bus = &"SFX"
 
-[node name="EmptyAudio" parent="Audio" index="3" instance=ExtResource("3_abduc")]
-bus = &"SFX"
+[node name="EmptyAudio" parent="Audio" index="2" instance=ExtResource("3_abduc")]
+
+[node name="FireAudio" parent="Audio" index="3" instance=ExtResource("3_abduc")]
 
 [node name="ProjectileSpawner" type="Node3D" parent="." index="5"]
 

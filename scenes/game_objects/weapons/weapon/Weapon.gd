@@ -11,7 +11,6 @@ class_name Weapon
 @onready var fire_rate := $Firerate as Timer
 @onready var animation := $AnimationPlayer as AnimationPlayer
 
-@onready var fire_audio := $Audio/FireAudio as Audio3D
 @onready var ready_audio := $Audio/ReadyAudio as Audio3D
 
 var active := false

@@ -28,7 +28,7 @@ transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, -0.
 texture_filter = 0
 texture = ExtResource("4_6vm2w")
 
-[node name="FireAudio" parent="Audio" index="1"]
+[node name="FireAudio" parent="Audio" index="3"]
 stream = ExtResource("5_0drgl")
 
 [node name="ProjectileSpawner" parent="." index="5"]

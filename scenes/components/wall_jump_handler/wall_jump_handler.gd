@@ -20,10 +20,14 @@ func _ready() -> void:
 	self.body_entered.connect(_on_body_entered)
 	self.body_exited.connect(_on_body_exited)
 
+func _physics_process(delta: float) -> void:
+	if colliding_with_surface:
+		visualizer.rotate_visualizer(delta)
+
 func _on_body_entered(body) -> void:
 	if body.get_collision_layer() == 1:
 		colliding_with_surface = true
-		visualizer.modify_color(ColorsUI.LIGHT_BLUE)
+		visualizer.modify_color(ColorsUI.YELLOW)
 
 
 func _on_body_exited(body) -> void:

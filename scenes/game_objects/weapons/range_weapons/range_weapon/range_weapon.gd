@@ -20,6 +20,7 @@ var current_chamber : int
 var raycast_range_weapon : RaycastRangeWeapon
 
 @onready var projectile_spawner := $ProjectileSpawner as Node3D
+@onready var fire_audio := $Audio/FireAudio as Audio3D
 @onready var reload_audio := $Audio/ReloadAudio as Audio3D
 @onready var empty_audio := $Audio/EmptyAudio as Audio3D
 @onready var shell_spawner := $ShellSpawner as Node3D

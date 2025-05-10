@@ -14,8 +14,6 @@ script = ExtResource("1_0n0it")
 
 [node name="ReadyAudio" parent="Audio" instance=ExtResource("2_ca1r4")]
 
-[node name="FireAudio" parent="Audio" instance=ExtResource("2_ca1r4")]
-
 [node name="Firerate" type="Timer" parent="."]
 one_shot = true
 

@@ -13,7 +13,7 @@ const _ROCKET_LAUNCHER := ""
 
 var available_primary_weapons := [
 	_RIFLE,
-	_REVOLVER_ENERGY
+	_SHOTGUN
 ]
 
 
@@ -28,4 +28,4 @@ const _ENERGY_SWORD := ""
 const _ENERGY_SPEAR := ""
 const _RAIL_CANNON := "res://scenes/game_objects/weapons/range_weapons/rail_cannon/rail_cannon.tscn"
 
-var available_support_weapon = _CHAINSAW
+var available_support_weapon = _GATLING

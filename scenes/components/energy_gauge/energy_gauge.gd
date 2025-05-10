@@ -5,7 +5,7 @@ signal energy_gauge_changed()
 signal cooldown_started()
 signal cooldown_ended()
 
-@export var MAX_ENERGY_GAUGE := 200.0
+@export var MAX_ENERGY_GAUGE := 120.0
 
 @export var consumption := 12.0
 @export var recovery := 1.0

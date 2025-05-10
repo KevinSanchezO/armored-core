@@ -11,7 +11,7 @@ func _ready() -> void:
 	SlowMotion.slow_motion_ended.connect(_exit_slow_motion)
 	
 
-func _physics_process(delta: float) -> void:
+func rotate_visualizer(delta: float) -> void:
 	self.rotation.y += current_rotation_mult * delta
 
 

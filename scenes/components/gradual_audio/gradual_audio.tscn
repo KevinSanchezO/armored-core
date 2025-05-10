@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bottsfsf3xdl0"]
+
+[ext_resource type="Script" path="res://scenes/components/gradual_audio/gradual_audio.gd" id="1_h2mst"]
+
+[node name="GradualAudio" type="AudioStreamPlayer3D"]
+script = ExtResource("1_h2mst")

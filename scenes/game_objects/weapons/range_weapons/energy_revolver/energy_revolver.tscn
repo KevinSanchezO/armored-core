@@ -17,7 +17,7 @@ projectile = ExtResource("3_wlgua")
 hit_marker_size = 16
 recoil = Vector3(2.5, 0.2, 0)
 weapon_name = "MZBK-LONG C0LT"
-fire_rate_value = 0.2
+fire_rate_value = 0.4
 buffed_by_slowmotion = true
 trauma = 0.7
 damage = 500.0
@@ -27,7 +27,7 @@ transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 
 texture_filter = 0
 texture = ExtResource("4_vqy8x")
 
-[node name="FireAudio" parent="Audio" index="1"]
+[node name="FireAudio" parent="Audio" index="3"]
 stream = ExtResource("7_7pule")
 
 [node name="ProjectileSpawner" parent="." index="5"]

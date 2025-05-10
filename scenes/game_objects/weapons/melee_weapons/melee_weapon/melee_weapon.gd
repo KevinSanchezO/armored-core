@@ -3,6 +3,8 @@ class_name MeleeWeapon
 
 signal melee_used()
 
+@onready var fire_audio := $Audio/FireAudio as Audio3D
+
 @export var hurtbox_size:Vector3
 @export_enum("BLUNT", "ENERGY", "EXPLOSION") var type_damage : String
 @export var frame_freeze_value := 0.2

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce6dmkal8ga2r"]
+[gd_scene load_steps=5 format=3 uid="uid://ce6dmkal8ga2r"]
 
 [ext_resource type="PackedScene" uid="uid://dsbenaf2j7t8t" path="res://scenes/game_objects/weapons/weapon/weapon.tscn" id="1_7so11"]
 [ext_resource type="Script" path="res://scenes/game_objects/weapons/melee_weapons/melee_weapon/melee_weapon.gd" id="2_4ofhv"]
+[ext_resource type="PackedScene" uid="uid://dur6wblr8mkxs" path="res://scenes/components/audio_3d/audio_3D.tscn" id="3_j5mwd"]
+[ext_resource type="AudioStream" uid="uid://dgcydqg8m30di" path="res://scenes/game_objects/weapons/melee_weapons/chainsaw/chainsaw_active.wav" id="4_n27uf"]
 
 [node name="MeleeWeapon" instance=ExtResource("1_7so11")]
 script = ExtResource("2_4ofhv")
@@ -13,5 +15,5 @@ buffed_by_slowmotion = true
 [node name="ReadyAudio" parent="Audio" index="0"]
 volume_db = -15.0
 
-[node name="FireAudio" parent="Audio" index="1"]
-volume_db = -15.0
+[node name="FireAudio" parent="Audio" index="1" instance=ExtResource("3_j5mwd")]
+stream = ExtResource("4_n27uf")
